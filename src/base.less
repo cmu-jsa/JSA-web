@@ -1,0 +1,54 @@
+@spacing-x: 8px;
+@spacing-y: 8px;
+
+@width-sm: 480px;
+@width-md: 768px;
+
+@width-container-max: @width-md;
+
+.media-screen-sm(@rules) {
+    @media screen and (max-width: @width-sm) {
+        @rules();
+    }
+}
+
+@font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans",
+    "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana,
+    "Verdana Ref", sans-serif;
+@font-size: 16px;
+@line-height: 1.6;
+
+@duration-transition: 0.2s;
+@duration-enter-leave: 0.3s;
+
+@color-primary: #7C1F20;
+
+@color-bg: lighten(black, 5%);
+@color-bg-hover: tint(@color-primary, 25%);
+@color-bg-active: @color-primary;
+@color-bg-card: lighten(@color-bg, 5%);
+
+@color-text-dark: lighten(black, 10%);
+@color-text-light: darken(white, 10%);
+
+@color-text: contrast(
+    @color-bg, @color-text-dark, @color-text-light
+);
+
+@color-text-bg-primary: contrast(
+    @color-primary, @color-text-dark, @color-text-light
+);
+
+@color-text-bg-hover: contrast(
+    @color-bg-hover, @color-text-dark, @color-text-light
+);
+
+@color-text-bg-active: contrast(
+    @color-bg-active, @color-text-dark, @color-text-light
+);
+
+@box-shadow: 0 @spacing-y / 2 @spacing-y / 2 fadeout(black, 50%);
+@border: 1px solid fadeout(black, 50%);
+
+@z-index-modal: 1000;
+

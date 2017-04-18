@@ -1,0 +1,11 @@
+{
+    "opts": {
+        "destination": "./doc/",
+        "recurse": true,
+        "access": "all"
+    },
+    "tags": {
+        "allowUnknownTags": false
+    }
+}
+

@@ -1,0 +1,10 @@
+{
+    "libs": ["ecmascript"],
+    "loadEagerly": [
+        "src/**/*.js",
+        "test/**/*.js"
+    ],
+    "plugins": {
+        "node": {}
+    }
+}
