@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const process = require('process');
 const webpack = require('webpack');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
@@ -49,6 +50,10 @@ switch (process.argv[2]) {
     case 'live': {
         const webpackDevServer = require('webpack-dev-server');
         const server = new webpackDevServer(webpackCompiler, {
+            contentBase: [
+                path.join(__dirname, 'dist'),
+                path.join(__dirname, 'public')
+            ],
             hot: true,
             compress: true,
             historyApiFallback: true,

@@ -7,22 +7,15 @@ import NotFound from 'bundle-loader?lazy!~/components/NotFound';
 import Header from '~/header';
 import Footer from '~/footer';
 import styles from './app.less';
-import routeConfig, { routeConfigFlat } from '~/routes';
-
-const routesCtx = require.context(
-    'bundle-loader?lazy!./routes',
-    true,
-    /\.(js|md)$/
-);
+import routeConfig, { routeConfigFlat } from '~/routeConfig';
 
 const routes = routeConfigFlat.map((config, i) => {
-    const { path, pattern, ...props } = config;
-    const loadModule = routesCtx(path);
-    const component = asyncComponent(loadModule, Spinner);
+    const { path, component } = config;
     return <Route
-        {...props}
         key={i}
-        exact path={pattern}
+        path={path}
+        exact={path === '/'}
+        strict
         component={component}
     />;
 });
@@ -34,7 +27,7 @@ export default function App() {
             <div className={styles.container}>
                 <Switch>
                     { routes }
-                    <Route component={asyncComponent(NotFound)} />
+                    <Route component={asyncComponent(NotFound, Spinner)} />
                 </Switch>
             </div>
             <Footer routeConfig={routeConfig} />

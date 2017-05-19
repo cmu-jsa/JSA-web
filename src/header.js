@@ -6,14 +6,17 @@ import Dropdown from '~/components/dropdown';
 import styles from './header.less';
 
 const {
-    string, arrayOf, oneOfType, func, shape, object, node
+bool, string, oneOfType, func, shape, object, node
 } = React.PropTypes;
 
-const routeConfigShape = {
-    name: string.isRequired,
-    title: string,
-    routeConfig: arrayOf(object)
-};
+function objectIsEmpty(obj) {
+    // eslint-disable-next-line guard-for-in
+    for (const key in obj) {
+        return false;
+    }
+
+    return true;
+}
 
 function Logo() {
     return <div className={styles.logo}>
@@ -23,9 +26,7 @@ function Logo() {
     </div>;
 }
 
-function HeaderLink({ parent, name, children, ...props }) {
-    const to = `${parent}/${name}`;
-
+function HeaderLink({ to, children, ...props }) {
     return typeof children === 'function'
         ? <Route path={to} children={children} {...props} />
         : <NavLink
@@ -39,12 +40,11 @@ function HeaderLink({ parent, name, children, ...props }) {
 }
 
 HeaderLink.propTypes = {
-    parent: string.isRequired,
-    name: string.isRequired,
+    to: string.isRequired,
     children: oneOfType([func, node])
 };
 
-function DropdownButton({ parent, name, title, isOpen }) {
+function DropdownButton({ to, title, isOpen }) {
     function Child({ isActive }) {
         const classes = classNames(styles.button, {
             [styles.active]: isActive,
@@ -59,95 +59,90 @@ function DropdownButton({ parent, name, title, isOpen }) {
     }
 
     Child.propTypes = {
-        isActive: React.PropTypes.bool
+        isActive: bool
     };
 
     return <HeaderLink
-        parent={parent}
-        name={name}
+        to={to}
         exact={false}
         children={Child}
     />;
 }
 
 DropdownButton.propTypes = {
-    parent: string.isRequired,
-    name: string.isRequired,
+    to: string.isRequired,
     title: string.isRequired,
-    isOpen: React.PropTypes.bool
+    isOpen: bool
 };
 
-function DropdownMenu({ parent, name, title, routeConfig }) {
+function DropdownMenu({ to, title, children }) {
     return <div className={styles.menu}>
-        <HeaderLink parent={parent} name={name}>{title}</HeaderLink>
-        {renderRoutes(routeConfig, `${parent}/${name}`)}
+        <HeaderLink to={to}>{title}</HeaderLink>
+        {renderRoutes(to, children)}
     </div>;
 }
 
 DropdownMenu.propTypes = {
-    parent: string.isRequired,
-    name: string.isRequired,
+    to: string.isRequired,
     title: string.isRequired,
-    isOpen: React.PropTypes.bool,
-    routeConfig: arrayOf(shape(routeConfigShape))
+    isOpen: bool,
+    children: object.isRequired
 };
 
-function renderRoutes(routeConfig, parent) {
-    return routeConfig.filter(config =>
-        'title' in config
-    ).map(({ routeConfig: subRoutes, title, name }, i) => {
-        if (!subRoutes) {
-            return <HeaderLink
-                key={i}
-                parent={parent}
-                name={name}
-            >
-                {title}
-            </HeaderLink>;
-        }
+function renderRoutes(parent, children) {
+    return Object.keys(children)
+        .map((name, i) => {
+            const { children: grandchildren, title, path } = children[name];
 
-        const button = <DropdownButton
-            parent={parent}
-            name={name}
-            title={title}
-        />;
+            if (objectIsEmpty(grandchildren)) {
+                return <HeaderLink
+                    key={i}
+                    to={path}
+                >
+                    {title}
+                </HeaderLink>;
+            }
 
-        const { enter, enterActive, leave, leaveActive } = styles;
-
-        return <Dropdown
-            key={i}
-            className={styles.dropdown}
-            button={button}
-            transitionName={{
-                enter, enterActive, leave, leaveActive
-            }}
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-        >
-            <DropdownMenu
-                parent={parent}
-                name={name}
+            const button = <DropdownButton
+                to={path}
                 title={title}
-                routeConfig={subRoutes}
-            />
-        </Dropdown>;
-    });
+            />;
+
+            const { enter, enterActive, leave, leaveActive } = styles;
+
+            return <Dropdown
+                key={i}
+                className={styles.dropdown}
+                button={button}
+                transitionName={{
+                    enter, enterActive, leave, leaveActive
+                }}
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+            >
+                <DropdownMenu
+                    to={path}
+                    title={title}
+                    children={grandchildren}
+                />
+            </Dropdown>;
+        });
 }
 
 export default function Header({ routeConfig }) {
     return <div className={styles.header}>
         <div className={styles.navigation}>
             <Logo />
-            {renderRoutes(routeConfig, '')}
+            {renderRoutes('', routeConfig.children)}
         </div>
     </div>;
 }
 
 Header.propTypes = {
-    routeConfig: arrayOf(shape({
-        name: string.isRequired,
-        title: string,
-        routeConfig: arrayOf(shape(routeConfigShape))
-    }))
+    routeConfig: shape({
+        path: string.isRequired,
+        title: string.isRequired,
+        children: object.isRequired
+    })
 };
 

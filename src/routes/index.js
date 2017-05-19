@@ -1,24 +1,11 @@
-const routeConfig = [{
-    name: '',
-    path: './home.js'
-}, {
-    name: 'login',
-    path: './login.js'
-}];
+import React from 'react';
 
-function configReducer(parent) {
-    return (arr, config) => arr.concat(flattenConfig(config, parent));
+import styles from './index.less';
+
+export default function Home() {
+    return <div className={styles.home}>
+        <h1>Hello React!</h1>
+        <a href="/secure">Secure area</a>
+    </div>;
 }
-
-function flattenConfig({ routeConfig: subRoutes, name, ...config }, parent) {
-    config.pattern = `${parent}/${name}`;
-
-    return subRoutes
-        ? subRoutes.reduce(configReducer(config.pattern), [config])
-        : config;
-}
-
-const routeConfigFlat = routeConfig.reduce(configReducer(''), []);
-
-export { routeConfig as default, routeConfigFlat };
 
