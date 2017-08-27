@@ -37,10 +37,8 @@ const webpackProgress = new ProgressBar(
     }
 );
 
-let webpackPrevPercent = 0;
 webpackCompiler.apply(new ProgressPlugin((percent, msg) => {
-    webpackProgress.tick((percent - webpackPrevPercent) * 100, { 'msg': msg });
-    webpackPrevPercent = percent;
+    webpackProgress.update(percent, { 'msg': msg });
 }));
 
 switch (process.argv[2]) {

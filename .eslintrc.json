@@ -1,7 +1,7 @@
 {
     "extends": ["eslint:recommended"],
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 2015
     },
     "env": {
         "node": true,
@@ -136,7 +136,8 @@
                 "Boolean": "boolean",
                 "Number": "number",
                 "String": "string",
-                "object": "Object"
+                "object": "Object",
+                "function": "Function"
             },
             "requireReturn": false,
             "requireReturnType": true,
@@ -148,4 +149,3 @@
         "yoda": [2, "never"]
     }
 }
-

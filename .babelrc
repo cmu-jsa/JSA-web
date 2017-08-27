@@ -1,11 +1,23 @@
 {
     "presets": [
-        ["es2015", { "modules": false }],
+        ["env", {
+            "targets": {
+                "browsers": ["defaults"]
+            },
+            "modules": false
+        }],
         "react"
     ],
     "plugins": [
-        "transform-object-rest-spread",
-        "react-hot-loader/babel"
-    ]
+        "react-hot-loader/babel",
+        "transform-object-rest-spread"
+    ],
+    "env": {
+        "production": {
+            "presets": [
+                "minify"
+            ]
+        }
+    }
 }
 

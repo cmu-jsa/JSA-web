@@ -1,25 +1,16 @@
 {
+    "plugins": [
+        "react"
+    ],
     "extends": ["plugin:react/recommended"],
     "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "impliedStrict": true,
-            "jsx": true
-        }
-    },
     "env": {
         "node": false,
         "browser": true,
         "commonjs": true,
         "es6": true
     },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "require-jsdoc": 0
+    "globals": {
+        "__webpack_public_path__": true
     }
 }
-

@@ -1,7 +1,37 @@
-@import '~base';
+@import '~src/less/definitions';
 
 .home {
     display: flex;
     flex-flow: column nowrap;
+
+    > .hero {
+        position: relative;
+        min-height: 100px;
+        height: 40vh;
+        background-image: url('public/images/home.jpg');
+        background-size: cover;
+        background-position: center;
+
+        box-shadow: @box-shadow;
+
+        > h1 {
+            position: absolute;
+            bottom: 0;
+
+            margin: @spacing-y 0;
+            padding: @spacing-y @spacing-x;
+
+            background-color: @color-primary;
+            color: @color-text-bg-primary;
+        }
+    }
+}
+
+.eventPreview {
+    > * {
+        margin: 0;
+    }
+
+    margin-bottom: @spacing-y;
 }
 

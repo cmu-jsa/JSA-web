@@ -1,4 +1,4 @@
-@import '~base';
+@import '~src/less/definitions';
 
 .header {
     position: relative;
@@ -7,7 +7,7 @@
     box-shadow: @box-shadow;
     margin-bottom: @spacing-y;
 
-    .navigation {
+    nav {
         flex: 1;
         display: flex;
         flex-flow: row wrap;
@@ -17,7 +17,6 @@
         margin: 0 auto;
         box-sizing: border-box;
 
-        font-weight: bold;
         font-size: larger;
 
         .active() {
@@ -123,6 +122,8 @@
                 display: flex;
                 flex-flow: column nowrap;
                 align-items: stretch;
+                white-space: nowrap;
+                min-width: 100%;
 
                 z-index: @z-index-modal;
                 position: absolute;
@@ -136,7 +137,7 @@
                 transform-origin: top center;
 
                 transition-property: opacity, transform;
-                transition-duration: @duration-transition;
+                transition-duration: @duration-enter-exit;
 
                 .child-separator(bottom);
 
@@ -144,26 +145,14 @@
                     width: 100%;
                 });
 
-                &.enter, &.leave.leaveActive {
+                &.enter, &.exit.exitActive {
                     transform: rotateX(90deg);
                     opacity: 0;
                 }
 
-                &.leave, &.enter.enterActive {
+                &.exit, &.enter.enterActive {
                     transform: none;
                     opacity: 1;
-                }
-            }
-
-            .dropdown {
-                .menu {
-                    top: 0;
-                    left: 100%;
-
-                    .media-screen-sm({
-                        top: 100%;
-                        left: 0;
-                    });
                 }
             }
         }
@@ -173,10 +162,12 @@
 
             > * {
                 flex: 1;
-            }
+                display: flex;
+                flex-flow: column;
 
-            font-weight: bold;
-            font-size: larger;
+                text-align: center;
+                line-height: 1.1;
+            }
         }
 
         .media-screen-sm({
