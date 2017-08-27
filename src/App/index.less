@@ -1,4 +1,5 @@
 @import '~src/less/definitions';
+@import '~vendor/lato/lato';
 
 a[href] {
     color: @color-primary;
@@ -8,30 +9,27 @@ a[href] {
     }
 }
 
-@font-face {
-    font-family: 'cjk';
-    src: local('Microsoft YaHei'), local('Apple LiGothic Medium'), local('AR PL UMing'), local('monospace');
-    unicode-range: U+3000-30FF, U+FF00-FFEF, U+4E00-9FAF;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
 }
 
 :global(#app) {
-    font-family: cjk, Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
-    font-size: @font-size;
-    line-height: @line-height;
     min-height: 100vh;
-    background-color: @color-bg;
-    color: @color-text;
     display: flex;
     flex-flow: column nowrap;
+
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: @font-size;
+    line-height: @line-height;
+
+    background-color: @color-bg;
+    color: @color-text;
 
     > * {
         flex: 1;
         display: inherit;
         flex-flow: column nowrap;
-    }
-
-    :focus {
-        outline: none;
     }
 
     .container {

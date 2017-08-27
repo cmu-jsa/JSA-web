@@ -38,11 +38,17 @@ function objectIsEmpty(obj) {
  * @returns {ReactElement} The component's elements.
  */
 function Logo() {
-    return <div className={styles.logo}>
-        <NavLink to={routeConfig.path} exact activeClassName={styles.active}>
+    return <NavLink
+        exact
+        to={routeConfig.path}
+        className={styles.logo}
+        activeClassName={styles.active}
+    >
+        <div className={styles.image} />
+        <div className={styles.text}>
             CMU JSA
-        </NavLink>
-    </div>;
+        </div>
+    </NavLink>;
 }
 
 /**

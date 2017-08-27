@@ -159,14 +159,33 @@
 
         .logo {
             display: flex;
+            flex-flow: row nowrap;
 
-            > * {
-                flex: 1;
+            @line-height: 1.0;
+            line-height: @line-height;
+
+            .image {
+                @height: @font-size * @line-height + @spacing-y;
+                height: @height;
+                min-width: @height;
+                background-image: url('/images/logo.png');
+                background-size: cover;
+                background-position: cover;
+                transition: background-image @duration-transition ease-in-out;
+            }
+
+            &.active, &:active, &:hover {
+                .image {
+                    background-image: url('/images/logo-active.png');
+                }
+            }
+
+            .text {
                 display: flex;
                 flex-flow: column;
 
+                margin-left: @spacing-x;
                 text-align: center;
-                line-height: 1.1;
             }
         }
 

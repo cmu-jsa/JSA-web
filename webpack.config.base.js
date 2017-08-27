@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ctxDir = path.resolve(__dirname);
 const srcDir = path.resolve(ctxDir, 'src');
 const outDir = path.resolve(ctxDir, 'dist');
+const vendorDir = path.resolve(ctxDir, 'vendor');
 const loadersDir = path.resolve(ctxDir, 'loaders');
 const publicDir = path.resolve(ctxDir, 'public');
 
@@ -31,6 +32,7 @@ module.exports = {
     resolve: {
         alias: {
             'src': srcDir,
+            'vendor': vendorDir,
             'public': publicDir
         }
     },
@@ -51,7 +53,7 @@ module.exports = {
             }]
         }, {
             test: /\.css$/,
-            include: [/node_modules/],
+            include: [vendorDir, /node_modules/],
             use: [{
                 loader: 'style-loader'
             }, {
@@ -68,7 +70,7 @@ module.exports = {
             }]
         }, {
             test: /\.less$/,
-            include: [/node_modules/],
+            include: [vendorDir, /node_modules/],
             use: [{
                 loader: 'style-loader'
             }, {
@@ -158,7 +160,7 @@ module.exports = {
                 }
             }]
         }, {
-            test: /\.(eot|woff|ttf|svg|jpg|ico)$/,
+            test: /\.(eot|woff|woff2|ttf|svg|jpg|ico)$/,
             use: [{
                 loader: 'url-loader',
                 options: {
