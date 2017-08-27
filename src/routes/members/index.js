@@ -103,14 +103,15 @@ MemberModal.propTypes = {
 function Member(props) {
     const { member } = props;
 
-    const { enter, enterActive, leave, leaveActive } = styles;
+    const { enter, enterActive, exit, exitActive } = styles;
     return <Modal
         className={styles.member}
-        transitionName={{
-            enter, enterActive, leave, leaveActive
+        transition={{
+            classNames: {
+                enter, enterActive, exit, exitActive
+            },
+            timeout: 300
         }}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
         button={<MemberButton member={member} />}
     >
         <MemberModal member={member} />
@@ -135,9 +136,6 @@ export default class Members extends React.Component {
         this.searchKeys = [
             'nameLast',
             'nameFirst',
-            'nameZh',
-            'location',
-            'country',
             'email'
         ];
         this.onInputChange = this.onInputChange.bind(this);

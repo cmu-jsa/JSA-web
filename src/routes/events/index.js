@@ -39,8 +39,8 @@ function EventComponent(props) {
     return <div>
         <Link to=".."><h1>Events</h1></Link>
         <h2>{title}</h2>
-        <h3>{date}</h3>
-        <h4>{location}</h4>
+        <h4>{date}</h4>
+        <h5>{location}</h5>
         <Content />
     </div>;
 }
@@ -88,8 +88,8 @@ function EventList() {
 
             return <div key={i}>
                 <Link to={`./${path}`}><h2>{title}</h2></Link>
-                <h3>{date}</h3>
-                <h4>{location}</h4>
+                <h4>{date}</h4>
+                <h5>{location}</h5>
             </div>;
         })}
     </div>;

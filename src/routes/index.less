@@ -4,6 +4,10 @@
     display: flex;
     flex-flow: column nowrap;
 
+    > * {
+        margin-bottom: @spacing-y;
+    }
+
     > .hero {
         position: relative;
         min-height: 100px;
@@ -26,13 +30,5 @@
             color: @color-text-bg-primary;
         }
     }
-}
-
-.eventPreview {
-    > * {
-        margin: 0;
-    }
-
-    margin-bottom: @spacing-y;
 }
 

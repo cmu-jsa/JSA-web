@@ -37,15 +37,31 @@ function EventPreview(props) {
         title, location, date, path
     } } = props;
 
-    return <div className={styles.eventPreview}>
-        <h3>{date}: <Link to={`/events/${path}`}>{title}</Link></h3>
-        <h4>{location}</h4>
+    return <div>
+        <h3><Link to={`/events/${path}`}>
+            {title}
+        </Link></h3>
+        <p>{date} @ {location}</p>
     </div>;
 }
 
 EventPreview.propTypes = {
     event: instanceOf(EventConfig)
 };
+
+/**
+ * Event list React component.
+ *
+ * @returns {ReactElement} The component's elements.
+ */
+function EventList() {
+    return <div>
+        <Link to="/events/"><h2>Upcoming Events</h2></Link>
+        <ul>{events.map((event, i) =>
+            <li key={i}><EventPreview event={event} /></li>
+        )}</ul>
+    </div>;
+}
 
 /**
  * Home page React component.
@@ -58,10 +74,7 @@ export default function Home() {
     return <div className={styles.home}>
         <Hero />
         <Content />
-        <Link to="/events/"><h2>Upcoming Events</h2></Link>
-        <ul>{events.map((event, i) =>
-            <li key={i}><EventPreview event={event} /></li>
-        )}</ul>
+        <EventList />
     </div>;
 }
 
