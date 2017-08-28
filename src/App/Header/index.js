@@ -183,23 +183,47 @@ function routeChildrenMenu(routeChildren) {
 
 /**
  * Header React component.
- *
- * @returns {ReactElement} The component's elements.
  */
-export default function Header() {
-    return <header className={styles.header}>
-        <input
-            id='header-nav-toggle'
-            type='checkbox'
-            className={styles.navToggleInput}
-        />
-        <label htmlFor='header-nav-toggle' className={styles.navToggle}>
-            <a className={styles.toggle}>CMU JSA</a>
+export default class Header extends React.Component {
+    /**
+     * Initializes the component.
+     */
+    constructor() {
+        super();
+
+        this.state = {
+            open: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    /**
+     * Toggles the nav.
+     */
+    toggle() {
+        this.setState({ open: !this.state.open });
+    }
+
+    /**
+     * Renders the component.
+     *
+     * @returns {ReactElement} The component's elements.
+     */
+    render() {
+        const classes = classNames(styles.header, {
+            [styles.open]: this.state.open
+        });
+
+        return <header className={classes} onClick={this.toggle}>
+            <div className={styles.toggle}>
+                CMU JSA
+            </div>
             <nav>
                 <Logo />
                 {routeChildrenMenu(routeConfig.children)}
             </nav>
-        </label>
-    </header>;
+        </header>;
+    }
 }
 

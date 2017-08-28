@@ -1,11 +1,5 @@
 @import '~src/less/definitions';
 
-.child-separator(@dir) {
-    > *:not(:last-child) {
-        border-@{dir}: @border;
-    }
-}
-
 .active() {
     background-color: @color-bg-active;
     color: @color-text-bg-active;
@@ -55,7 +49,7 @@
     background-color: @color-bg;
     font-size: larger;
 
-    a, .dropdown .button {
+    a, .dropdown .button, > .toggle {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -63,6 +57,7 @@
         padding: @spacing-y @spacing-x;
 
         color: @color-primary;
+        background-color: @color-bg;
         transition: color @duration-transition;
         transition: background-color @duration-transition;
 
@@ -81,121 +76,99 @@
         .active();
     }
 
-    > .navToggleInput {
+    > .toggle {
         display: none;
     }
 
-    > .navToggle {
-        width: 100%;
+    > nav {
+        display: flex;
+        flex-flow: row wrap;
 
-        > .toggle {
-            display: none;
+        width: 100%;
+        max-width: @width-container-max;
+        margin: 0 auto;
+        box-sizing: border-box;
+
+        background-color: @color-bg;
+
+        > * {
+            display: flex;
+            flex: 1;
         }
 
-        > nav {
+        .dropdown {
+            position: relative;
             display: flex;
-            flex-flow: row wrap;
+            flex-flow: column;
 
-            width: 100%;
-            max-width: @width-container-max;
-            margin: 0 auto;
-            box-sizing: border-box;
+            .button {
+                height: 100%;
+                box-sizing: border-box;
 
-            background-color: @color-bg;
-
-            .child-separator(right);
-
-            > * {
-                display: flex;
-                flex: 1;
-            }
-
-            .dropdown {
                 position: relative;
-                display: flex;
-                flex-flow: column;
 
-                .button {
-                    height: 100%;
-                    box-sizing: border-box;
+                &:after {
+                    @size: @font-size / 2;
 
-                    position: relative;
+                    margin-left: @size / 2;
+                    width: 0;
+                    height: 0;
+                    content: ' ';
 
-                    &:hover, &:focus {
-                        .hover();
-                    }
+                    color: inherit;
+                    border-top: @size / 2 solid transparent;
+                    border-left: @size solid;
+                    border-bottom: @size / 2 solid transparent;
 
-                    &:active, &.open {
-                        .active();
-                    }
+                    opacity: 0.5;
+                    transition-property: opacity, transform;
+                    transition-duration: @duration-transition;
+                }
 
+                &:hover, &:focus, &:active, &.open {
                     &:after {
-                        @size: @font-size / 2;
-
-                        margin-left: @size / 2;
-                        width: 0;
-                        height: 0;
-                        content: ' ';
-
-                        color: inherit;
-                        border-top: @size / 2 solid transparent;
-                        border-left: @size solid;
-                        border-bottom: @size / 2 solid transparent;
-
-                        opacity: 0.5;
-                        transition-property: opacity, transform;
-                        transition-duration: @duration-transition;
-                    }
-
-                    &:hover, &:focus, &:active, &.open {
-                        &:after {
-                            opacity: 1;
-                        }
-                    }
-
-                    &.open {
-                        &:after {
-                            transform: rotate(90deg);
-                        }
+                        opacity: 1;
                     }
                 }
 
-                .menu {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    align-items: stretch;
-                    white-space: nowrap;
-                    min-width: 100%;
+                &.open:after {
+                    transform: rotate(90deg);
+                }
+            }
 
-                    z-index: @z-index-modal;
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
+            .menu {
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: stretch;
+                white-space: nowrap;
+                min-width: 100%;
 
-                    background-color: @color-bg;
-                    color: @color-text;
-                    box-shadow: @box-shadow;
+                z-index: @z-index-modal;
+                position: absolute;
+                top: 100%;
+                left: 0;
 
-                    transform-origin: top center;
+                background-color: @color-bg;
+                color: @color-text;
+                box-shadow: @box-shadow;
 
-                    transition-property: opacity, transform;
-                    transition-duration: @duration-enter-exit;
+                transform-origin: top center;
 
-                    .child-separator(bottom);
+                transition-property: opacity, transform;
+                transition-duration: @duration-enter-exit;
 
-                    .media-screen-sm({
-                        width: 100%;
-                    });
+                .media-screen-sm({
+                    width: 100%;
+                });
 
-                    &.enter, &.exit.exitActive {
-                        transform: rotateX(90deg);
-                        opacity: 0;
-                    }
+                &.enter, &.exit.exitActive {
+                    transform: rotateX(90deg);
+                    opacity: 0;
+                }
 
-                    &.exit, &.enter.enterActive {
-                        transform: none;
-                        opacity: 1;
-                    }
+                &.exit, &.enter.enterActive {
+                    transform: none;
+                    opacity: 1;
                 }
             }
         }
@@ -204,54 +177,48 @@
     .media-screen-sm({
         background: none;
 
-        > .navToggle {
-            display: flex;
-            flex-flow: column nowrap;
+        display: flex;
+        flex-flow: column nowrap;
 
-            width: 100%;
+        > .toggle {
+            display: unset;
+            justify-content: flex-start;
 
-            > .toggle {
-                display: unset;
-                justify-content: flex-start;
-                background-color: @color-bg;
+            line-height: 1;
+            font-size: @line-height * @font-size;
 
-                line-height: 1;
-                font-size: @line-height * @font-size;
-
-                &:hover, &:focus {
-                    .hover();
-                }
-
-                &:active {
-                    .active();
-                }
-
-                &:before {
-                    content: '≡';
-                    padding-right: @spacing-x;
-                }
+            &:hover, &:focus {
+                .hover();
             }
 
-            > nav {
-                flex-flow: column nowrap;
+            &:active {
+                .active();
+            }
 
-                position: absolute;
-                top: @height-header;
-                transform-origin: top center;
-                transform: rotateX(90deg);
-
-                opacity: 0;
-
-                transition-property: opacity, transform;
-                transition-duration: @duration-transition;
-
-                box-shadow: @box-shadow;
-
-                .child-separator(bottom);
+            &:before {
+                content: '≡';
+                padding-right: @spacing-x;
             }
         }
 
-        > .navToggleInput:checked ~ .navToggle {
+        > nav {
+            flex-flow: column nowrap;
+
+            position: absolute;
+            top: @height-header;
+
+            transform-origin: top center;
+            transform: rotateX(90deg);
+
+            opacity: 0;
+
+            transition-property: opacity, transform;
+            transition-duration: @duration-transition;
+
+            box-shadow: @box-shadow;
+        }
+
+        &.open {
             height: 100vh;
 
             > .toggle {
