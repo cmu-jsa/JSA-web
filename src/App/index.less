@@ -1,7 +1,7 @@
 @import '~src/less/definitions';
 @import '~vendor/lato/lato';
 
-a[href] {
+a {
     color: @color-primary;
     text-decoration: none;
     &:hover, &:active {
@@ -52,7 +52,8 @@ p {
 
         width: 100%;
         max-width: @width-container-max;
-        margin: @spacing-y auto;
+
+        margin: (@height-header + 2 * @spacing-y) auto @spacing-y;
         padding: 0 @spacing-x;
         box-sizing: border-box;
     }

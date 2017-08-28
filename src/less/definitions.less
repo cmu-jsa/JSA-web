@@ -1,7 +1,7 @@
 @spacing-x: 8px;
 @spacing-y: 8px;
 
-@width-sm: 480px;
+@width-sm: 520px;
 @width-md: 768px;
 
 @width-container-max: @width-md;
@@ -43,9 +43,11 @@
     @color-bg-active, @color-text-dark, @color-text-light
 );
 
+@height-header: 2 * @spacing-y + @line-height * @font-size;
 @box-shadow: 0 @spacing-y / 2 @spacing-y / 2 fadeout(@color-text, 75%);
 @border: 1px solid fadeout(@color-text, 75%);
 @border-primary: @spacing-x / 2 solid @color-primary;
 
+@z-index-header: 100;
 @z-index-modal: 1000;
 

@@ -188,10 +188,18 @@ function routeChildrenMenu(routeChildren) {
  */
 export default function Header() {
     return <header className={styles.header}>
-        <nav>
-            <Logo />
-            {routeChildrenMenu(routeConfig.children)}
-        </nav>
+        <input
+            id='header-nav-toggle'
+            type='checkbox'
+            className={styles.navToggleInput}
+        />
+        <label htmlFor='header-nav-toggle' className={styles.navToggle}>
+            <a className={styles.toggle}>CMU JSA</a>
+            <nav>
+                <Logo />
+                {routeChildrenMenu(routeConfig.children)}
+            </nav>
+        </label>
     </header>;
 }
 
