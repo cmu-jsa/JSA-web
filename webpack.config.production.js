@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = require('./webpack.config.base.js');
 
-const publicPath = '/user/fencing/';
+const publicPath = '/';
 
 config.output.publicPath = publicPath;
 
