@@ -22,6 +22,12 @@ import styles from './index.less';
  * @property {string} email - Email.
  */
 
+const memberShape = shape({
+    nameLast: string.isRequired,
+    nameFirst: string.isRequired,
+    email: string.isRequired
+});
+
 /**
  * Stops an event from propagating.
  *
@@ -30,12 +36,6 @@ import styles from './index.less';
 function stopPropagation(event) {
     event.stopPropagation();
 }
-
-const memberShape = shape({
-    nameLast: string.isRequired,
-    nameFirst: string.isRequired,
-    email: string.isRequired
-});
 
 /**
  * Member card button React component.
@@ -122,6 +122,12 @@ Member.propTypes = {
     member: memberShape.isRequired
 };
 
+const searchKeys = [
+    'nameLast',
+    'nameFirst',
+    'email'
+];
+
 /**
  * Member list React component.
  */
@@ -133,12 +139,7 @@ export default class Members extends React.Component {
         super();
 
         this.state = { searchString: '' };
-        this.searchKeys = [
-            'nameLast',
-            'nameFirst',
-            'email'
-        ];
-        this.onInputChange = this.onInputChange.bind(this);
+        this.onSearchChange = this.onSearchChange.bind(this);
     }
 
     /**
@@ -157,7 +158,7 @@ export default class Members extends React.Component {
 
         return terms.reduce(
             (score, term) => {
-                const termIndex = this.searchKeys.reduce(
+                const termIndex = searchKeys.reduce(
                     (str, key) => {
                         return str + member[key].toLowerCase().trim();
                     },
@@ -174,7 +175,7 @@ export default class Members extends React.Component {
      *
      * @param {Event} event - The event.
      */
-    onInputChange(event) {
+    onSearchChange(event) {
         const field = event.target.getAttribute('data-field');
         this.setState({ [field]: event.target.value });
     }
@@ -218,7 +219,7 @@ export default class Members extends React.Component {
                     type="text"
                     placeholder="Search"
                     data-field="searchString"
-                    onChange={this.onInputChange}
+                    onChange={this.onSearchChange}
                 />
             </div>
             <div className={styles.list}>
