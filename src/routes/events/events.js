@@ -136,7 +136,7 @@ function EventConfig(config) {
 }
 
 const events = eventConfigs.map(config => new EventConfig(config))
-    .sort((a, b) => a.startDate - b.startDate);
+    .sort((a, b) => b.startDate - a.startDate);
 
 events.byPath = {};
 events.forEach(event => (events.byPath[event.path] = event));
