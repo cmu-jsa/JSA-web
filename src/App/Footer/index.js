@@ -32,12 +32,12 @@ export default function Footer() {
             </div>
             <div className={styles.right}>
                 <span>
-                    Email: <a href='mailto:todo@andrew.cmu.edu'>
-                        todo@andrew.cmu.edu
+                    Inquiries: <a href='mailto:rkhorana@andrew.cmu.edu'>
+                        rkhorana@andrew.cmu.edu
                     </a>
                 </span>
                 <span>
-                    Site design by <a href='https://szz.io'>Stan Zhang</a>
+                    Site design: <a href='https://szz.io'>Stan Zhang</a>
                 </span>
             </div>
         </nav>

@@ -50,7 +50,7 @@ function stopPropagation(event) {
  */
 function MemberButton(props) {
     const { member, isOpen, open } = props;
-    const { nameFirst, nameLast } = member;
+    const { nameFirst, nameLast, position } = member;
 
     const classes = classNames(styles.button, {
         [styles.open]: isOpen
@@ -58,6 +58,7 @@ function MemberButton(props) {
 
     return <div className={classes} onClick={open}>
         <h2>{nameFirst} {nameLast}</h2>
+        <h3>{position}</h3>
     </div>;
 }
 
@@ -78,13 +79,12 @@ MemberButton.propTypes = {
  */
 function MemberModal(props) {
     const { member, isOpen, close } = props;
-    const { memberSince, position, email } = member;
+    const { memberSince, email } = member;
 
     return <div className={styles.modal} onClick={close}>
         <div className={styles.content} onClick={stopPropagation}>
             <div className={styles.close} onClick={close} />
             <MemberButton member={member} isOpen={isOpen} />
-            <p>Position: {position}</p>
             <p>Member Since: {memberSince}</p>
             <p>Email: <a href={`mailto:${email}`}>{email}</a></p>
         </div>
@@ -126,11 +126,11 @@ Member.propTypes = {
     member: memberShape.isRequired
 };
 
-// const searchKeys = [
-//     'nameLast',
-//     'nameFirst',
-//     'email'
-// ];
+const searchKeys = [
+    'nameLast',
+    'nameFirst',
+    'email'
+];
 
 /**
  * Member list React component.
@@ -142,8 +142,8 @@ export default class Members extends React.Component {
     constructor() {
         super();
 
-        // this.state = { searchString: '' };
-        // this.onSearchChange = this.onSearchChange.bind(this);
+        this.state = { searchString: '' };
+        this.onSearchChange = this.onSearchChange.bind(this);
     }
 
     /**
@@ -153,38 +153,36 @@ export default class Members extends React.Component {
      * @param {string} searchString - The search string.
      * @returns {number} The score for that member. Higher scores are better.
      */
-    // searchScore(member, searchString) {
-    //     console.log(searchString);
-    //     if (searchString === "" || !searchString) {
-    //         console.log("hitting");
-    //         return;
-    //     }
+    searchScore(member, searchString) {
+        if (!searchString) {
+            return;
+        }
 
-    //     const terms = searchString.toLowerCase().trim().split(/\s+/);
+        const terms = searchString.toLowerCase().trim().split(/\s+/);
 
-    //     return terms.reduce(
-    //         (score, term) => {
-    //             const termIndex = searchKeys.reduce(
-    //                 (str, key) => {
-    //                     return str + member[key].toLowerCase().trim();
-    //                 },
-    //                 ''
-    //             ).indexOf(term);
-    //             return score + (termIndex === -1 ? 0 : term.length);
-    //         },
-    //         0
-    //     );
-    // }
+        return terms.reduce(
+            (score, term) => {
+                const termIndex = searchKeys.reduce(
+                    (str, key) => {
+                        return str + member[key].toLowerCase().trim();
+                    },
+                    ''
+                ).indexOf(term);
+                return score + (termIndex === -1 ? 0 : term.length);
+            },
+            0
+        );
+    }
 
     /**
      * Handler for `change` events on the search input.
      *
      * @param {Event} event - The event.
      */
-    // onSearchChange(event) {
-    //     const field = event.target.getAttribute('data-field');
-    //     this.setState({ [field]: event.target.value });
-    // }
+    onSearchChange(event) {
+        const field = event.target.getAttribute('data-field');
+        this.setState({ [field]: event.target.value });
+    }
 
     /**
      * React lifecycle handler called when component is about to update.
@@ -192,14 +190,14 @@ export default class Members extends React.Component {
      * @param {Object} nextProps - The component's new props.
      * @param {Object} nextState - The component's new state.
      */
-    // componentWillUpdate(nextProps, nextState) {
-    //     const { searchString } = nextState;
-    //     if (searchString !== this.state.searchString) {
-    //         members.forEach(m =>
-    //             (m.searchScore = this.searchScore(m, searchString))
-    //         );
-    //     }
-    // }
+    componentWillUpdate(nextProps, nextState) {
+        const { searchString } = nextState;
+        if (searchString !== this.state.searchString) {
+            members.forEach(m =>
+                (m.searchScore = this.searchScore(m, searchString))
+            );
+        }
+    }
 
     /**
      * Renders the component.
@@ -207,32 +205,31 @@ export default class Members extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        // const matches = members.filter(member =>
-        //     member.searchScore === void 0
-        //     || member.searchScore > 0
-        // ).sort((a, b) =>
-        //     b.searchScore - a.searchScore
-        // );
+        const matches = members.filter(member =>
+            member.searchScore === void 0
+            || member.searchScore > 0
+        ).sort((a, b) =>
+            b.searchScore - a.searchScore
+        );
 
-        // const amount = `${matches.length}/${members.length}`;
+        const amount = `${matches.length}/${members.length}`;
         return <div className={styles.members}>
             <div className={styles.header}>
                 <h1>
-                    Executive Board Members {/*<span className={styles.amount}>
+                    Executive Board Members <span className={styles.amount}>
                         {amount}
-                    </span>*/}
+                    </span>
                 </h1>
-                
-                {/*<input
+
+                <input
                     type="text"
                     placeholder="Search"
                     data-field="searchString"
                     onChange={this.onSearchChange}
-                />*/}
-                
+                />
             </div>
             <div className={styles.list}>
-                {members.map((member, i) =>
+                {matches.map((member, i) =>
                     <Member key={i} member={member} />
                 )}
             </div>

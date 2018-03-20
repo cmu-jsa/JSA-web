@@ -13,6 +13,7 @@
 }
 
 @font-size: 16px;
+@font-size-header: 1.1 * @font-size;
 @line-height: 1.6;
 
 @duration-transition: 0.2s;
@@ -43,7 +44,7 @@
     @color-bg-active, @color-text-dark, @color-text-light
 );
 
-@height-header: 2 * @spacing-y + @line-height * @font-size;
+@height-header: 2 * @spacing-y + @line-height * @font-size-header;
 @box-shadow: 0 @spacing-y / 2 @spacing-y / 2 fadeout(@color-text, 75%);
 @border: 1px solid fadeout(@color-text, 75%);
 @border-primary: @spacing-x / 2 solid @color-primary;
