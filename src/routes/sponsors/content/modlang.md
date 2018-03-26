@@ -1,3 +1,3 @@
 ### About
 
-The Department of Modern Languages
+Department of Modern Languages
