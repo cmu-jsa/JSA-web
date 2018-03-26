@@ -1,6 +1,6 @@
 # JSA-web
 
-CMU JSA website.
+CMUJSA website.
 
 ## Installation
 

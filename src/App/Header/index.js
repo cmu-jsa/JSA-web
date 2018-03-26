@@ -46,7 +46,7 @@ function Logo() {
     >
         <div className={styles.image} />
         <div className={styles.text}>
-            CMU JSA
+            CMUJSA
         </div>
     </NavLink>;
 }
@@ -217,7 +217,7 @@ export default class Header extends React.Component {
 
         return <header className={classes} onClick={this.toggle}>
             <div className={styles.toggle}>
-                CMU JSA
+                CMUJSA
             </div>
             <nav>
                 <Logo />

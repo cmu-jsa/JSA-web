@@ -20,7 +20,7 @@ import styles from './index.less';
  */
 function Hero() {
     return <div className={styles.hero}>
-        <h1 className={styles.left}>日本学生会</h1>
+        <h1 className={styles.left}>CMUJSA</h1>
     </div>;
 }
 

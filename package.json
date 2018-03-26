@@ -1,7 +1,7 @@
 {
   "name": "jsa-web",
   "version": "1.0.0",
-  "description": "CMU JSA website",
+  "description": "CMUJSA website",
   "main": "lib/index.js",
   "scripts": {
     "doc": "jsdoc -c .jsdoc.json README.md src",
