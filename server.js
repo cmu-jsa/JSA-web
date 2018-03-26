@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 const http = require('http');
@@ -5,7 +7,7 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 
-const publicPath = '/user/fencing/';
+const publicPath = '/';
 const bundleDir = path.resolve(__dirname, 'dist');
 const publicDir = path.resolve(__dirname, 'public');
 const index = path.join(bundleDir, 'index.html');

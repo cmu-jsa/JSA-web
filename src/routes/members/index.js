@@ -208,9 +208,13 @@ export default class Members extends React.Component {
         const matches = members.filter(member =>
             member.searchScore === void 0
             || member.searchScore > 0
-        ).sort((a, b) =>
-            b.searchScore - a.searchScore
         );
+
+        if (this.state.searchString) {
+            matches.sort((a, b) =>
+                b.searchScore - a.searchScore
+            );
+        }
 
         const amount = `${matches.length}/${members.length}`;
         return <div className={styles.members}>
