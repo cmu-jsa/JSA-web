@@ -20,7 +20,6 @@
         .left, .right {
             display: flex;
             flex-flow: row wrap;
-            justify-content: flex-end;
 
             > * {
                 padding: 0 @spacing-x;
@@ -28,6 +27,7 @@
         }
 
         .right {
+            justify-content: flex-end;
             margin-left: auto;
         }
     }
