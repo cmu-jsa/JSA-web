@@ -34,7 +34,8 @@ function EventComponent(props) {
         title, location, date, contentPath
     } } = props;
 
-    const Content = asyncComponent(contentCtx(contentPath), Spinner);
+    const Content = contentPath
+        && asyncComponent(contentCtx(contentPath), Spinner);
 
     return <div>
         <Link to=".."><h1>Events</h1></Link>
@@ -87,7 +88,7 @@ function EventList() {
             } = event;
 
             return <div key={i}>
-                <Link to={`./${path}`}><h2>{title}</h2></Link>
+                <Link to={path}><h2>{title}</h2></Link>
                 <h4>{date}</h4>
                 <h5>{location}</h5>
             </div>;

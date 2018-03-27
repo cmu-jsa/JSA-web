@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
@@ -39,6 +39,10 @@ export default function App() {
             <main className={styles.container}>
                 <Switch>
                     { routes }
+                    <Route path="/:path" render={({ match }) => {
+                        const { path } = match.params;
+                        return <Redirect to={`./${path}/`} />;
+                    }} />
                     <Route component={asyncComponent(NotFound, Spinner)} />
                 </Switch>
             </main>

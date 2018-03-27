@@ -38,7 +38,7 @@ function EventPreview(props) {
     } } = props;
 
     return <div>
-        <h3><Link to={`/events/${path}`}>
+        <h3><Link to={path.startsWith('/') ? path : `/events/${path}`}>
             {title}
         </Link></h3>
         <p>{date} @ {location}</p>

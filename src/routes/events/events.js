@@ -40,7 +40,8 @@ function formatDate(date) {
  */
 function EventConfig(config) {
     const {
-        title, location, contentPath,
+        title, location,
+        contentPath: rawContentPath,
         startDate: rawStartDate,
         endDate: rawEndDate
     } = config;
@@ -55,14 +56,18 @@ function EventConfig(config) {
         ? formatDate(endDate)
         : null;
 
-    let date;
-    if (!end || start === end) {
-        date = start;
-    } else {
-        date = `${start} - ${end}`;
-    }
+    const date = (!end || start === end)
+        ? start
+        : `${start} - ${end}`;
 
-    const path = contentPath.match(/^(.*)\.md$/)[1] + '/';
+    let path;
+    let contentPath = null;
+    if (rawContentPath.startsWith('/')) {
+        path = rawContentPath;  // Absolute URLs should be used directly.
+    } else {
+        path = rawContentPath.match(/^(.*)\.md$/)[1] + '/';
+        contentPath = rawContentPath;
+    }
 
     Object.defineProperties(
         this,
@@ -125,12 +130,12 @@ function EventConfig(config) {
              */
             path: { value: path },
             /**
-             * The path for requiring the event's content.
+             * The path for requiring the event's content, or `null` if none.
              *
-             * @type {string}
+             * @type {string?}
              * @readonly
              */
-            contentPath: { value: `./${contentPath}` }
+            contentPath: { value: contentPath && `./${contentPath}` }
         }
     );
 }
