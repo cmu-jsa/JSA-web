@@ -1,0 +1,3 @@
+### About
+
+Teppanyaki Kyoto Restaurant
