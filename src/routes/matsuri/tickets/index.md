@@ -21,8 +21,9 @@ Venmo [@cmujsa](https://venmo.com/cmujsa) with the following information:
 - Number of tickets purchased
 - The correct price of tickets
 
-We will only accept Venmo transactions before 0:00 am April 10th, 2018.
-Invalid transactions will not be subject to refund, unless appealed by the user via Venmo before the end of the event.
+The deadline for discounted ticket prices is **0:00 am April 10th, 2018**.
+We will only accept Venmo transactions up until the deadline.
+Invalid transactions will not be subject to refund, unless appealed by the user via Venmo before the deadline.
 
 ## Purchase via PayPal
 
