@@ -1,7 +1,13 @@
 'use strict';
 
 const webpack = require('webpack');
-const config = require('./webpack.config.js');
+const config = require('./webpack.config.base.js');
+
+if (!config.performance) {
+    config.performance = {};
+}
+
+config.performance.hints = false;
 
 config.output.filename = '[name].js';
 

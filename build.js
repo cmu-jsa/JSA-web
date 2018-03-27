@@ -6,8 +6,11 @@ const webpack = require('webpack');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const ProgressBar = require('progress');
 
-const webpackCompiler = webpack(function getWebpackConfig(action) {
-    switch (action) {
+const action = process.argv[2];
+const port = process.argv[3] || 8080;
+
+const webpackCompiler = webpack(function getWebpackConfig(act) {
+    switch (act) {
         case 'production':
             return require('./webpack.config.production.js');
         case 'live':
@@ -15,7 +18,7 @@ const webpackCompiler = webpack(function getWebpackConfig(action) {
         default:
             return require('./webpack.config.js');
     }
-}(process.argv[2]));
+}(action));
 
 const webpackBuildFinished = (err, stats) => {
     if (err) {
@@ -41,7 +44,7 @@ webpackCompiler.apply(new ProgressPlugin((percent, msg) => {
     webpackProgress.update(percent, { 'msg': msg });
 }));
 
-switch (process.argv[2]) {
+switch (action) {
     case 'watch':
         webpackCompiler.watch({}, webpackBuildFinished);
         return;
@@ -57,7 +60,7 @@ switch (process.argv[2]) {
             historyApiFallback: true,
             stats: { colors: true, timings: true, cached: false }
         });
-        server.listen(8080, 'localhost');
+        server.listen(port, 'localhost');
         return;
     }
     default:
