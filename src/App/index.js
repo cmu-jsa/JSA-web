@@ -16,14 +16,35 @@ import Header from './Header';
 import Footer from './Footer';
 import styles from './index.less';
 
-const routes = routeConfigFlat.map((config, i) => {
+const routes = routeConfigFlat.map(config => {
     const { path, component } = config;
     return <Route
-        key={i}
+        key={path}
         path={path}
         exact={path === '/'}
         strict
         component={component}
+    />;
+});
+
+// Create redirects for missing trailing slashes.
+const routeRedirects = routeConfigFlat.map(config => {
+    const { path } = config;
+    if (!path.endsWith('/')) {
+        return null;
+    }
+
+    const noSlash = path.substr(0, path.length - 1);
+    if (!noSlash) {
+        return;
+    }
+
+    return <Route
+        key={noSlash}
+        path={noSlash}
+        exact
+        strict
+        render={() => <Redirect to={path} />}
     />;
 });
 
@@ -38,11 +59,8 @@ export default function App() {
             <Header />
             <main className={styles.container}>
                 <Switch>
+                    { routeRedirects }
                     { routes }
-                    <Route path="/:path" render={({ match }) => {
-                        const { path } = match.params;
-                        return <Redirect to={`./${path}/`} />;
-                    }} />
                     <Route component={asyncComponent(NotFound, Spinner)} />
                 </Switch>
             </main>
