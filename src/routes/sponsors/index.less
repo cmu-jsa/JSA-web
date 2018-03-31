@@ -112,11 +112,17 @@
       display: flex;
       flex-flow: column nowrap;
 
+      overflow: auto;
+      max-height: 100%;
       max-width: @width-container-max;
 
       cursor: initial;
 
       transition: transform @duration-enter-exit;
+
+      > :global(.markdown) {
+        overflow: auto;
+      }
 
       > .button {
         background-color: none;
