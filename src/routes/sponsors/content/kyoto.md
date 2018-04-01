@@ -4,6 +4,8 @@ Teppanyaki Kyoto Restaurant is one of the most authentic Japanese restaurants, r
 Their signature okonomiyaki dish comes with many side options, and will surprise you every time with
 new tastes of deliciousness.
 
+## Connections
+
 CMUJSA also holds most board mixers and dinners at this restaurant,
 as it offers a large zashiki-style (sitting on the floor) seating for big groups like ours.
 

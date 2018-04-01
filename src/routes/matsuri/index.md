@@ -21,4 +21,4 @@ The school lost their whole campus due to the East Japan Earthquake and Tsunami 
 
 ## Food and Games List
 
-_Coming Soon..._
+Check out our [booths](/matsuri/booths)!
