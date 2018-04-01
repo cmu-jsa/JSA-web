@@ -2,14 +2,24 @@
 
 ## How it works
 
-For purchasing food and playing games, you will need to buy tickets.
+For purchasing food and playing games at Matsuri, you will need to buy tickets.
 You can drop by and purchase tickets during the event, with the price of $1.00 per ticket.
 We _will_ be accepting credit/debit cards.
 
-You can also purchase tickets online at a discount price, which you can redeem on the day of (you will have a much shorter line!).
-There are two methods of transaction (Venmo or PayPal), highlighted below.
-
 Note that there is no entrance fee to the event, and you can enjoy all of the performances for free.
+
+## Pre-ordering
+
+You can also purchase tickets online at a discount price, which you can redeem on the day of (you will have a much shorter line at the booth!).
+
+Pre-order ticket prices come at a 10% discount:
+
+- 10 tickets:  $9.00 (worth $10.00)
+- 20 tickets: $18.00 (worth $20.00)
+- 30 tickets: $27.00 (worth $30.00)
+- 40 tickets: $36.00 (worth $40.00)
+
+There are two methods of transaction (Venmo or PayPal), highlighted below.
 
 ## Purchase via Venmo
 
@@ -26,11 +36,6 @@ We will only accept Venmo transactions up until the deadline.
 Invalid transactions will not be subject to refund, unless appealed by the user via Venmo before the deadline.
 
 ## Purchase via PayPal
-
-- 10 tickets</b>: $9.00 (worth $10.00)
-- 20 tickets</b>: $18.00 (worth $20.00)
-- 30 tickets</b>: $27.00 (worth $30.00)
-- 40 tickets</b>: $36.00 (worth $40.00)
 
 You will be redirected to PayPal for secure transaction. Please make sure to note down which personal information you used for the transaction.<br><br>
 
