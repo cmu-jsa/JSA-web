@@ -14,4 +14,4 @@ This is Chaya's first year as a sponsor for CMUJSA, supporting us as a <font col
 Take the 61C or 61D from the Forbes Ave. at Hamburg Hall bus stop to the Murray Ave. at Hobart St. bus stop.
 The restaurant is right in front of the bus stop!
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.869699091062!2d-79.92532268451733!3d40.433884079363104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8834f1fe914c87b7%3A0x849efbbfce93402b!2sChaya+Japanese+Cuisine!5e0!3m2!1sja!2sus!4v1522687149423" width="320" height="280" frameborder="0" style="border:0" allowfullscreen></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.869699091062!2d-79.92532268451733!3d40.433884079363104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8834f1fe914c87b7%3A0x849efbbfce93402b!2sChaya+Japanese+Cuisine!5e0!3m2!1sja!2sus!4v1522687149423" width="100%" height="280" frameborder="0" style="border:0" allowfullscreen></iframe>
