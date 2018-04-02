@@ -7,7 +7,7 @@ Their signature sushi is one of the best in Pittsburgh!
 ## Connections
 
 Chaya is a favorite Japanese restaurant for CMU students, for it's accessible location and filling dinner.
-This is Chaya's first year as a sponsor for CMUJSA, supporting us as a <font color="DarkGoldenRod">Bronze Tier Sponsor</font> for Matsuri 2018.
+This is Chaya's first year as a sponsor for CMUJSA, supporting us as a <font color="Silver">Silver Tier Sponsor</font> for Matsuri 2018.
 
 ## Location
 
