@@ -9,7 +9,7 @@ new tastes of deliciousness.
 CMUJSA also holds most board mixers and dinners at this restaurant,
 as it offers a large zashiki-style (sitting on the floor) seating for big groups like ours.
 
-<img src="/images/kyoto.jpg" alt="kyoto_image" style="width: 320px;">
+<img src="/images/kyoto.jpg" alt="kyoto_image" style="width: 100%; max-width: 400px;">
 
 Teppanyaki Kyoto has generously sponsored us for the past few Matsuri events, and continue to 
 show their support as a <font color="DarkGoldenRod">Bronze Tier Sponsor</font> for Matsuri 2018.

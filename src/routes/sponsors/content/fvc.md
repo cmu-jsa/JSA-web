@@ -9,7 +9,7 @@ where they act as buffers between the applicants and the unique corporate cultur
 Fourth Valley Concierge is known amongst Japanese students of the United States through their
 recruiting agent service, Connect Job (Formerly TOP CAREER International).
 
-<img src="/images/connectjob.png" alt="connectjob_logo" style="width: 320px;">
+<img src="/images/connectjob.png" alt="connectjob_logo" style="width: 100%;">
 
 Many CMUJSA students who are interested in working in Japan are connected to Japanese recruiters
 through events and seminars hosted by Connect Job.

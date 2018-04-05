@@ -12,7 +12,7 @@ Many CMUJSA fundraisers are also supported by Tokyo, as some condiments for serv
 
 Tokyo Japanese Store had been a regular sponsor for our Matsuri event several years back, 
 and have generously offered to restore the sponsorship in 2018.
-They show their support as a <font color="Silver">Silver Tier Sponsor</font> for Matsuri 2018,
+They show their support as a <font color="Gold">Gold Tier Sponsor</font> for Matsuri 2018,
 through abundant supplies of snacks and food ingredients used for the event.
 
 ## Location
