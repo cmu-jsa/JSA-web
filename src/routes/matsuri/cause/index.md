@@ -4,7 +4,7 @@
 
 #### _When the only thing left in your life is yourself - no shelter, no money, no family - what would you do?_<br>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Cie88YSP9SI?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
+<iframe width="100%" height="280" src="https://www.youtube.com/embed/Cie88YSP9SI?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
 
 The 2011 East Japan Earthquake and Tsunami disaster happened seven years ago.
 As the earthquake shook the ground beneath East Japan, it teared down all the precious memories built with families and friends.
