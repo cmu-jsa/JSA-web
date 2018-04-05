@@ -19,14 +19,14 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 ### Snacks / Desserts
 
 - Japanese-style Crepe &nbsp;🎫🎫🎫
-- Dorayaki (Pancake with Red Bean Paste) &nbsp;🎫🎫
+- Dorayaki (Pancakes with Red Bean Paste) &nbsp;🎫🎫
 - Assorted Japanese Snacks
  - Small &nbsp;🎫
  - Large &nbsp;🎫🎫
 
 ## Games
 
-- Poké Ball Omikuji (Fortune Slip Drawing) &nbsp;🎫
+- Poké Ball Omikuji (Fortune Drawing) &nbsp;🎫
 - Senbontsuri (Prize Fishing) &nbsp;🎫
 - Super Ball Sukui (Super Ball Scooping) &nbsp;🎫
 - Wanage (Ring Tossing) &nbsp;🎫🎫
