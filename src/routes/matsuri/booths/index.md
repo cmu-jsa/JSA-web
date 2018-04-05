@@ -11,7 +11,7 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 
 ### General
 
-- Karaage (Fried Chicken) &nbsp;🎫🎫🎫
+- Karaage (Fried Chicken) &nbsp;🎫🎫
 - Onigiri (Rice Balls) &nbsp;🎫 
 - Takoyaki (Octopus Balls) &nbsp;🎫🎫🎫
 - Yakisoba (Fried Noodles) &nbsp;🎫🎫🎫🎫
@@ -24,6 +24,14 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
  - Small &nbsp;🎫
  - Large &nbsp;🎫🎫
 
+### Drinks
+
+- Water &nbsp;🎫
+- Soda &nbsp;🎫
+- Capri Sun &nbsp;🎫
+- Ocha (Japanese Tea) &nbsp;🎫🎫
+- Ramune (Japanese Soda) &nbsp;🎫🎫🎫
+
 ## Games
 
 - Poké Ball Omikuji (Fortune Drawing) &nbsp;🎫
@@ -31,7 +39,12 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 - Super Ball Sukui (Super Ball Scooping) &nbsp;🎫
 - Wanage (Ring Tossing) &nbsp;🎫🎫
 
-## Others
+## JSA Apparel
+
+- Sticker + Button Set &nbsp;🎫
+- Matsuri 2018 T-shirt &nbsp;🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
+
+## Activities
 
 - Raffle Ticket &nbsp;🎫
 - Advanced Origami Workshop &nbsp;🎫
