@@ -29,6 +29,7 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 - Water &nbsp;🎫
 - Soda &nbsp;🎫
 - Capri Sun &nbsp;🎫
+- La Croix Sparkling Water &nbsp;🎫🎫
 - Ocha (Japanese Tea) &nbsp;🎫🎫
 - Ramune (Japanese Soda) &nbsp;🎫🎫🎫
 

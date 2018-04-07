@@ -19,6 +19,21 @@ We are also proud to announce that the profits we make at this event will be
 donated to Minato Junior High school in Ishinomaki, Japan. 
 The school lost their whole campus due to the East Japan Earthquake and Tsunami of March 11, 2011. 
 
-## Food and Games List
+## When, Where
 
-Check out our [booths](/matsuri/booths)!
+- Find out about the [event logistics](/matsuri/logistics)
+
+## What
+
+- Check out what we have at our [booths](/matsuri/booths)
+- Check out our free [stage performances](/matsuri/stage)
+
+## Why
+
+- Read about our [cause](/matsuri/cause)
+
+## How
+
+- Read more about our [sponsors](/sponsors)
+- Discover our [collaborators](/matsuri/j@cmu)
+- Find out about how our [ticketing system](/matsuri/tickets) works
