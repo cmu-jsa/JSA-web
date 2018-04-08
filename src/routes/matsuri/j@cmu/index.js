@@ -95,7 +95,6 @@ export default class Orgs extends React.Component {
                 J@CMU
             </h1>
 
-            <h2> About </h2>
             <p>
                 J@CMU stands for Japan at Carnegie Mellon University,
                 which is the alliance of all Japan-related organizations

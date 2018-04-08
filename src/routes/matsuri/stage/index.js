@@ -23,7 +23,6 @@ export default class Performances extends React.Component {
 
             <h1> Stage </h1>
 
-            <h2> About </h2>
             <p>
                 Each year, Matsuri invites a variety of performers and
                 performances from all around Pittsburgh. Stage performances at
