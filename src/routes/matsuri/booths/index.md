@@ -30,7 +30,6 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 - Soda &nbsp;🎫
 - Capri Sun &nbsp;🎫
 - La Croix Sparkling Water &nbsp;🎫🎫
-- Ocha (Japanese Tea) &nbsp;🎫🎫
 - Ramune (Japanese Soda) &nbsp;🎫🎫🎫
 
 ## Games
@@ -40,15 +39,13 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 - Super Ball Sukui (Super Ball Scooping) &nbsp;🎫
 - Wanage (Ring Tossing) &nbsp;🎫🎫
 
-## JSA Apparel
+## Apparel
 
-- Sticker + Button Set &nbsp;🎫
+- CMUJSA Sticker + Button Set &nbsp;🎫
 - Matsuri 2018 T-shirt &nbsp;🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
 
 ## Activities
 
 - Raffle Ticket &nbsp;🎫
 - Advanced Origami Workshop &nbsp;🎫
-- Polaroid Photos at Photo Booth
- - 1 Polaroid Film &nbsp;🎫
- - 3 Polaroid Films &nbsp;🎫🎫
+- Kimono Try-ons + 1 Polaroid Photo &nbsp;🎫🎫
