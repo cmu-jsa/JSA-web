@@ -4,18 +4,19 @@
   "description": "CMUJSA website",
   "main": "lib/index.js",
   "scripts": {
-    "doc": "jsdoc -c .jsdoc.json README.md src",
+    "doc": "jsdoc -c .jsdoc.json README.md src lib",
     "doc-watch": "nodemon --config .nodemon.doc.json",
     "live": "node build.js live",
     "watch": "node build.js watch",
     "build": "node build.js",
     "dist": "node build.js production",
     "prepare": "node build.js production",
-    "lint": "eslint *.js src",
+    "lint": "eslint *.js src lib",
     "start": "node lib/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "lib"
   ],
   "repository": {
     "type": "git",
@@ -72,12 +73,15 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
-    "body-parser": "^1.17.0",
-    "connect-session-sequelize": "^4.1.0",
-    "express-session": "^1.15.1",
-    "passport": "^0.3.2",
-    "passport-google-oauth2": "^0.1.6",
-    "sequelize": "^3.30.2",
-    "sqlite3": "^3.1.8"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.2.0"
+  },
+  "engine": {
+    "npm": ">=3.0.0",
+    "node": ">=8.0.0"
   }
 }

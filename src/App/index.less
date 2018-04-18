@@ -26,6 +26,18 @@ p {
     margin: @spacing-y 0;
 }
 
+input[type=text], input[type=password] {
+    padding: @spacing-y @spacing-x;
+    background: none;
+    border: none;
+    border-bottom: @border;
+    transition: border @duration-transition;
+
+    &:focus {
+        border-bottom: @border-primary;
+    }
+}
+
 :global(#app) {
     min-height: 100vh;
     display: flex;

@@ -1,11 +1,11 @@
 {
     "extends": ["eslint:recommended"],
     "parserOptions": {
-        "ecmaVersion": 2015
+        "ecmaVersion": 2017
     },
     "env": {
-        "node": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "rules": {
         "no-console": 0,

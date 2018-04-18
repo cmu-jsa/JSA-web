@@ -12,6 +12,7 @@ import Spinner from 'src/Spinner';
 import { routeConfigFlat } from 'src/routeConfig';
 
 import NotFound from 'bundle-loader?lazy!src/NotFound';
+import Login from 'bundle-loader?lazy!./Login';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './index.less';
@@ -48,6 +49,9 @@ const routeRedirects = routeConfigFlat.map(config => {
     />;
 });
 
+const asyncLogin = asyncComponent(Login, Spinner);
+const asyncNotFound = asyncComponent(NotFound, Spinner);
+
 /**
  * React component for the entire app.
  *
@@ -61,7 +65,8 @@ export default function App() {
                 <Switch>
                     { routeRedirects }
                     { routes }
-                    <Route component={asyncComponent(NotFound, Spinner)} />
+                    <Route path='/login' component={asyncLogin} />
+                    <Route component={asyncNotFound} />
                 </Switch>
             </main>
             <Footer />
