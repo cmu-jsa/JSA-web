@@ -4,7 +4,7 @@
  * @module src/routeConfig
  */
 
-import { string, shape, object, objectOf } from 'prop-types';
+import { boolean, string, shape, object, objectOf } from 'prop-types';
 
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
@@ -41,22 +41,32 @@ const routeComponentCtx = require.context(
 const routeConfig = { children: {} };
 
 /**
- * Configures the route specified by the given configuration file.
+ * Gets the component at the given path from the context.
  *
- * @param {string} configPath - Path to the configuration file.
- * @returns {module:src/routeConfig~Route} The configured route.
+ * @param {string} path The path for the component.
+ * @returns {React.Component} The (async) component.
  */
-function configure(configPath) {
-    const { title } = routeConfigCtx(configPath);
-    const path = configPath.match(/.(\/|\/.*\/)route.json$/)[1];
-
+function componentFromCtx(path) {
     let getComponent;
     try {
         getComponent = routeComponentCtx(`.${path}index.js`);
     } catch (err) {
         getComponent = routeComponentCtx(`.${path}index.md`);
     }
-    const component = asyncComponent(getComponent, Spinner);
+
+    return asyncComponent(getComponent, Spinner);
+}
+
+/**
+ * Configures the route specified by the given configuration file.
+ *
+ * @param {string} configPath - Path to the configuration file.
+ * @returns {module:src/routeConfig~Route} The configured route.
+ */
+function configure(configPath) {
+    const config = routeConfigCtx(configPath);
+    const path = configPath.match(/.(\/|\/.*\/)route.json$/)[1];
+    const component = componentFromCtx(path);
 
     // Find the route's proper location in the configuration
     const parts = path.split('/').slice(1, -1);
@@ -69,10 +79,14 @@ function configure(configPath) {
         return node.children[key];
     }, routeConfig);
 
+    const { title } = config;
+
     route.title = title;
     route.path = path;
     route.component = component;
     route.parts = parts;
+    'auth' in config && (route.auth = config.auth);
+
     return route;
 }
 
@@ -83,7 +97,8 @@ const routeConfigFlat = routeConfigCtx.keys()
 const routeShape = shape({
     title: string.isRequired,
     path: string.isRequired,
-    children: object.isRequired
+    children: object.isRequired,
+    auth: boolean
 });
 
 const routeChildrenShape = objectOf(routeShape);

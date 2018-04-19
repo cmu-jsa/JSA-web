@@ -8,6 +8,8 @@ import React from 'react';
 import { shape, string } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
+import User from 'src/User';
+
 import styles from './index.less';
 
 /**
@@ -22,6 +24,11 @@ export default class Login extends React.Component {
 
         this.state = {
             redirect: false
+        };
+
+        this.inputs = {
+            username: null,
+            password: null
         };
 
         this.login = this.login.bind(this);
@@ -40,15 +47,20 @@ export default class Login extends React.Component {
             return <Redirect to={referer} />;
         }
 
-        return <form className={styles.login} onSubmit={this.login}>
+        return <form className={styles.login} onSubmit={event => {
+            event.preventDefault();
+            this.login();
+        }}>
             <input
                 type='text'
                 name='username'
+                ref={input => (this.inputs.username = input)}
                 placeholder='Username'
             />
             <input
                 type='password'
                 name='password'
+                ref={input => (this.inputs.password = input)}
                 placeholder='Password'
             />
             <input
@@ -60,11 +72,19 @@ export default class Login extends React.Component {
 
     /**
      * Attempts to log in.
+     *
+     * @returns {Promise} Resolves when login has succeeded, or rejects with an
+     * error.
      */
-    login() {
-        // TODO
-        console.log('in!');
+    async login() {
+        const { inputs } = this;
+        const username = inputs.username.value;
+        const password = inputs.password.value;
+
+        await User.login(username, password);
+
         this.setState({ redirect: true });
+        return void 0;
     }
 }
 
