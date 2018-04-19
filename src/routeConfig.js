@@ -85,6 +85,7 @@ function configure(configPath) {
     route.path = path;
     route.component = component;
     route.parts = parts;
+    'hidden' in config && (route.hidden = config.hidden);
     'auth' in config && (route.auth = config.auth);
 
     return route;
@@ -98,6 +99,7 @@ const routeShape = shape({
     title: string.isRequired,
     path: string.isRequired,
     children: object.isRequired,
+    hidden: boolean,
     auth: boolean
 });
 

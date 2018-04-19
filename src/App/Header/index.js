@@ -140,7 +140,12 @@ DropdownMenu.propTypes = {
  */
 function routeChildrenMenu(routeChildren) {
     return Object.keys(routeChildren).map(name => {
-        const { children: grandchildren, title, path } = routeChildren[name];
+        const child = routeChildren[name];
+        if (child.hidden) {
+            return null;
+        }
+
+        const { children: grandchildren, title, path } = child;
 
         if (objectIsEmpty(grandchildren)) {
             return <HeaderLink

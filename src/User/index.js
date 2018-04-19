@@ -74,13 +74,13 @@ class User {
             /** @lends User.prototype */
             {
                 /**
-                 * `true` if logged in; `false` if not logged in; `null` if
+                 * Username if logged in; `false` if not logged in; `null` if
                  * unknown (i.e., initial refresh not performed).
                  *
                  * @private
-                 * @type {boolean}
+                 * @type {string?|boolean}
                  */
-                _loggedIn: { value: null, writable: true },
+                _username: { value: null, writable: true },
 
                 /**
                  * The current login refresh promise, or `null`.
@@ -107,12 +107,26 @@ class User {
                 _logoutPromise: { value: null, writable: true },
 
                 /**
-                 * `true` if logged in; `false` otherwise.
+                 * `true` if logged in; `false` if not logged in; `null` if
+                 * unknown (i.e., initial refresh not performed).
                  *
                  * @readonly
-                 * @type {boolean}
+                 * @type {boolean?}
                  */
-                loggedIn: { get() { return this._loggedIn; } }
+                loggedIn: { get() {
+                    return this.username === null
+                        ? null
+                        : !!this.username;
+                } },
+
+                /**
+                 * Username if logged in; `false` if not logged in; `null` if
+                 * unknown (i.e., initial refresh not performed).
+                 *
+                 * @readonly
+                 * @type {string?|boolean}
+                 */
+                username: { get() { return this._username; } }
             }
         );
     }
@@ -132,9 +146,11 @@ class User {
         }
 
         this._refreshLoginStatusPromise = async function() {
-            const { status } = await XHRpromise('GET', API.auth);
+            const { status, responseText } = await XHRpromise('GET', API.auth);
 
-            this._loggedIn = status === 200;
+            this._username = status === 200
+                ? responseText
+                : false;
         }.bind(this)();
         return this._refreshLoginStatusPromise;
     }
@@ -167,7 +183,7 @@ class User {
                     successStatus: 200
                 });
 
-                this._loggedIn = true;
+                this._username = username;
             }
 
             this._loginPromise = null;
@@ -194,7 +210,7 @@ class User {
                 successStatus: 200
             });
 
-            this._loggedIn = false;
+            this._username = false;
             this._logoutPromise = null;
             return this;
         }.bind(this)();
