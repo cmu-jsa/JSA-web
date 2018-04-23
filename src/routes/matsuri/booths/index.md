@@ -12,7 +12,8 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 ### General
 
 - Karaage (Fried Chicken) &nbsp;🎫🎫
-- Onigiri (Rice Balls) &nbsp;🎫 
+- Onigiri (Rice Balls) &nbsp;🎫
+- Spam Musubi (Spam Rice Balls) &nbsp;🎫🎫 
 - Takoyaki (Octopus Balls) &nbsp;🎫🎫🎫
 - Yakisoba (Fried Noodles) &nbsp;🎫🎫🎫🎫
 
