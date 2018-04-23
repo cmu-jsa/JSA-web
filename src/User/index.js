@@ -86,31 +86,33 @@ class User {
                  * @private
                  * @type {Promise?}
                  */
-                _logoutPromise: { value: null, writable: true },
-
-                /**
-                 * `true` if logged in; `false` if not logged in; `null` if
-                 * unknown (i.e., initial refresh not performed).
-                 *
-                 * @readonly
-                 * @type {boolean?}
-                 */
-                loggedIn: { get() {
-                    return this.username === null
-                        ? null
-                        : !!this.username;
-                } },
-
-                /**
-                 * Username if logged in; `false` if not logged in; `null` if
-                 * unknown (i.e., initial refresh not performed).
-                 *
-                 * @readonly
-                 * @type {(string?|boolean)}
-                 */
-                username: { get() { return this._username; } }
+                _logoutPromise: { value: null, writable: true }
             }
         );
+    }
+
+    /**
+     * `true` if logged in; `false` if not logged in; `null` if
+     * unknown (i.e., initial refresh not performed).
+     *
+     * @readonly
+     * @type {boolean?}
+     */
+    get loggedIn() {
+        return this.username === null
+            ? null
+            : !!this.username;
+    }
+
+    /**
+     * Username if logged in; `false` if not logged in; `null` if
+     * unknown (i.e., initial refresh not performed).
+     *
+     * @readonly
+     * @type {(string?|boolean)}
+     */
+    get username() {
+        return this._username;
     }
 
     /**
