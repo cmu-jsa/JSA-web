@@ -60,7 +60,7 @@ class User {
                  * unknown (i.e., initial refresh not performed).
                  *
                  * @private
-                 * @type {string?|boolean}
+                 * @type {(string?|boolean)}
                  */
                 _username: { value: null, writable: true },
 
@@ -106,7 +106,7 @@ class User {
                  * unknown (i.e., initial refresh not performed).
                  *
                  * @readonly
-                 * @type {string?|boolean}
+                 * @type {(string?|boolean)}
                  */
                 username: { get() { return this._username; } }
             }
@@ -116,8 +116,8 @@ class User {
     /**
      * Refreshes the login status.
      *
-     * @note If an existing refresh request is in progress, its promise is
-     * returned instead.
+     * If an existing refresh request is in progress, its promise is returned
+     * instead.
      *
      * @returns {Promise} Resolves with the user instance on completion, or
      * rejects with an error.
@@ -140,8 +140,8 @@ class User {
     /**
      * Attempts to log in.
      *
-     * @note If an existing login request is in progress, its promise is
-     * returned instead.
+     * If an existing login request is in progress, its promise is returned
+     * instead.
      *
      * @param {string} username - The username.
      * @param {string} password - The password.
@@ -177,8 +177,9 @@ class User {
     /**
      * Attempts to log out.
      *
-     * @note If an existing logout request is in progress, its promise is
-     * returned instead.
+     * If an existing logout request is in progress, its promise is returned
+     * instead.
+     *
      * @returns {Promise} Resolves with the user instance on success, or rejects
      * with an error.
      */
