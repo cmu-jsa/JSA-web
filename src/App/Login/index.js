@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { shape, string, element } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import User from 'src/User';
@@ -23,7 +23,8 @@ export default class Login extends React.Component {
         super();
 
         this.state = {
-            redirect: false
+            redirect: false,
+            message: null
         };
 
         this.inputs = {
@@ -32,6 +33,11 @@ export default class Login extends React.Component {
         };
 
         this.login = this.login.bind(this);
+
+        (async function() {
+            await User.refreshLoginStatus();
+            this.setState({ redirect: User.loggedIn });
+        }).bind(this)();
     }
 
     /**
@@ -40,8 +46,11 @@ export default class Login extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        if (this.state.redirect) {
-            const { referer } = this.props.location.state || {
+        const { location, prompt = 'Log in' } = this.props;
+        const { redirect, message } = this.state;
+
+        if (redirect) {
+            const { referer } = location.state || {
                 referer: { pathname: '/' }
             };
             return <Redirect to={referer} />;
@@ -51,6 +60,7 @@ export default class Login extends React.Component {
             event.preventDefault();
             this.login();
         }}>
+            {message}
             <input
                 type='text'
                 name='username'
@@ -63,10 +73,9 @@ export default class Login extends React.Component {
                 ref={input => (this.inputs.password = input)}
                 placeholder='Password'
             />
-            <input
-                type='submit'
-                value='Login'
-            />
+            <button type='submit'>
+                {prompt}
+            </button>
         </form>;
     }
 
@@ -81,9 +90,18 @@ export default class Login extends React.Component {
         const username = inputs.username.value;
         const password = inputs.password.value;
 
-        await User.login(username, password);
+        try {
+            await User.login(username, password);
 
-        this.setState({ redirect: true });
+            this.setState({ redirect: true });
+        } catch (err) {
+            const message = <p>
+                {err.message}
+            </p>;
+
+            this.setState({ message });
+        }
+
         return void 0;
     }
 }
@@ -95,6 +113,7 @@ Login.propTypes = {
                 pathname: string.isRequired
             }).isRequired
         })
-    }).isRequired
+    }).isRequired,
+    prompt: element
 };
 

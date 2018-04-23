@@ -26,15 +26,36 @@ p {
     margin: @spacing-y 0;
 }
 
-input[type=text], input[type=password] {
-    padding: @spacing-y @spacing-x;
-    background: none;
-    border: none;
-    border-bottom: @border;
-    transition: border @duration-transition;
+form {
+    input[type=text], input[type=password] {
+        padding: @spacing-y @spacing-x;
+        background: none;
+        border: none;
+        border-bottom: @border;
+        transition: border @duration-transition;
 
-    &:focus {
-        border-bottom: @border-primary;
+        &:focus {
+            border-bottom: @border-primary;
+            border-bottom-width: 1px;
+        }
+    }
+
+    button, input[type=submit] {
+        background: @color-bg-card;
+        color: @color-text;
+        border: @border;
+        transition: all @duration-transition;
+        line-height: @line-height;
+
+        &:hover {
+            background: @color-bg-hover;
+            color: @color-text-bg-hover;
+        }
+
+        &:focus, &:active {
+            background: @color-bg-active;
+            color: @color-text-bg-active;
+        }
     }
 }
 

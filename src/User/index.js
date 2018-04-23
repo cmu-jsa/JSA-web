@@ -22,6 +22,19 @@ const API = {
 Object.freeze(API);
 
 /**
+ * UI paths.
+ *
+ * @private
+ * @readonly
+ * @enum {string}
+ */
+const UIPaths = {
+    /** Login UI. */
+    login: '/login/'
+};
+Object.freeze(UIPaths);
+
+/**
  * Creates and sends an XMLHttpRequest.
  *
  * @param {string} method - The method for the request.
@@ -66,6 +79,14 @@ function XHRpromise(method, url, opts = {}) {
  * Represents user state.
  */
 class User {
+    /**
+     * Paths associated with the user interface.
+     *
+     * @readonly
+     * @type {Object}
+     */
+    get paths() { return UIPaths; }
+
     /**
      * Initializes the user state.
      */

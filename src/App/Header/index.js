@@ -91,7 +91,13 @@ function DropdownButton(props) {
             [styles.open]: isOpen
         });
 
-        return <span className={classes}>{title}</span>;
+        return <a
+            href={to}
+            className={classes}
+            onClick={event => event.preventDefault()}
+        >
+            {title}
+        </a>;
     }
 
     Button.propTypes = {

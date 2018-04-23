@@ -20,13 +20,6 @@ import Footer from './Footer';
 import styles from './index.less';
 
 /**
- * Path to the login UI.
- *
- * @private
- */
-const PATH_LOGIN_UI = '/login';
-
-/**
  * Represents a route that needs authentication.
  *
  * @private
@@ -40,7 +33,7 @@ function AuthRoute(props) {
         return User.loggedIn
             ? <Component {...componentProps} />
             : <Redirect to={{
-                pathname: PATH_LOGIN_UI,
+                pathname: User.paths.login,
                 state: { referer: componentProps.location }
             }} />;
     }} />;
@@ -66,11 +59,15 @@ const routes = routeConfigFlat.map(config => {
         : <Route {...props} />;
 });
 
-// Create redirects for missing trailing slashes.
-const routeRedirects = routeConfigFlat.map(config => {
-    const { path } = config;
+/**
+ * Redirects paths without a trailing slash to paths with a slash.
+ *
+ * @param {string} path - The path, including the trailing slash.
+ * @returns {ReactElement} The redirect.
+ */
+function redirectNoSlash(path) {
     if (!path.endsWith('/')) {
-        return null;
+        throw new Error('Path does not end with a slash.');
     }
 
     const noSlash = path.substr(0, path.length - 1);
@@ -78,13 +75,24 @@ const routeRedirects = routeConfigFlat.map(config => {
         return;
     }
 
-    return <Route
+    return <Redirect
         key={noSlash}
-        path={noSlash}
+        from={noSlash}
         exact
         strict
-        render={() => <Redirect to={path} />}
+        to={path}
     />;
+}
+
+// Create redirects for missing trailing slashes.
+const routeRedirects = routeConfigFlat.map(config => {
+    return redirectNoSlash(config.path);
+});
+
+// Create redirects for user UI paths.
+const userRedirects = Object.keys(User.paths).map(key => {
+    const path = User.paths[key];
+    return redirectNoSlash(path);
 });
 
 const asyncLogin = asyncComponent(Login, Spinner);
@@ -103,7 +111,8 @@ export default function App() {
                 <Switch>
                     { routeRedirects }
                     { routes }
-                    <Route path={PATH_LOGIN_UI} component={asyncLogin} />
+                    { userRedirects }
+                    <Route path={User.paths.login} component={asyncLogin} />
                     <Route component={asyncNotFound} />
                 </Switch>
             </main>
