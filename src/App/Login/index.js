@@ -34,10 +34,10 @@ export default class Login extends React.Component {
 
         this.login = this.login.bind(this);
 
-        (async function() {
+        (async() => {
             await User.refreshLoginStatus();
             this.setState({ redirect: User.loggedIn });
-        }).bind(this)();
+        })();
     }
 
     /**

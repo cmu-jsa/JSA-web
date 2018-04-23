@@ -1,6 +1,21 @@
 @import '~src/less/definitions';
 
 .elections {
+    display: flex;
+    flex-flow: column nowrap;
 
+    .admin {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > form {
+            display: flex;
+            flex-flow: column nowrap;
+
+            > * {
+                margin-bottom: @spacing-y;
+            }
+        }
+    }
 }
 

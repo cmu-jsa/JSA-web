@@ -7,6 +7,19 @@
 import XHRpromise from 'src/XHRpromise';
 
 /**
+ * Authorization levels.
+ *
+ * @private
+ * @readonly
+ * @enum {number}
+ */
+const AuthLevels = {
+    USER: 0,
+    ADMIN: 1000
+};
+Object.freeze(AuthLevels);
+
+/**
  * API endpoints.
  *
  * @private
@@ -47,6 +60,16 @@ class User {
      * @type {Object}
      */
     get paths() { return UIPaths; }
+
+    /**
+     * Authorization levels.
+     *
+     * @readonly
+     * @enum {number}
+     */
+    get AuthLevels() {
+        return AuthLevels;
+    }
 
     /**
      * Initializes the user state.
@@ -147,7 +170,7 @@ class User {
             return this._refreshLoginStatusPromise;
         }
 
-        this._refreshLoginStatusPromise = async function() {
+        this._refreshLoginStatusPromise = (async() => {
             const { status, responseText } = await XHRpromise('GET', API.auth);
 
             if (status === 200) {
@@ -157,7 +180,7 @@ class User {
             } else {
                 this._username = false;
             }
-        }.bind(this)();
+        })();
         return this._refreshLoginStatusPromise;
     }
 
@@ -177,7 +200,7 @@ class User {
             return this._loginPromise;
         }
 
-        this._loginPromise = async function() {
+        this._loginPromise = (async() => {
             if (this.loggedIn === null) {
                 await this.refreshLoginStatus();
             }
@@ -198,7 +221,7 @@ class User {
 
             this._loginPromise = null;
             return this;
-        }.bind(this)();
+        })();
         return this._loginPromise;
     }
 
@@ -216,7 +239,7 @@ class User {
             return this._logoutPromise;
         }
 
-        this._logoutPromise = async function() {
+        this._logoutPromise = (async() => {
             await XHRpromise('GET', API.auth_logout, {
                 successStatus: 204
             });
@@ -224,7 +247,7 @@ class User {
             this._username = false;
             this._logoutPromise = null;
             return this;
-        }.bind(this)();
+        })();
         return this._logoutPromise;
     }
 }
