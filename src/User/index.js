@@ -65,6 +65,14 @@ class User {
                 _username: { value: null, writable: true },
 
                 /**
+                 * Authorization level, or `null` if unknown/not logged in.
+                 *
+                 * @private
+                 * @type {number?}
+                 */
+                _authLevel: { value: null, writable: true },
+
+                /**
                  * The current login refresh promise, or `null`.
                  *
                  * @private
@@ -116,6 +124,16 @@ class User {
     }
 
     /**
+     * Authorization level, or `null` if unknown/not logged in.
+     *
+     * @readonly
+     * @type {number?}
+     */
+    get authLevel() {
+        return this._authLevel;
+    }
+
+    /**
      * Refreshes the login status.
      *
      * If an existing refresh request is in progress, its promise is returned
@@ -132,9 +150,13 @@ class User {
         this._refreshLoginStatusPromise = async function() {
             const { status, responseText } = await XHRpromise('GET', API.auth);
 
-            this._username = status === 200
-                ? responseText
-                : false;
+            if (status === 200) {
+                const { username, authLevel } = JSON.parse(responseText);
+                this._username = username;
+                this._authLevel = authLevel;
+            } else {
+                this._username = false;
+            }
         }.bind(this)();
         return this._refreshLoginStatusPromise;
     }
@@ -161,13 +183,17 @@ class User {
             }
 
             if (!this.loggedIn) {
-                await XHRpromise('POST', API.auth_login, {
-                    contentType: 'application/json',
-                    body: JSON.stringify({ username, password }),
-                    successStatus: 200
-                });
+                const { responseText } = await XHRpromise(
+                    'PUT', API.auth_login, {
+                        contentType: 'application/json',
+                        body: JSON.stringify({ username, password }),
+                        successStatus: 200
+                    }
+                );
 
+                const { authLevel } = JSON.parse(responseText);
                 this._username = username;
+                this._authLevel = authLevel;
             }
 
             this._loginPromise = null;
@@ -192,7 +218,7 @@ class User {
 
         this._logoutPromise = async function() {
             await XHRpromise('GET', API.auth_logout, {
-                successStatus: 200
+                successStatus: 204
             });
 
             this._username = false;
