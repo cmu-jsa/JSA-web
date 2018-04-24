@@ -7,12 +7,11 @@
 import React from 'react';
 import { objectOf, func } from 'prop-types';
 
-import XHRpromise from 'src/XHRpromise';
 import User from 'src/User';
+import Election, { electionShape } from 'src/Election';
 import Logout from 'src/App/Logout';
 import ListInput from 'src/ListInput';
 
-import { API, electionShape } from './election';
 import ElectionForm from './ElectionForm';
 import styles from './index.less';
 
@@ -67,8 +66,6 @@ class Elections extends React.Component {
             elections: {}
         };
 
-        this.openElectionPromise = null;
-
         this.inputs = {
             openElection: {
                 title: null,
@@ -76,7 +73,10 @@ class Elections extends React.Component {
             }
         };
 
-        this.refreshElections();
+        (async() => {
+            const elections = await Election.getAll();
+            this.setState({ elections });
+        })();
     }
 
     /**
@@ -100,7 +100,18 @@ class Elections extends React.Component {
                 title.value = '';
                 candidates.reset();
 
-                this.openElection(titleValue, candidatesValues);
+                const id = await Election.open(titleValue, candidatesValues);
+
+                this.setState(({ elections }) => {
+                    elections[id] = {
+                        id,
+                        title: titleValue,
+                        candidates: candidatesValues,
+                        closed: false,
+                        voted: false
+                    };
+                    return { elections };
+                });
             }}>
                 <ListInput
                     placeholder='Candidate' dedup
@@ -144,65 +155,6 @@ class Elections extends React.Component {
             {this.renderAdmin()}
             <ElectionsList elections={elections} onVoted={onVoted} />
         </article>;
-    }
-
-    /**
-     * Refreshes the elections list.
-     *
-     * @returns {Promise} Resolves on completion, or rejects with an error.
-     */
-    async refreshElections() {
-        const { responseText } = await XHRpromise('GET', API.elections, {
-            successStatus: 200
-        });
-
-        const list = JSON.parse(responseText);
-        const elections = {};
-        Object.keys(list).map(id => {
-            const { title, candidates, voted } = list[id];
-            elections[id] = { id, title, candidates, voted };
-        });
-        this.setState({ elections });
-
-        return void 0;
-    }
-
-    /**
-     * Opens a new election.
-     *
-     * If an existing request is in progress, its promise is returned.
-     *
-     * @param {string} title - The title for the election.
-     * @param {string[]} candidates - The candidates for the election.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
-     */
-    openElection(title, candidates) {
-        if (this.openElectionPromise) {
-            return this.openElectionPromise;
-        }
-
-        const body = JSON.stringify({ title, candidates });
-
-        this.openElectionPromise = (async() => {
-            try {
-                const { responseText } = await XHRpromise(
-                    'POST', API.elections, {
-                        body,
-                        contentType: 'application/json',
-                        successStatus: 201
-                    }
-                );
-
-                const id = responseText;
-                this.setState(({ elections }) => {
-                    elections[id] = { id, title, candidates, voted: false };
-                    return { elections };
-                });
-            } finally {
-                this.openElectionPromise = null;
-            }
-        })();
-        return this.openElectionPromise;
     }
 }
 

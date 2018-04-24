@@ -7,9 +7,7 @@
 import React from 'react';
 import { func } from 'prop-types';
 
-import XHRpromise from 'src/XHRpromise';
-
-import { API, electionShape } from './election';
+import Election, { electionShape } from 'src/Election';
 
 /**
  * Election form React component.
@@ -21,7 +19,9 @@ class ElectionForm extends React.PureComponent {
     constructor() {
         super();
 
-        this.votePromise = null;
+        this.state = {
+            message: null
+        };
 
         this.select = null;
     }
@@ -50,9 +50,10 @@ class ElectionForm extends React.PureComponent {
             ? 'You have already voted!'
             : 'Submit vote';
 
-        return <form onSubmit={event => {
+        return <form onSubmit={async event => {
             event.preventDefault();
 
+            const { id } = this.props.election;
             const { select } = this;
             const candidate = select.value;
 
@@ -66,7 +67,10 @@ class ElectionForm extends React.PureComponent {
 
             select.value = '';
 
-            this.vote(candidate);
+            Election.vote(id, candidate);
+
+            const { onVoted } = this.props;
+            onVoted && onVoted(id);
         }}>
             <p>{title}</p>
             <select
@@ -81,41 +85,6 @@ class ElectionForm extends React.PureComponent {
                 {submitMessage}
             </button>
         </form>;
-    }
-
-    /**
-     * Submits the chosen vote.
-     *
-     * If an existing request is in progress, its promise is returned.
-     *
-     * @param {string} candidate - The candidate to vote for.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
-     */
-    vote(candidate) {
-        if (this.votePromise) {
-            return this.votePromise;
-        }
-
-        const { id } = this.props.election;
-
-        const body = candidate;
-        const uri = `${API.elections}/${id}`;
-
-        this.votePromise = (async() => {
-            try {
-                await XHRpromise('PUT', uri, {
-                    body,
-                    contentType: 'text/plain',
-                    successStatus: 204
-                });
-
-                const { onVoted } = this.props;
-                onVoted && onVoted(id);
-            } finally {
-                this.votePromise = null;
-            }
-        })();
-        return this.votePromise;
     }
 }
 
