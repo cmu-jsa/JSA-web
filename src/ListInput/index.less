@@ -15,6 +15,15 @@
         margin: 0;
 
         li {
+            cursor: pointer;
+
+            &:hover, &:focus, &:active {
+                &:after {
+                    float: right;
+                    content: '⌫';
+                }
+            }
+
             &.placeholder {
                 opacity: 0.5;
             }
