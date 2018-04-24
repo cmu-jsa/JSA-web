@@ -20,6 +20,7 @@ class ElectionForm extends React.PureComponent {
         super();
 
         this.state = {
+            confirmMessage: null,
             message: null
         };
 
@@ -33,7 +34,7 @@ class ElectionForm extends React.PureComponent {
      */
     render() {
         const { title, candidates, voted } = this.props.election;
-        const { message } = this.state;
+        const { confirmMessage, message } = this.state;
 
         const candidateOptions = candidates.map(candidate => {
             return <option
@@ -44,42 +45,47 @@ class ElectionForm extends React.PureComponent {
             </option>;
         });
 
-        const selectPrompt = voted
-            ? 'You have already voted!'
-            : 'Select a candidate...';
-        const submitMessage = voted
-            ? 'You have already voted!'
-            : 'Submit vote';
+        const inputs = voted
+            ? <p>You have already voted in this election.</p>
+            : [
+                <select
+                    key='select'
+                    required={true}
+                    ref={select => (this.select = select)}
+                >
+                    <option value=''>Select a candidate...</option>
+                    {candidateOptions}
+                </select>,
+                <button
+                    key='submit'
+                    type='submit'
+                    onBlur={() => {
+                        this.state.confirmMessage && this.setState({
+                            confirmMessage: null
+                        });
+                    }}>
+                    {confirmMessage || 'Submit vote'}
+                </button>
+            ];
 
         return <form onSubmit={event => {
             event.preventDefault();
 
-            const { select } = this;
-            const candidate = select.value;
-
-            // eslint-disable-next-line no-alert
-            if (!window.confirm(
-                `Are you sure you want to vote for "${candidate}" `
-                + `in the election "${title}"?`
-            )) {
+            if (!this.state.confirmMessage) {
+                this.setState({
+                    confirmMessage: 'Are you sure? (Click again to confirm.)'
+                });
                 return;
             }
 
+            const { select } = this;
+            const candidate = select.value;
             select.value = '';
+
             this.vote(candidate);
         }}>
             <p>{title}</p>
-            <select
-                required={true}
-                disabled={voted}
-                ref={select => (this.select = select)}
-            >
-                <option value=''>{selectPrompt}</option>
-                {candidateOptions}
-            </select>
-            <button type='submit' disabled={voted}>
-                {submitMessage}
-            </button>
+            {inputs}
             {message}
         </form>;
     }

@@ -72,15 +72,7 @@ class Election {
              * @private
              * @type {Promise?}
              */
-            _openPromise: { value: null, writable: true },
-
-            /**
-             * The current vote promise, or `null`.
-             *
-             * @private
-             * @type {Promise?}
-             */
-            _votePromise: { value: null, writable: true }
+            _openPromise: { value: null, writable: true }
         });
     }
 
@@ -166,41 +158,30 @@ class Election {
     /**
      * Submits the chosen vote.
      *
-     * If an existing request is in progress, its promise is returned.
-     *
      * @param {string} id - The election ID.
      * @param {string} candidate - The candidate to vote for.
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
-    vote(id, candidate) {
-        if (this._votePromise) {
-            return this._votePromise;
-        }
-
+    async vote(id, candidate) {
         const body = candidate;
         const uri = API.election(id);
 
-        this._votePromise = (async() => {
-            try {
-                const {
-                    status, responseText
-                } = await XHRpromise('PUT', uri, {
-                    body,
-                    contentType: 'text/plain'
-                });
+        const {
+            status, responseText
+        } = await XHRpromise('PUT', uri, {
+            body,
+            contentType: 'text/plain'
+        });
 
-                if (status === 400) {
-                    throw new Error(responseText);
-                }
+        if (status === 400) {
+            throw new Error(responseText);
+        }
 
-                if (status !== 204) {
-                    throw new Error('Unknown error occurred.');
-                }
-            } finally {
-                this._votePromise = null;
-            }
-        })();
-        return this._votePromise;
+        if (status !== 204) {
+            throw new Error('Unknown error occurred.');
+        }
+
+        return void 0;
     }
 }
 
