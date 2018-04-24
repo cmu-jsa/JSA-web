@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
 
 import styles from './index.less';
 
@@ -26,7 +26,6 @@ class ListInput extends React.Component {
         };
 
         this.inputKeyPress = this.inputKeyPress.bind(this);
-
     }
 
     /**
@@ -45,13 +44,27 @@ class ListInput extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        const { values } = this.state;
         const { placeholder } = this.props;
         const { inputKeyPress } = this;
 
-        const valueElems = values.map((value, i) => {
-            return <p key={i}>{value}</p>;
+        let valueElems = this.state.values.map((value, i) => {
+            const onClick = () => {
+                this.setState(({ values }) => {
+                    values.splice(i, 1);
+                    return { values };
+                });
+            };
+
+            return <li key={i} onClick={onClick}>
+                {value}
+            </li>;
         });
+
+        if (valueElems.length === 0) {
+            valueElems = <li className={styles.placeholder}>
+                {placeholder}
+            </li>;
+        }
 
         return <label className={styles.listInput}>
             <input
@@ -59,7 +72,9 @@ class ListInput extends React.Component {
                 placeholder={placeholder}
                 onKeyPress={inputKeyPress}
             />
-            {valueElems}
+            <ul>
+                {valueElems}
+            </ul>
         </label>;
     }
 
@@ -77,6 +92,15 @@ class ListInput extends React.Component {
         event.preventDefault();
 
         const { value } = target;
+        target.value = '';
+
+        if (
+            this.props.dedup
+            && this.state.values.findIndex(v => v === value) >= 0
+        ) {
+            return;
+        }
+
         this.setState(({ values }) => {
             values.push(value);
             return { values };
@@ -85,7 +109,8 @@ class ListInput extends React.Component {
 }
 
 ListInput.propTypes = {
-    placeholder: string
+    placeholder: string,
+    dedup: bool
 };
 
 export default ListInput;

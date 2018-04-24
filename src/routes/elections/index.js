@@ -96,20 +96,26 @@ class Elections extends React.Component {
         }
 
         return <div className={styles.admin}>
+            <h4>Administration</h4>
             <form onSubmit={async event => {
                 const form = event.target;
                 event.preventDefault();
                 await this.openElection();
                 form.reset();
             }}>
-                <input
-                    type='text'
-                    name='title'
-                    ref={input => (this.inputs.openElection.title = input)}
-                    placeholder='Title'
+                <ListInput
+                    placeholder='Candidate' dedup
+                    ref={input => (this.inputs.openElection.candidates = input)}
                 />
-                <ListInput placeholder='Candidate' />
-                <button type='submit'>Open an election</button>
+                <div className={styles.submit}>
+                    <input
+                        type='text'
+                        name='title'
+                        ref={input => (this.inputs.openElection.title = input)}
+                        placeholder='Title'
+                    />
+                    <button type='submit'>Open new election</button>
+                </div>
             </form>
         </div>;
     }
@@ -128,8 +134,8 @@ class Elections extends React.Component {
 
         return <div className={styles.elections}>
             <h1>Elections</h1>
-            {this.renderAdmin()}
             <h3>Hello, {User.username}! <Logout /></h3>
+            {this.renderAdmin()}
             <ElectionsList elections={elections} />
         </div>;
     }
@@ -162,7 +168,7 @@ class Elections extends React.Component {
      */
     async openElection() {
         const title = this.inputs.openElection.title.value;
-        const candidates = ['hello', 'world'];  // TODO
+        const candidates = this.inputs.openElection.candidates.values;
 
         const body = JSON.stringify({ title, candidates });
 

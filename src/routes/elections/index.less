@@ -8,12 +8,16 @@
         display: flex;
         flex-flow: column nowrap;
 
-        > form {
+        .submit {
             display: flex;
-            flex-flow: column nowrap;
+            flex-flow: row wrap;
 
-            > * {
-                margin-bottom: @spacing-y;
+            > input[type=text] {
+                flex: 1;
+            }
+
+            > *:not(:last-child) {
+                margin-inline-end: @spacing-x;
             }
         }
     }

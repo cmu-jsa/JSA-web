@@ -27,6 +27,16 @@ p {
 }
 
 form {
+    display: flex;
+    flex-flow: column nowrap;
+
+    padding: @spacing-y @spacing-x;
+    border: @border;
+
+    > *:not(:last-child) {
+        margin-block-end: @spacing-y;
+    }
+
     input[type=text], input[type=password] {
         padding: @spacing-y @spacing-x;
         background: none;
