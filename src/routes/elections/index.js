@@ -10,6 +10,7 @@ import { objectOf, shape, string } from 'prop-types';
 import XHRpromise from 'src/XHRpromise';
 import User from 'src/User';
 import Logout from 'src/App/Logout';
+import ListInput from 'src/ListInput';
 
 import styles from './index.less';
 
@@ -107,6 +108,7 @@ class Elections extends React.Component {
                     ref={input => (this.inputs.openElection.title = input)}
                     placeholder='Title'
                 />
+                <ListInput placeholder='Candidate' />
                 <button type='submit'>Open an election</button>
             </form>
         </div>;

@@ -171,14 +171,20 @@ class User {
         }
 
         this._refreshLoginStatusPromise = (async() => {
-            const { status, responseText } = await XHRpromise('GET', API.auth);
+            try {
+                const {
+                    status, responseText
+                } = await XHRpromise('GET', API.auth);
 
-            if (status === 200) {
-                const { username, authLevel } = JSON.parse(responseText);
-                this._username = username;
-                this._authLevel = authLevel;
-            } else {
-                this._username = false;
+                if (status === 200) {
+                    const { username, authLevel } = JSON.parse(responseText);
+                    this._username = username;
+                    this._authLevel = authLevel;
+                } else {
+                    this._username = false;
+                }
+            } finally {
+                this._refreshLoginStatusPromise = null;
             }
         })();
         return this._refreshLoginStatusPromise;
@@ -201,11 +207,11 @@ class User {
         }
 
         this._loginPromise = (async() => {
-            if (this.loggedIn === null) {
-                await this.refreshLoginStatus();
-            }
+            try {
+                if (this.loggedIn) {
+                    return this;
+                }
 
-            if (!this.loggedIn) {
                 const { responseText } = await XHRpromise(
                     'PUT', API.auth_login, {
                         contentType: 'application/json',
@@ -217,9 +223,10 @@ class User {
                 const { authLevel } = JSON.parse(responseText);
                 this._username = username;
                 this._authLevel = authLevel;
+            } finally {
+                this._loginPromise = null;
             }
 
-            this._loginPromise = null;
             return this;
         })();
         return this._loginPromise;
@@ -240,12 +247,16 @@ class User {
         }
 
         this._logoutPromise = (async() => {
-            await XHRpromise('GET', API.auth_logout, {
-                successStatus: 204
-            });
+            try {
+                await XHRpromise('GET', API.auth_logout, {
+                    successStatus: 204
+                });
 
-            this._username = false;
-            this._logoutPromise = null;
+                this._username = false;
+            } finally {
+                this._logoutPromise = null;
+            }
+
             return this;
         })();
         return this._logoutPromise;

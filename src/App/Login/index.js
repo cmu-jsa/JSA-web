@@ -22,8 +22,10 @@ export default class Login extends React.Component {
     constructor() {
         super();
 
+        const { loggedIn } = User;
+
         this.state = {
-            redirect: false,
+            redirect: loggedIn === true,
             message: null
         };
 
@@ -34,10 +36,12 @@ export default class Login extends React.Component {
 
         this.login = this.login.bind(this);
 
-        (async() => {
-            await User.refreshLoginStatus();
-            this.setState({ redirect: User.loggedIn });
-        })();
+        if (loggedIn === null) {
+            (async() => {
+                await User.refreshLoginStatus();
+                this.setState({ redirect: User.loggedIn });
+            })();
+        }
     }
 
     /**
