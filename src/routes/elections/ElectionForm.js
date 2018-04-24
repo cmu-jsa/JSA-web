@@ -53,7 +53,8 @@ class ElectionForm extends React.PureComponent {
         return <form onSubmit={event => {
             event.preventDefault();
 
-            const candidate = this.select.value;
+            const { select } = this;
+            const candidate = select.value;
 
             // eslint-disable-next-line no-alert
             if (!window.confirm(
@@ -62,6 +63,8 @@ class ElectionForm extends React.PureComponent {
             )) {
                 return;
             }
+
+            select.value = '';
 
             this.vote(candidate);
         }}>

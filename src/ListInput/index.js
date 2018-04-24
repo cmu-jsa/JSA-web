@@ -39,6 +39,13 @@ class ListInput extends React.Component {
     }
 
     /**
+     * Resets the component's values to empty.
+     */
+    reset() {
+        this.setState({ values: [] });
+    }
+
+    /**
      * Renders the component.
      *
      * @returns {ReactElement} The component's elements.

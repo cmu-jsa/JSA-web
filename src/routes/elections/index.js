@@ -94,13 +94,13 @@ class Elections extends React.Component {
             <form onSubmit={async event => {
                 event.preventDefault();
 
-                const form = event.target;
-                const title = this.inputs.openElection.title.value;
-                const candidates = this.inputs.openElection.candidates.values;
+                const { title, candidates } = this.inputs.openElection;
+                const titleValue = title.value;
+                const candidatesValues = candidates.values;
+                title.value = '';
+                candidates.reset();
 
-                await this.openElection(title, candidates);
-
-                form.reset();
+                this.openElection(titleValue, candidatesValues);
             }}>
                 <ListInput
                     placeholder='Candidate' dedup

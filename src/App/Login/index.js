@@ -74,7 +74,13 @@ export default class Login extends React.Component {
 
         return <form className={styles.login} onSubmit={event => {
             event.preventDefault();
-            this.login();
+
+            const { username, password } = this.inputs;
+            const usernameValue = username.value;
+            const passwordValue = password.value;
+            password.value = '';
+
+            this.login(usernameValue, passwordValue);
         }}>
             <input
                 type='text'
@@ -96,16 +102,14 @@ export default class Login extends React.Component {
     }
 
     /**
-     * Attempts to log in.
+     * Attempts to log in with the given credentials.
      *
+     * @param {string} username - The username.
+     * @param {string} password - The password.
      * @returns {Promise} Resolves when login has succeeded, or rejects with an
      * error.
      */
-    async login() {
-        const { inputs } = this;
-        const username = inputs.username.value;
-        const password = inputs.password.value;
-
+    async login(username, password) {
         try {
             await User.login(username, password);
 
