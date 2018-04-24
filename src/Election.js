@@ -16,8 +16,18 @@ import XHRpromise from 'src/XHRpromise';
  * @enum {string}
  */
 const API = {
-    /** Elections base URL. */
-    elections: '/api/elections'
+    /** Elections base URI. */
+    elections: '/api/elections',
+
+    /**
+     * Election URI.
+     *
+     * @param {string} id - The election's ID.
+     * @returns {string} The URI.
+     */
+    election(id) {
+        return `${API.elections}/${id}`;
+    }
 };
 
 /**
@@ -94,6 +104,24 @@ class Election {
     }
 
     /**
+     * Gets information about the given election.
+     *
+     * @param {string} id - The election's ID.
+     * @returns {Promise} Resolves with the election's information, or rejects
+     * with an error.
+     */
+    async get(id) {
+        const uri = API.election(id);
+        const { responseText } = await XHRpromise('GET', uri, {
+            successStatus: 200
+        });
+
+        const election = JSON.parse(responseText);
+        election.id = id;
+        return election;
+    }
+
+    /**
      * Opens a new election.
      *
      * If an existing request is in progress, its promise is returned.
@@ -150,7 +178,7 @@ class Election {
         }
 
         const body = candidate;
-        const uri = `${API.elections}/${id}`;
+        const uri = API.election(id);
 
         this._votePromise = (async() => {
             try {
