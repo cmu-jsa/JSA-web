@@ -112,13 +112,20 @@ class Election {
 
         this._openPromise = (async() => {
             try {
-                const { responseText } = await XHRpromise(
-                    'POST', API.elections, {
-                        body,
-                        contentType: 'application/json',
-                        successStatus: 201
-                    }
-                );
+                const {
+                    status, responseText
+                } = await XHRpromise('POST', API.elections, {
+                    body,
+                    contentType: 'application/json'
+                });
+
+                if (status === 400) {
+                    throw new Error(responseText);
+                }
+
+                if (status !== 201) {
+                    throw new Error('Unknown error occurred.');
+                }
 
                 return responseText;
             } finally {

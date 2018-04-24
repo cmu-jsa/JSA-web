@@ -53,9 +53,9 @@ ElectionsList.propTypes = {
 };
 
 /**
- * Elections React component.
+ * Administration React component.
  */
-class Elections extends React.Component {
+class ElectionsAdmin extends React.PureComponent {
     /**
      * Initializes the component.
      */
@@ -63,7 +63,7 @@ class Elections extends React.Component {
         super();
 
         this.state = {
-            elections: {}
+            openElectionMessage: null
         };
 
         this.inputs = {
@@ -73,25 +73,23 @@ class Elections extends React.Component {
             }
         };
 
-        (async() => {
-            const elections = await Election.getAll();
-            this.setState({ elections });
-        })();
     }
 
     /**
-     * Renders administrator components.
+     * Renders the component.
      *
      * @returns {ReactElement} The component's elements.
      */
-    renderAdmin() {
+    render() {
         if (User.authLevel < User.AuthLevels.ADMIN) {
             return null;
         }
 
+        const { openElectionMessage } = this.state;
+
         return <section className={styles.admin}>
             <h4>Administration</h4>
-            <form onSubmit={async event => {
+            <form onSubmit={event => {
                 event.preventDefault();
 
                 const { title, candidates } = this.inputs.openElection;
@@ -100,18 +98,7 @@ class Elections extends React.Component {
                 title.value = '';
                 candidates.reset();
 
-                const id = await Election.open(titleValue, candidatesValues);
-
-                this.setState(({ elections }) => {
-                    elections[id] = {
-                        id,
-                        title: titleValue,
-                        candidates: candidatesValues,
-                        closed: false,
-                        voted: false
-                    };
-                    return { elections };
-                });
+                this.openElection(titleValue, candidatesValues);
             }}>
                 <ListInput
                     placeholder='Candidate' dedup
@@ -126,8 +113,57 @@ class Elections extends React.Component {
                     />
                     <button type='submit'>Open new election</button>
                 </div>
+                {openElectionMessage}
             </form>
         </section>;
+    }
+
+    /**
+     * Opens an election.
+     *
+     * @param {string} title - The election's title.
+     * @param {string[]} candidates - The election's candidates.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async openElection(title, candidates) {
+        try {
+            const id = await Election.open(title, candidates);
+
+            this.setState({ openElectionMessage: null });
+
+            const { onOpenElection } = this.props;
+            onOpenElection && onOpenElection(id, title, candidates);
+        } catch (err) {
+            const openElectionMessage = <p>{err.message}</p>;
+            this.setState({ openElectionMessage });
+        }
+
+        return void 0;
+    }
+}
+
+ElectionsAdmin.propTypes = {
+    onOpenElection: func
+};
+
+/**
+ * Elections React component.
+ */
+class Elections extends React.Component {
+    /**
+     * Initializes the component.
+     */
+    constructor() {
+        super();
+
+        this.state = {
+            elections: {}
+        };
+
+        (async() => {
+            const elections = await Election.getAll();
+            this.setState({ elections });
+        })();
     }
 
     /**
@@ -147,12 +183,26 @@ class Elections extends React.Component {
             });
         };
 
+        const onOpenElection = (id, title, candidates) => {
+            this.setState(({ elections }) => {
+                if (id in elections) {
+                    return;
+                }
+
+                elections[id] = {
+                    id, title, candidates,
+                    closed: false,
+                    voted: false
+                };
+            });
+        };
+
         const { elections } = this.state;
 
         return <article className={styles.elections}>
             <h1>Elections</h1>
             <h3>Hello, {User.username}! <Logout /></h3>
-            {this.renderAdmin()}
+            <ElectionsAdmin onOpenElection={onOpenElection} />
             <ElectionsList elections={elections} onVoted={onVoted} />
         </article>;
     }

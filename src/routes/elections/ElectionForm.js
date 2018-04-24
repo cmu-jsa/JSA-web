@@ -33,6 +33,7 @@ class ElectionForm extends React.PureComponent {
      */
     render() {
         const { title, candidates, voted } = this.props.election;
+        const { message } = this.state;
 
         const candidateOptions = candidates.map(candidate => {
             return <option
@@ -50,10 +51,9 @@ class ElectionForm extends React.PureComponent {
             ? 'You have already voted!'
             : 'Submit vote';
 
-        return <form onSubmit={async event => {
+        return <form onSubmit={event => {
             event.preventDefault();
 
-            const { id } = this.props.election;
             const { select } = this;
             const candidate = select.value;
 
@@ -66,11 +66,7 @@ class ElectionForm extends React.PureComponent {
             }
 
             select.value = '';
-
-            Election.vote(id, candidate);
-
-            const { onVoted } = this.props;
-            onVoted && onVoted(id);
+            this.vote(candidate);
         }}>
             <p>{title}</p>
             <select
@@ -84,7 +80,32 @@ class ElectionForm extends React.PureComponent {
             <button type='submit' disabled={voted}>
                 {submitMessage}
             </button>
+            {message}
         </form>;
+    }
+
+    /**
+     * Votes for the given candidate.
+     *
+     * @param {string} candidate - The candidate to vote for.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async vote(candidate) {
+        const { id } = this.props.election;
+
+        try {
+            await Election.vote(id, candidate);
+
+            this.setState({ message: null });
+
+            const { onVoted } = this.props;
+            onVoted && onVoted(id);
+        } catch (err) {
+            const message = <p>{err.message}</p>;
+            this.setState({ message });
+        }
+
+        return void 0;
     }
 }
 

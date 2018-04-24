@@ -113,7 +113,7 @@ export default class Login extends React.Component {
         try {
             await User.login(username, password);
 
-            this.setState({ redirect: true });
+            this.setState({ redirect: true, message: null });
         } catch (err) {
             const message = <p className={styles.error}>
                 Login failed: {err.message}
