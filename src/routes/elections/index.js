@@ -5,77 +5,52 @@
  */
 
 import React from 'react';
-import { arrayOf, objectOf, shape, string } from 'prop-types';
+import { objectOf, func } from 'prop-types';
 
 import XHRpromise from 'src/XHRpromise';
 import User from 'src/User';
 import Logout from 'src/App/Logout';
 import ListInput from 'src/ListInput';
 
+import { API, electionShape } from './election';
+import ElectionForm from './ElectionForm';
 import styles from './index.less';
-
-/**
- * API endpoints.
- *
- * @private
- * @readonly
- * @enum {string}
- */
-const API = {
-    /** Elections base URL. */
-    elections: '/api/elections'
-};
-
-/**
- * Represents an election.
- *
- * @private
- * @typedef {Object} Election
- * @property {string} id - The election's ID.
- * @property {string} title - The election's title.
- * @property {string[]} candidates - The election's candidates.
- */
 
 /**
  * Elections list React component.
  *
+ * @alias module:src/routes//elections/ElectionsList
  * @param {Object} props - The component's props.
  * @param {Object<string, Election>} props.elections - The elections to list.
+ * @param {Function} props.onVoted - Event handler for votes. Called with the
+ * election's ID.
  * @returns {ReactElement} The component's elements.
  */
 function ElectionsList(props) {
-    const { elections } = props;
+    const { elections, onVoted } = props;
     let elems = Object.keys(elections).map(id => {
-        const { title, candidates } = elections[id];
+        const election = elections[id];
 
-        const candidateElems = candidates.map(candidate => {
-            return <li key={candidate}>{candidate}</li>;
-        });
-
-        return <li key={id}>
-            {title}
-            <ul>{candidateElems}</ul>
-        </li>;
+        return <ElectionForm
+            key={id}
+            election={election}
+            onVoted={onVoted}
+        />;
     });
 
     if (elems.length === 0) {
-        elems = <li>No elections available.</li>;
+        elems = <p>No elections available.</p>;
     }
 
     return <section className={styles.list}>
         <h4>Available elections</h4>
-        <ul>
-            {elems}
-        </ul>
+        {elems}
     </section>;
 }
 
 ElectionsList.propTypes = {
-    elections: objectOf(shape({
-        id: string.isRequired,
-        title: string.isRequired,
-        candidates: arrayOf(string).isRequired
-    })).isRequired
+    elections: objectOf(electionShape).isRequired,
+    onVoted: func
 };
 
 /**
@@ -129,9 +104,9 @@ class Elections extends React.Component {
                 <div className={styles.submit}>
                     <input
                         type='text'
-                        name='title'
                         ref={input => (this.inputs.openElection.title = input)}
                         placeholder='Title'
+                        required={true}
                     />
                     <button type='submit'>Open new election</button>
                 </div>
@@ -149,13 +124,20 @@ class Elections extends React.Component {
             throw new Error('User must be logged in to render.');
         }
 
+        const onVoted = id => {
+            this.setState(({ elections }) => {
+                elections[id].voted = true;
+                return { elections };
+            });
+        };
+
         const { elections } = this.state;
 
         return <article className={styles.elections}>
             <h1>Elections</h1>
             <h3>Hello, {User.username}! <Logout /></h3>
             {this.renderAdmin()}
-            <ElectionsList elections={elections} />
+            <ElectionsList elections={elections} onVoted={onVoted} />
         </article>;
     }
 
@@ -172,8 +154,8 @@ class Elections extends React.Component {
         const list = JSON.parse(responseText);
         const elections = {};
         Object.keys(list).map(id => {
-            const { title, candidates } = list[id];
-            elections[id] = { id, title, candidates };
+            const { title, candidates, voted } = list[id];
+            elections[id] = { id, title, candidates, voted };
         });
         this.setState({ elections });
 
@@ -188,17 +170,17 @@ class Elections extends React.Component {
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
     openElection() {
-        if (this.openElectionPromise !== null) {
+        if (this.openElectionPromise) {
             return this.openElectionPromise;
         }
 
+        const title = this.inputs.openElection.title.value;
+        const candidates = this.inputs.openElection.candidates.values;
+
+        const body = JSON.stringify({ title, candidates });
+
         this.openElectionPromise = (async() => {
             try {
-                const title = this.inputs.openElection.title.value;
-                const candidates = this.inputs.openElection.candidates.values;
-
-                const body = JSON.stringify({ title, candidates });
-
                 const { responseText } = await XHRpromise(
                     'POST', API.elections, {
                         body,
@@ -209,7 +191,7 @@ class Elections extends React.Component {
 
                 const id = responseText;
                 this.setState(({ elections }) => {
-                    elections[id] = { id, title, candidates };
+                    elections[id] = { id, title, candidates, voted: false };
                     return { elections };
                 });
             } finally {

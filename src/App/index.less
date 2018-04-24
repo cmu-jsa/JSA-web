@@ -50,6 +50,18 @@ form {
         }
     }
 
+    select {
+        background: none;
+        border: none;
+        border-bottom: @border;
+        transition: border @duration-transition;
+
+        &:focus {
+            border-bottom: @border-primary;
+            border-bottom-width: 1px;
+        }
+    }
+
     button, input[type=submit] {
         background: @color-bg-card;
         color: @color-text;
@@ -65,6 +77,15 @@ form {
         &:focus, &:active {
             background: @color-bg-active;
             color: @color-text-bg-active;
+        }
+    }
+
+    input, button {
+        &:disabled {
+            &, &:hover, &:focus, &:active {
+                background: @color-bg-disabled;
+                color: @color-text-bg-disabled;
+            }
         }
     }
 }

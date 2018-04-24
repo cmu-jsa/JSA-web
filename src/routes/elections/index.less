@@ -4,7 +4,7 @@
     display: flex;
     flex-flow: column nowrap;
 
-    > section {
+    section {
         margin-block-end: @spacing-y;
     }
 
@@ -27,6 +27,12 @@
     }
 
     .list {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > * {
+            margin-block-end: @spacing-y;
+        }
     }
 }
 

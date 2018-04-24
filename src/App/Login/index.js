@@ -78,15 +78,15 @@ export default class Login extends React.Component {
         }}>
             <input
                 type='text'
-                name='username'
                 ref={input => (this.inputs.username = input)}
                 placeholder='Username'
+                required={true}
             />
             <input
                 type='password'
-                name='password'
                 ref={input => (this.inputs.password = input)}
                 placeholder='Password'
+                required={true}
             />
             <button type='submit'>
                 {prompt}
