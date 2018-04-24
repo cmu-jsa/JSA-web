@@ -48,7 +48,7 @@ class Logout extends React.PureComponent {
         try {
             await User.logout();
 
-            history.push(User.paths.login);
+            history.go(0);
         } catch (err) {
             console.log(err);
         }

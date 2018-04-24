@@ -9,6 +9,7 @@ import { shape, string, element } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import User from 'src/User';
+import Spinner from 'src/Spinner';
 
 import styles from './index.less';
 
@@ -24,8 +25,12 @@ export default class Login extends React.Component {
 
         const { loggedIn } = User;
 
+        const loading = loggedIn === null;
+        const redirect = loggedIn === true;
+
         this.state = {
-            redirect: loggedIn === true,
+            loading,
+            redirect,
             message: null
         };
 
@@ -36,10 +41,13 @@ export default class Login extends React.Component {
 
         this.login = this.login.bind(this);
 
-        if (loggedIn === null) {
+        if (loading) {
             (async() => {
                 await User.refreshLoginStatus();
-                this.setState({ redirect: User.loggedIn });
+                this.setState({
+                    loading: false,
+                    redirect: User.loggedIn
+                });
             })();
         }
     }
@@ -51,7 +59,11 @@ export default class Login extends React.Component {
      */
     render() {
         const { location, prompt = 'Log in' } = this.props;
-        const { redirect, message } = this.state;
+        const { loading, redirect, message } = this.state;
+
+        if (loading) {
+            return <Spinner />;
+        }
 
         if (redirect) {
             const { referer } = location.state || {
@@ -64,7 +76,6 @@ export default class Login extends React.Component {
             event.preventDefault();
             this.login();
         }}>
-            {message}
             <input
                 type='text'
                 name='username'
@@ -80,6 +91,7 @@ export default class Login extends React.Component {
             <button type='submit'>
                 {prompt}
             </button>
+            {message}
         </form>;
     }
 
@@ -99,8 +111,8 @@ export default class Login extends React.Component {
 
             this.setState({ redirect: true });
         } catch (err) {
-            const message = <p>
-                {err.message}
+            const message = <p className={styles.error}>
+                Login failed: {err.message}
             </p>;
 
             this.setState({ message });

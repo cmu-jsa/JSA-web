@@ -212,13 +212,20 @@ class User {
                     return this;
                 }
 
-                const { responseText } = await XHRpromise(
+                const { status, responseText } = await XHRpromise(
                     'PUT', API.auth_login, {
                         contentType: 'application/json',
-                        body: JSON.stringify({ username, password }),
-                        successStatus: 200
+                        body: JSON.stringify({ username, password })
                     }
                 );
+
+                if (status === 401) {
+                    throw new Error('Incorrect username/password.');
+                }
+
+                if (status !== 200) {
+                    throw new Error('Unknown error occurred.');
+                }
 
                 const { authLevel } = JSON.parse(responseText);
                 this._username = username;
