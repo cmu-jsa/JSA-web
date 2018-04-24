@@ -92,9 +92,14 @@ class Elections extends React.Component {
         return <section className={styles.admin}>
             <h4>Administration</h4>
             <form onSubmit={async event => {
-                const form = event.target;
                 event.preventDefault();
-                await this.openElection();
+
+                const form = event.target;
+                const title = this.inputs.openElection.title.value;
+                const candidates = this.inputs.openElection.candidates.values;
+
+                await this.openElection(title, candidates);
+
                 form.reset();
             }}>
                 <ListInput
@@ -167,15 +172,14 @@ class Elections extends React.Component {
      *
      * If an existing request is in progress, its promise is returned.
      *
+     * @param {string} title - The title for the election.
+     * @param {string[]} candidates - The candidates for the election.
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
-    openElection() {
+    openElection(title, candidates) {
         if (this.openElectionPromise) {
             return this.openElectionPromise;
         }
-
-        const title = this.inputs.openElection.title.value;
-        const candidates = this.inputs.openElection.candidates.values;
 
         const body = JSON.stringify({ title, candidates });
 

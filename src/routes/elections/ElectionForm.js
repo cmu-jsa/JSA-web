@@ -43,9 +43,27 @@ class ElectionForm extends React.PureComponent {
             </option>;
         });
 
+        const selectPrompt = voted
+            ? 'You have already voted!'
+            : 'Select a candidate...';
+        const submitMessage = voted
+            ? 'You have already voted!'
+            : 'Submit vote';
+
         return <form onSubmit={event => {
             event.preventDefault();
-            this.vote();
+
+            const candidate = this.select.value;
+
+            // eslint-disable-next-line no-alert
+            if (!window.confirm(
+                `Are you sure you want to vote for "${candidate}" `
+                + `in the election "${title}"?`
+            )) {
+                return;
+            }
+
+            this.vote(candidate);
         }}>
             <p>{title}</p>
             <select
@@ -53,11 +71,11 @@ class ElectionForm extends React.PureComponent {
                 disabled={voted}
                 ref={select => (this.select = select)}
             >
-                <option value=''>Select a candidate...</option>
+                <option value=''>{selectPrompt}</option>
                 {candidateOptions}
             </select>
             <button type='submit' disabled={voted}>
-                {voted ? 'You have already voted!' : 'Submit vote'}
+                {submitMessage}
             </button>
         </form>;
     }
@@ -67,16 +85,17 @@ class ElectionForm extends React.PureComponent {
      *
      * If an existing request is in progress, its promise is returned.
      *
+     * @param {string} candidate - The candidate to vote for.
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
-    vote() {
+    vote(candidate) {
         if (this.votePromise) {
             return this.votePromise;
         }
 
         const { id } = this.props.election;
 
-        const body = this.select.value;
+        const body = candidate;
         const uri = `${API.elections}/${id}`;
 
         this.votePromise = (async() => {
