@@ -7,7 +7,7 @@
 import React from 'react';
 import { objectOf, func } from 'prop-types';
 
-import User from 'src/User';
+import User, { AuthLevels } from 'src/User';
 import Election, { electionShape } from 'src/Election';
 import Logout from 'src/App/Logout';
 import ListInput from 'src/ListInput';
@@ -80,7 +80,7 @@ class ElectionsAdmin extends React.PureComponent {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        if (User.authLevel < User.AuthLevels.ADMIN) {
+        if (User.authLevel < AuthLevels.ADMIN) {
             return null;
         }
 

@@ -9,7 +9,7 @@ import XHRpromise from 'src/XHRpromise';
 /**
  * Authorization levels.
  *
- * @private
+ * @alias module:src/User.AuthLevels
  * @readonly
  * @enum {number}
  */
@@ -18,6 +18,7 @@ const AuthLevels = {
     ADMIN: 1000
 };
 Object.freeze(AuthLevels);
+export { AuthLevels };
 
 /**
  * API endpoints.
@@ -60,16 +61,6 @@ class User {
      * @type {Object}
      */
     get paths() { return UIPaths; }
-
-    /**
-     * Authorization levels.
-     *
-     * @readonly
-     * @enum {number}
-     */
-    get AuthLevels() {
-        return AuthLevels;
-    }
 
     /**
      * Initializes the user state.

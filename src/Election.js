@@ -156,6 +156,38 @@ class Election {
     }
 
     /**
+     * Closes the given election.
+     *
+     * @param {string} id - The election ID.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async close(id) {
+        const uri = API.election(id);
+
+        await XHRpromise('PATCH', uri, {
+            successStatus: 204
+        });
+
+        return void 0;
+    }
+
+    /**
+     * Destroys the given election.
+     *
+     * @param {string} id - The election ID.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async destroy(id) {
+        const uri = API.election(id);
+
+        await XHRpromise('DELETE', uri, {
+            successStatus: 204
+        });
+
+        return void 0;
+    }
+
+    /**
      * Submits the chosen vote.
      *
      * @param {string} id - The election ID.

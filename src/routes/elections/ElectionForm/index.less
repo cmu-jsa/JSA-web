@@ -1,0 +1,21 @@
+@import '~src/less/definitions';
+
+.election {
+    .title {
+        display: flex;
+        flex-flow: row wrap;
+
+        > *:not(:last-child) {
+            margin-inline-end: @spacing-x;
+        }
+
+        > span {
+            flex: 1;
+        }
+
+        > button {
+            align-self: flex-end;
+        }
+    }
+}
+
