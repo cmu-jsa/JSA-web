@@ -18,22 +18,19 @@ import styles from './index.less';
 /**
  * Elections list React component.
  *
- * @alias module:src/routes//elections/ElectionsList
+ * @private
  * @param {Object} props - The component's props.
- * @param {Object<string, Election>} props.elections - The elections to list.
- * @param {Function} props.onVoted - Event handler for votes. Called with the
- * election's ID.
  * @returns {ReactElement} The component's elements.
  */
 function ElectionsList(props) {
-    const { elections, onVoted } = props;
+    const { elections, onElectionChanged } = props;
     let elems = Object.keys(elections).map(id => {
         const election = elections[id];
 
         return <ElectionForm
             key={id}
             election={election}
-            onVoted={onVoted}
+            onElectionChanged={onElectionChanged}
         />;
     });
 
@@ -49,11 +46,13 @@ function ElectionsList(props) {
 
 ElectionsList.propTypes = {
     elections: objectOf(electionShape).isRequired,
-    onVoted: func
+    onElectionChanged: func
 };
 
 /**
  * Administration React component.
+ *
+ * @private
  */
 class ElectionsAdmin extends React.PureComponent {
     /**
@@ -131,8 +130,8 @@ class ElectionsAdmin extends React.PureComponent {
 
             this.setState({ openElectionMessage: null });
 
-            const { onOpenElection } = this.props;
-            onOpenElection && onOpenElection(id, title, candidates);
+            const { onElectionOpened } = this.props;
+            onElectionOpened && onElectionOpened(id, title, candidates);
         } catch (err) {
             const openElectionMessage = <p>{err.message}</p>;
             this.setState({ openElectionMessage });
@@ -143,11 +142,13 @@ class ElectionsAdmin extends React.PureComponent {
 }
 
 ElectionsAdmin.propTypes = {
-    onOpenElection: func
+    onElectionOpened: func
 };
 
 /**
  * Elections React component.
+ *
+ * @alias module:src/routes/elections
  */
 class Elections extends React.Component {
     /**
@@ -159,6 +160,9 @@ class Elections extends React.Component {
         this.state = {
             elections: {}
         };
+
+        this.onElectionChanged = this.onElectionChanged.bind(this);
+        this.onElectionOpened = this.onElectionOpened.bind(this);
 
         (async() => {
             const elections = await Election.getAll();
@@ -176,35 +180,66 @@ class Elections extends React.Component {
             throw new Error('User must be logged in to render.');
         }
 
-        const onVoted = id => {
-            this.setState(({ elections }) => {
-                elections[id].voted = true;
-                return { elections };
-            });
-        };
-
-        const onOpenElection = (id, title, candidates) => {
-            this.setState(({ elections }) => {
-                if (id in elections) {
-                    return;
-                }
-
-                elections[id] = {
-                    id, title, candidates,
-                    closed: false,
-                    voted: false
-                };
-            });
-        };
-
         const { elections } = this.state;
+        const { onElectionChanged, onElectionOpened } = this;
 
         return <article className={styles.elections}>
             <h1>Elections</h1>
             <h3>Hello, {User.username}! <Logout /></h3>
-            <ElectionsAdmin onOpenElection={onOpenElection} />
-            <ElectionsList elections={elections} onVoted={onVoted} />
+            <ElectionsAdmin
+                onElectionOpened={onElectionOpened}
+            />
+            <ElectionsList
+                elections={elections}
+                onElectionChanged={onElectionChanged}
+            />
         </article>;
+    }
+
+    /**
+     * Event handler for election changes.
+     *
+     * @param {string} id - The election's ID.
+     * @param {Object?} changes - The changed election state, or `null` to
+     * delete the election with the given ID.
+     */
+    onElectionChanged(id, changes) {
+        this.setState(({ elections }) => {
+            if (!(id in elections)) {
+                return;
+            }
+
+            if (changes === null) {
+                delete elections[id];
+            } else {
+                Object.assign(elections[id], changes);
+            }
+
+            return { elections };
+        });
+    }
+
+    /**
+     * Event handler for election openings.
+     *
+     * @param {string} id - The opened election's ID.
+     * @param {string} title - The opened election's title.
+     * @param {string} candidates - The opened election's candidates.
+     */
+    onElectionOpened(id, title, candidates) {
+        this.setState(({ elections }) => {
+            if (id in elections) {
+                return;
+            }
+
+            elections[id] = {
+                id, title, candidates,
+                closed: false,
+                voted: false
+            };
+
+            return { elections };
+        });
     }
 }
 

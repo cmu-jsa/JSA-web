@@ -77,9 +77,9 @@ class Election {
     }
 
     /**
-     * Gets the election list.
+     * Gets the election map.
      *
-     * @returns {Promise} Resolves with the election list on completion, or
+     * @returns {Promise} Resolves with the election map on completion, or
      * rejects with an error.
      */
     async getAll() {

@@ -11,8 +11,10 @@ import Election, { electionShape } from 'src/Election';
 
 /**
  * Election form React component.
+ *
+ * @alias module:src/routes/elections/ElectionForm
  */
-class ElectionForm extends React.PureComponent {
+class ElectionForm extends React.Component {
     /**
      * Initializes the component.
      */
@@ -25,6 +27,8 @@ class ElectionForm extends React.PureComponent {
         };
 
         this.select = null;
+
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     /**
@@ -45,6 +49,12 @@ class ElectionForm extends React.PureComponent {
             </option>;
         });
 
+        const onSubmitBlur = confirmMessage
+            ? () => {
+                this.setState({ confirmMessage: null });
+            }
+            : void 0;
+
         const inputs = voted
             ? <p>You have already voted in this election.</p>
             : [
@@ -59,35 +69,39 @@ class ElectionForm extends React.PureComponent {
                 <button
                     key='submit'
                     type='submit'
-                    onBlur={() => {
-                        this.state.confirmMessage && this.setState({
-                            confirmMessage: null
-                        });
-                    }}>
+                    onBlur={onSubmitBlur}>
                     {confirmMessage || 'Submit vote'}
                 </button>
             ];
 
-        return <form onSubmit={event => {
-            event.preventDefault();
-
-            if (!this.state.confirmMessage) {
-                this.setState({
-                    confirmMessage: 'Are you sure? (Click again to confirm.)'
-                });
-                return;
-            }
-
-            const { select } = this;
-            const candidate = select.value;
-            select.value = '';
-
-            this.vote(candidate);
-        }}>
+        return <form onSubmit={this.onSubmit}>
             <p>{title}</p>
             {inputs}
             {message}
         </form>;
+    }
+
+    /**
+     * Form submission handler.
+     *
+     * @private
+     * @param {Event} event - The event.
+     */
+    onSubmit(event) {
+        event.preventDefault();
+
+        if (!this.state.confirmMessage) {
+            this.setState({
+                confirmMessage: 'Are you sure? (Click again to confirm.)'
+            });
+            return;
+        }
+
+        const { select } = this;
+        const candidate = select.value;
+        select.value = '';
+
+        this.vote(candidate);
     }
 
     /**
@@ -97,15 +111,16 @@ class ElectionForm extends React.PureComponent {
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
     async vote(candidate) {
-        const { id } = this.props.election;
+        const { election } = this.props;
+        const { id } = election;
 
         try {
             await Election.vote(id, candidate);
 
             this.setState({ message: null });
 
-            const { onVoted } = this.props;
-            onVoted && onVoted(id);
+            const { onElectionChanged } = this.props;
+            onElectionChanged && onElectionChanged(id, { voted: true });
         } catch (err) {
             const message = <p>{err.message}</p>;
             this.setState({ message });
@@ -117,7 +132,7 @@ class ElectionForm extends React.PureComponent {
 
 ElectionForm.propTypes = {
     election: electionShape.isRequired,
-    onVoted: func
+    onElectionChanged: func
 };
 
 export default ElectionForm;
