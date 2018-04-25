@@ -9,13 +9,31 @@
             margin-inline-end: @spacing-x;
         }
 
-        > span {
+        .title {
             flex: 1;
         }
 
         > button {
             align-self: flex-end;
         }
+
+        .media-screen-sm({
+            flex-flow: column nowrap;
+
+            > *:not(:last-child) {
+                margin-inline-end: 0;
+                margin-block-end: @spacing-x;
+            }
+
+            > * {
+                display: flex;
+                justify-content: center;
+            }
+
+            > button {
+                align-self: unset;
+            }
+        });
     }
 }
 

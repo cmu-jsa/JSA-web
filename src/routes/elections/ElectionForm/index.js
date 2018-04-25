@@ -160,12 +160,14 @@ class ElectionForm extends React.Component {
         const { message } = this.state;
 
         const voteCountElem = 'voteCount' in election
-            ? <span>(Votes so far: {election.voteCount})</span>
+            ? <span className={styles.voteCount}>
+                (Votes so far: {election.voteCount})
+            </span>
             : null;
 
         return <form className={styles.election} onSubmit={this.onSubmit}>
             <p className={styles.title}>
-                <span>{title}</span>
+                <span className={styles.title}>{title}</span>
                 {voteCountElem}
                 {this.renderButtons()}
             </p>
