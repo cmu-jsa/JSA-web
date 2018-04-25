@@ -4,7 +4,7 @@
  * @module src/Election
  */
 
-import { bool, string, arrayOf, shape } from 'prop-types';
+import { bool, number, string, arrayOf, objectOf, shape } from 'prop-types';
 
 import XHRpromise from 'src/XHRpromise';
 
@@ -40,6 +40,9 @@ const API = {
  * @property {string[]} candidates - The election's candidates.
  * @property {boolean} closed - `true` if closed; `false` otherwise.
  * @property {boolean} voted - `true` if voted; `false` otherwise.
+ * @property {number} [voteCount] - Number of votes so far.
+ * @property {Object<string,number>?} [finalVotes] - Final votes, or `null` if
+ * not closed yet.
  */
 
 /**
@@ -53,7 +56,9 @@ const electionShape = shape({
     title: string.isRequired,
     candidates: arrayOf(string).isRequired,
     closed: bool.isRequired,
-    voted: bool.isRequired
+    voted: bool.isRequired,
+    voteCount: number,
+    finalVotes: objectOf(number)
 });
 export { electionShape };
 

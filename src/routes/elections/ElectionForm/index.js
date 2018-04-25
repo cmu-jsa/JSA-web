@@ -35,31 +35,104 @@ class ElectionForm extends React.Component {
     }
 
     /**
-     * Renders the component.
+     * Renders the component's buttons.
      *
-     * @returns {ReactElement} The component's elements.
+     * @returns {ReactElement} The component's buttons.
      */
-    render() {
-        const { title, candidates, voted, closed } = this.props.election;
-        const { message } = this.state;
+    renderButtons() {
+        const { closed } = this.props.election;
 
-        const candidateOptions = candidates.map(candidate => {
-            return <option
-                key={candidate}
-                value={candidate}
+        const buttons = [
+            <button key='refresh' onClick={event => {
+                event.preventDefault();
+                this.refresh();
+            }}>
+                Refresh
+            </button>
+        ];
+
+        if (User.authLevel >= AuthLevels.ADMIN) {
+            !closed && buttons.push(<ConfirmButton
+                key='close'
+                onClick={event => {
+                    event.preventDefault();
+                    this.close();
+                }}
             >
-                {candidate}
-            </option>;
+                Close
+            </ConfirmButton>);
+
+            buttons.push(<ConfirmButton key='destroy' onClick={event => {
+                event.preventDefault();
+                this.destroy();
+            }}>
+                Destroy
+            </ConfirmButton>);
+        }
+
+        return buttons;
+    }
+
+    /**
+     * Renders the closed election.
+     *
+     * @returns {ReactElement} The closed election's elements.
+     */
+    renderClosed() {
+        const { election } = this.props;
+
+        if (!('finalVotes' in election)) {
+            return <p key='closed'>
+                This election is closed.
+            </p>;
+        }
+
+        const { finalVotes } = election;
+
+        const voteElems = Object.keys(finalVotes).map(candidate => {
+            return { candidate, votes: finalVotes[candidate] };
+        }).sort((a, b) => {
+            return b.votes - a.votes;
+        }).map(({ candidate, votes }) => {
+            return <li key={candidate}>{candidate}: {votes}</li>;
         });
 
-        let inputs;
+        return <p key='finalVotes'>
+            Final votes:
+            <ol>{voteElems}</ol>
+        </p>;
+    }
 
-        if (voted) {
-            inputs = <p>You have already voted in this election.</p>;
-        } else if (closed) {
-            inputs = <p>This election is closed.</p>;
-        } else {
-            inputs = [
+    /**
+     * Renders the component's content.
+     *
+     * @returns {ReactElement} The component's content.
+     */
+    renderContent() {
+        const { election } = this.props;
+        const { voted, closed } = election;
+
+        const content = [];
+
+        closed && content.push(this.renderClosed());
+
+        voted && content.push(<p key='voted'>
+            You have already voted in this election.
+        </p>);
+
+        if (!voted && !closed) {
+            const { candidates } = election;
+
+            const candidateOptions = candidates.map(candidate => {
+                return <option
+                    key={candidate}
+                    value={candidate}
+                >
+                    {candidate}
+                </option>;
+            });
+
+            content.push(
                 <select
                     key='select'
                     required={true}
@@ -71,38 +144,33 @@ class ElectionForm extends React.Component {
                 <ConfirmButton key='submit' type='submit'>
                     Submit vote
                 </ConfirmButton>
-            ];
+            );
         }
 
-        let closeButton = null;
-        let destroyButton = null;
+        return content;
+    }
 
-        if (User.authLevel >= AuthLevels.ADMIN) {
-            if (!closed) {
-                closeButton = <ConfirmButton onClick={event => {
-                    event.preventDefault();
-                    this.close();
-                }}>
-                    Close
-                </ConfirmButton>;
-            }
+    /**
+     * Renders the component.
+     *
+     * @returns {ReactElement} The component's elements.
+     */
+    render() {
+        const { election } = this.props;
+        const { title } = election;
+        const { message } = this.state;
 
-            destroyButton = <ConfirmButton onClick={event => {
-                event.preventDefault();
-                this.destroy();
-            }}>
-                Destroy
-            </ConfirmButton>;
-        }
-
+        const voteCountElem = 'voteCount' in election
+            ? <span>(Votes so far: {election.voteCount})</span>
+            : null;
 
         return <form className={styles.election} onSubmit={this.onSubmit}>
             <p className={styles.title}>
                 <span>{title}</span>
-                {closeButton}
-                {destroyButton}
+                {voteCountElem}
+                {this.renderButtons()}
             </p>
-            {inputs}
+            {this.renderContent()}
             {message}
         </form>;
     }
@@ -146,6 +214,19 @@ class ElectionForm extends React.Component {
         }
 
         return void 0;
+    }
+
+    /**
+     * Refreshes election state.
+     *
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async refresh() {
+        return await this.update(async(id) => {
+            const result = await Election.get(id);
+            delete result.id;
+            return result;
+        });
     }
 
     /**
