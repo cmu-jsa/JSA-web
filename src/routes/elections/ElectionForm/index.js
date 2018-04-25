@@ -80,14 +80,13 @@ class ElectionForm extends React.Component {
      */
     renderClosed() {
         const { election } = this.props;
+        const { finalVotes } = election;
 
-        if (!('finalVotes' in election)) {
+        if (!finalVotes) {
             return <p key='closed'>
                 This election is closed.
             </p>;
         }
-
-        const { finalVotes } = election;
 
         const voteElems = Object.keys(finalVotes).map(candidate => {
             return { candidate, votes: finalVotes[candidate] };
@@ -97,10 +96,10 @@ class ElectionForm extends React.Component {
             return <li key={candidate}>{candidate}: {votes}</li>;
         });
 
-        return <p key='finalVotes'>
-            Final votes:
+        return <div key='finalVotes'>
+            <h4>Final votes:</h4>
             <ol>{voteElems}</ol>
-        </p>;
+        </div>;
     }
 
     /**
