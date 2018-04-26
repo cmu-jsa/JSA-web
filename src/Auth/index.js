@@ -31,11 +31,21 @@ const API = {
     /** Authentication endpoint. */
     auth: '/auth',
     /** Login endpoint. */
-    auth_login: '/auth/login',
+    login: '/auth/login',
     /** Logout endpoint. */
-    auth_logout: '/auth/logout',
-    /** User info endpoint. */
-    auth_users: '/auth/users'
+    logout: '/auth/logout',
+    /** Users endpoint. */
+    users: '/auth/users',
+
+    /**
+     * User endpoint.
+     *
+     * @param {string} username - The user's username.
+     * @returns {string} The URI.
+     */
+    user(username) {
+        return `${API.users}/${username}`;
+    }
 };
 Object.freeze(API);
 
@@ -206,7 +216,7 @@ class Auth {
                 }
 
                 const { status, responseText } = await XHRpromise(
-                    'PUT', API.auth_login, {
+                    'PUT', API.login, {
                         contentType: 'application/json',
                         body: JSON.stringify({ username, password })
                     }
@@ -248,7 +258,7 @@ class Auth {
 
         this._logoutPromise = (async() => {
             try {
-                await XHRpromise('GET', API.auth_logout, {
+                await XHRpromise('GET', API.logout, {
                     successStatus: 204
                 });
 
@@ -260,6 +270,80 @@ class Auth {
             return this;
         })();
         return this._logoutPromise;
+    }
+
+    /**
+     * Attempts to list all usernames.
+     *
+     * @returns {Promise} Resolves with the list of all usernames, or rejects
+     * with an error.
+     */
+    async users() {
+        const { responseText } = await XHRpromise('GET', API.users, {
+            successStatus: 200
+        });
+
+        return JSON.parse(responseText);
+    }
+
+    /**
+     * Attempts to create a user.
+     *
+     * @param {string} username - The user's username.
+     * @param {string} password - The user's password.
+     * @param {number} authLevel - The user's authentication level.
+     * @param {boolean} replace - `true` to replace an existing user with the
+     * same username; `false` to reject if the user exists.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async userCreate(username, password, authLevel, replace) {
+        const body = JSON.stringify({ password, authLevel, replace });
+        const uri = API.user(username);
+
+        await XHRpromise('PUT', uri, {
+            successStatus: replace ? 204 : 201,
+            body,
+            contentType: 'application/json'
+        });
+
+        return void 0;
+    }
+
+    /**
+     * Attempts to destroy a user.
+     *
+     * @param {string} username - The user's username.
+     * @returns {Promise} Resolves on completion, or rejects with an error.
+     */
+    async userDestroy(username) {
+        const uri = API.user(username);
+
+        await XHRpromise('DELETE', uri, {
+            successStatus: 204
+        });
+
+        return void 0;
+
+    }
+
+    /**
+     * Gets information about the user.
+     *
+     * @param {string} username - The user's username.
+     * @returns {Promise} Resolves with the user's information on completion, or
+     * rejects with an error.
+     */
+    async userGet(username) {
+        const uri = API.user(username);
+
+        const { responseText } = await XHRpromise('GET', uri, {
+            successStatus: 200
+        });
+
+        const user = JSON.parse(responseText);
+        user.username = username;
+
+        return user;
     }
 }
 
