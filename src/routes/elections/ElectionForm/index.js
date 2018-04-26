@@ -7,7 +7,7 @@
 import React from 'react';
 import { func } from 'prop-types';
 
-import User, { AuthLevels } from 'src/User';
+import Auth, { AuthLevels } from 'src/Auth';
 import Election, { electionShape } from 'src/Election';
 import ConfirmButton from 'src/ConfirmButton';
 
@@ -51,7 +51,7 @@ class ElectionForm extends React.Component {
             </button>
         ];
 
-        if (User.authLevel >= AuthLevels.ADMIN) {
+        if (Auth.authLevel >= AuthLevels.ADMIN) {
             !closed && buttons.push(<ConfirmButton
                 key='close'
                 onClick={event => {

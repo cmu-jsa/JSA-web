@@ -7,7 +7,7 @@
 import React from 'react';
 import { objectOf, func } from 'prop-types';
 
-import User, { AuthLevels } from 'src/User';
+import Auth, { AuthLevels } from 'src/Auth';
 import Election, { electionShape } from 'src/Election';
 import Logout from 'src/App/Logout';
 import ListInput from 'src/ListInput';
@@ -80,7 +80,7 @@ class ElectionsAdmin extends React.PureComponent {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        if (User.authLevel < AuthLevels.ADMIN) {
+        if (Auth.authLevel < AuthLevels.ADMIN) {
             return null;
         }
 
@@ -176,7 +176,7 @@ class Elections extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        if (!User.loggedIn) {
+        if (!Auth.loggedIn) {
             throw new Error('User must be logged in to render.');
         }
 
@@ -185,7 +185,7 @@ class Elections extends React.Component {
 
         return <article className={styles.elections}>
             <h1>Elections</h1>
-            <h3>Hello, {User.username}! <Logout /></h3>
+            <h3>Hello, {Auth.username}! <Logout /></h3>
             <ElectionsAdmin
                 onElectionOpened={onElectionOpened}
             />

@@ -1,7 +1,7 @@
 /**
  * Module for representing user state.
  *
- * @module src/User
+ * @module src/Auth
  */
 
 import XHRpromise from 'src/XHRpromise';
@@ -9,7 +9,7 @@ import XHRpromise from 'src/XHRpromise';
 /**
  * Authorization levels.
  *
- * @alias module:src/User.AuthLevels
+ * @alias module:src/Auth.AuthLevels
  * @readonly
  * @enum {number}
  */
@@ -33,7 +33,9 @@ const API = {
     /** Login endpoint. */
     auth_login: '/auth/login',
     /** Logout endpoint. */
-    auth_logout: '/auth/logout'
+    auth_logout: '/auth/logout',
+    /** User info endpoint. */
+    auth_users: '/auth/users'
 };
 Object.freeze(API);
 
@@ -51,9 +53,9 @@ const UIPaths = {
 Object.freeze(UIPaths);
 
 /**
- * Represents user state.
+ * Represents authentication state.
  */
-class User {
+class Auth {
     /**
      * Paths associated with the user interface.
      *
@@ -63,11 +65,11 @@ class User {
     get paths() { return UIPaths; }
 
     /**
-     * Initializes the user state.
+     * Initializes the authentication state.
      */
     constructor() {
         Object.defineProperties(this,
-            /** @lends User.prototype */
+            /** @lends Auth.prototype */
             {
                 /**
                  * Username if logged in; `false` if not logged in; `null` if
@@ -261,14 +263,14 @@ class User {
     }
 }
 
-Object.freeze(User);
+Object.freeze(Auth);
 
 /**
- * User state singleton.
+ * Authentication state singleton.
  *
- * @alias module:src/User
- * @type {module:src/User~User}
+ * @alias module:src/Auth
+ * @type {module:src/Auth~Auth}
  */
-const state = new User();
+const state = new Auth();
 export default state;
 

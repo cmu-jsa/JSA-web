@@ -8,7 +8,7 @@ import React from 'react';
 import { shape, func, element } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import User from 'src/User';
+import Auth from 'src/Auth';
 
 import styles from './index.less';
 
@@ -30,7 +30,7 @@ class Logout extends React.PureComponent {
             event.preventDefault();
             this.logout();
         }}>
-            <button type='submit' disabled={!User.loggedIn}>
+            <button type='submit' disabled={!Auth.loggedIn}>
                 {prompt}
             </button>
         </form>;
@@ -46,7 +46,7 @@ class Logout extends React.PureComponent {
         const { history } = this.props;
 
         try {
-            await User.logout();
+            await Auth.logout();
 
             history.go(0);
         } catch (err) {

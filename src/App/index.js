@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 import { routeConfigFlat } from 'src/routeConfig';
-import User from 'src/User';
+import Auth from 'src/Auth';
 
 import NotFound from 'bundle-loader?lazy!src/NotFound';
 import Login from 'bundle-loader?lazy!./Login';
@@ -30,10 +30,10 @@ function AuthRoute(props) {
     const { component: Component, ...rest } = props;
 
     return <Route {...rest} render={componentProps => {
-        return User.loggedIn
+        return Auth.loggedIn
             ? <Component {...componentProps} />
             : <Redirect to={{
-                pathname: User.paths.login,
+                pathname: Auth.paths.login,
                 state: { referer: componentProps.location }
             }} />;
     }} />;
@@ -90,8 +90,8 @@ const routeRedirects = routeConfigFlat.map(config => {
 });
 
 // Create redirects for user UI paths.
-const userRedirects = Object.keys(User.paths).map(key => {
-    const path = User.paths[key];
+const userRedirects = Object.keys(Auth.paths).map(key => {
+    const path = Auth.paths[key];
     return redirectNoSlash(path);
 });
 
@@ -112,7 +112,7 @@ export default function App() {
                     { routeRedirects }
                     { routes }
                     { userRedirects }
-                    <Route path={User.paths.login} component={asyncLogin} />
+                    <Route path={Auth.paths.login} component={asyncLogin} />
                     <Route component={asyncNotFound} />
                 </Switch>
             </main>

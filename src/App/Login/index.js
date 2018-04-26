@@ -8,7 +8,7 @@ import React from 'react';
 import { shape, string, element } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-import User from 'src/User';
+import Auth from 'src/Auth';
 import Spinner from 'src/Spinner';
 
 import styles from './index.less';
@@ -23,7 +23,7 @@ export default class Login extends React.Component {
     constructor() {
         super();
 
-        const { loggedIn } = User;
+        const { loggedIn } = Auth;
 
         const loading = loggedIn === null;
         const redirect = loggedIn === true;
@@ -43,10 +43,10 @@ export default class Login extends React.Component {
 
         if (loading) {
             (async() => {
-                await User.refreshLoginStatus();
+                await Auth.refreshLoginStatus();
                 this.setState({
                     loading: false,
-                    redirect: User.loggedIn
+                    redirect: Auth.loggedIn
                 });
             })();
         }
@@ -111,7 +111,7 @@ export default class Login extends React.Component {
      */
     async login(username, password) {
         try {
-            await User.login(username, password);
+            await Auth.login(username, password);
 
             this.setState({ redirect: true, message: null });
         } catch (err) {
