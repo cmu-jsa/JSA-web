@@ -73,7 +73,7 @@ class UserCreate extends React.PureComponent {
                 placeholder='Username'
                 required={true}
             />
-            <fieldset className={styles.password}>
+            <fieldset>
                 <input
                     type={passwordShown ? 'text' : 'password'}
                     autoComplete='off'
@@ -96,16 +96,18 @@ class UserCreate extends React.PureComponent {
                     Generate
                 </button>
             </fieldset>
-            <select
-                autoComplete='off'
-                ref={input => (this.inputs.auth = input)}
-                required={true}
-            >
-                {AuthLevelOptions}
-            </select>
-            <ConfirmButton type='submit'>
-                Create user
-            </ConfirmButton>
+            <fieldset>
+                <select
+                    autoComplete='off'
+                    ref={input => (this.inputs.auth = input)}
+                    required={true}
+                >
+                    {AuthLevelOptions}
+                </select>
+                <ConfirmButton type='submit'>
+                    Create user
+                </ConfirmButton>
+            </fieldset>
             {message}
         </form>;
     }

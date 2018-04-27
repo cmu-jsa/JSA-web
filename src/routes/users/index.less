@@ -9,13 +9,9 @@
     }
 
     .create {
-        .password {
+        fieldset {
             display: flex;
             flex-flow: row wrap;
-
-            input[type=text], input[type=password] {
-                flex: 1;
-            }
 
             .media-screen-sm({
                 flex-flow: column nowrap;
@@ -25,6 +21,14 @@
                     justify-content: center;
                 }
             });
+
+            > select, input[type=text], > input[type=password] {
+                flex: 1;
+            }
+
+            > input[type=submit], > button[type=submit] {
+                flex: 0.5;
+            }
         }
     }
 
