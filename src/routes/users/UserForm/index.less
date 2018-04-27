@@ -1,6 +1,39 @@
 @import '~src/less/definitions';
 
 .user {
+    .header {
+        display: flex;
+        flex-flow: row wrap;
 
+        > *:not(:last-child) {
+            margin-inline-end: @spacing-x;
+        }
+
+        .username {
+            flex: 1;
+        }
+
+        > button {
+            align-self: flex-end;
+        }
+
+        .media-screen-sm({
+            flex-flow: column nowrap;
+
+            > *:not(:last-child) {
+                margin-inline-end: 0;
+                margin-block-end: @spacing-x;
+            }
+
+            > * {
+                display: flex;
+                justify-content: center;
+            }
+
+            > button {
+                align-self: unset;
+            }
+        });
+    }
 }
 

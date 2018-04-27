@@ -7,7 +7,9 @@
 import React from 'react';
 import { func } from 'prop-types';
 
-import { userShape } from 'src/Auth/Users';
+import Auth from 'src/Auth';
+import AuthUsers, { userShape } from 'src/Auth/Users';
+import ConfirmButton from 'src/ConfirmButton';
 
 import styles from './index.less';
 
@@ -23,7 +25,13 @@ class UserForm extends React.Component {
     constructor() {
         super();
 
+        this.state = {
+            message: null
+        };
+
         this.onSubmit = this.onSubmit.bind(this);
+        this.refresh = this.refresh.bind(this);
+        this.destroy = this.destroy.bind(this);
     }
 
     /**
@@ -32,11 +40,33 @@ class UserForm extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        const { username } = this.props.user;
+        const { user } = this.props;
+        const { message } = this.state;
         const { onSubmit } = this;
 
+        const { username } = user;
+        let authLevel = null;
+        if ('authLevel' in user) {
+            authLevel = ` [${user.authLevel}]`;
+        }
+
+        const destroyButton = username === Auth.username
+            ? null
+            : <ConfirmButton type='button' onClick={this.destroy}>
+                Destroy
+            </ConfirmButton>;
+
         return <form className={styles.user} onSubmit={onSubmit}>
-            <h4>{username}</h4>
+            <p className={styles.header}>
+                <span className={styles.username}>
+                    {username}{authLevel}
+                </span>
+                <button type='button' onClick={this.refresh}>
+                    Refresh
+                </button>
+                {destroyButton}
+            </p>
+            {message}
         </form>;
     }
 
@@ -49,6 +79,60 @@ class UserForm extends React.Component {
         event.preventDefault();
 
         // TODO
+    }
+
+    /**
+     * Attempts to update user state.
+     *
+     * @param {Function} updater - The updating function. Called with the user's
+     * username; should return a promise that resolves with the updated state.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
+     */
+    async update(updater) {
+        try {
+            const { username } = this.props.user;
+            const update = await updater(username);
+
+            this.setState({ message: null });
+
+            const { onUserChanged } = this.props;
+            onUserChanged && onUserChanged(username, update);
+
+            return null;
+        } catch (err) {
+            const message = <p>{err.message}</p>;
+            this.setState({ message });
+
+            return err;
+        }
+    }
+
+    /**
+     * Refreshes user state.
+     *
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
+     */
+    async refresh() {
+        return await this.update(async username => {
+            const result = await AuthUsers.get(username);
+            delete result.username;
+            return result;
+        });
+    }
+
+    /**
+     * Destroys the user.
+     *
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
+     */
+    async destroy() {
+        return await this.update(async username => {
+            await AuthUsers.destroy(username);
+            return null;
+        });
     }
 }
 

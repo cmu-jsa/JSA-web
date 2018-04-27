@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { func, arrayOf } from 'prop-types';
+import { func, objectOf } from 'prop-types';
 
 import Auth from 'src/Auth';
 import AuthLevels from 'src/Auth/AuthLevels';
@@ -195,24 +195,36 @@ class UsersList extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
-        const { users, onUserChanged } = this.props;
+        const { users, onUserChanged, refresh } = this.props;
         const { searchString } = this.state;
 
-        let elems = users.filter(user => {
-            return user.username.indexOf(searchString) >= 0;
-        }).map(user => {
+        let elems = Object.keys(users).filter(username => {
+            return username.indexOf(searchString) >= 0;
+        }).sort((a, b) => {
+            return a.localeCompare(b);
+        }).map(username => {
             return <UserForm
-                key={user.username}
-                user={user}
+                key={username}
+                user={users[username]}
                 onUserChanged={onUserChanged}
             />;
         });
 
-        if (users.length === 0) {
+        if (elems.length === 0) {
             elems = <p>No users found.</p>;
         }
 
+        const refreshButton = refresh
+            ? <button type='button' onClick={refresh}>
+                Refresh
+            </button>
+            : null;
+
         return <section className={styles.list}>
+            <h4 className={styles.header}>
+                <span className={styles.title}>Available users</span>
+                {refreshButton}
+            </h4>
             <input
                 type='username'
                 autoComplete='off'
@@ -230,8 +242,9 @@ class UsersList extends React.Component {
 }
 
 UsersList.propTypes = {
-    users: arrayOf(userShape).isRequired,
-    onUserChanged: func
+    users: objectOf(userShape).isRequired,
+    onUserChanged: func,
+    refresh: func
 };
 
 /**
@@ -247,16 +260,15 @@ class Users extends React.Component {
         super();
 
         this.state = {
-            users: []
+            users: {},
+            message: null
         };
 
         this.onUserCreated = this.onUserCreated.bind(this);
         this.onUserChanged = this.onUserChanged.bind(this);
+        this.refresh = this.refresh.bind(this);
 
-        (async() => {
-            const users = await AuthUsers.getAll();
-            this.setState({ users });
-        })();
+        this.refresh();
     }
 
     /**
@@ -265,20 +277,28 @@ class Users extends React.Component {
      * @returns {ReactElement} The component's elements.
      */
     render() {
+        const { message } = this.state;
+
         if (!Auth.loggedIn || Auth.authLevel < AuthLevels.ADMIN) {
             throw new Error('User must be logged in to render.');
         }
 
         const { users } = this.state;
-        const { onUserCreated, onUserChanged } = this;
+        const { onUserCreated, onUserChanged, refresh } = this;
 
         return <article className={styles.users}>
             <h1>Users</h1>
             <h3>Hello, {Auth.username}! <Logout /></h3>
             <section>
+                <h4>Create user</h4>
                 <UserCreate onUserCreated={onUserCreated} />
             </section>
-            <UsersList users={users} onUserChanged={onUserChanged} />
+            {message}
+            <UsersList
+                users={users}
+                onUserChanged={onUserChanged}
+                refresh={refresh}
+            />
         </article>;
     }
 
@@ -291,7 +311,7 @@ class Users extends React.Component {
      */
     onUserCreated(username, password, authLevel) {
         this.setState(({ users }) => {
-            users.push({ username, password, authLevel });
+            users[username] = { username, password, authLevel };
             return { users };
         });
     }
@@ -318,6 +338,26 @@ class Users extends React.Component {
 
             return { users };
         });
+    }
+
+    /**
+     * Refreshes the user list.
+     *
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
+     */
+    async refresh() {
+        try {
+            const users = await AuthUsers.getAll();
+            this.setState({ users, message: null });
+
+            return null;
+        } catch (err) {
+            const message = <p>{err.message}</p>;
+            this.setState({ message });
+
+            return err;
+        }
     }
 }
 

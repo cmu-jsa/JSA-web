@@ -63,17 +63,20 @@ class Users {
     /**
      * Attempts to get all users.
      *
-     * @returns {Promise} Resolves with `module:src/Auth/Users~User[]`, or
-     * rejects with an error.
+     * @returns {Promise} Resolves with a map of usernames to
+     * `module:src/Auth/Users~User`, or rejects with an error.
      */
     static async getAll() {
         const { responseText } = await XHRpromise('GET', API.users, {
             successStatus: 200
         });
 
-        return JSON.parse(responseText).map(username => {
-            return { username };
+        const usernames = JSON.parse(responseText);
+        const users = {};
+        usernames.forEach(username => {
+            users[username] = { username };
         });
+        return users;
     }
 
     /**

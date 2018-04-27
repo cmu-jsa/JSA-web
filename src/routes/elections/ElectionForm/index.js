@@ -33,6 +33,9 @@ class ElectionForm extends React.Component {
         this.select = null;
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.refresh = this.refresh.bind(this);
+        this.close = this.close.bind(this);
+        this.destroy = this.destroy.bind(this);
     }
 
     /**
@@ -44,10 +47,7 @@ class ElectionForm extends React.Component {
         const { closed } = this.props.election;
 
         const buttons = [
-            <button key='refresh' type='button' onClick={event => {
-                event.preventDefault();
-                this.refresh();
-            }}>
+            <button key='refresh' type='button' onClick={this.refresh}>
                 Refresh
             </button>
         ];
@@ -56,10 +56,7 @@ class ElectionForm extends React.Component {
             !closed && buttons.push(<ConfirmButton
                 key='close'
                 type='button'
-                onClick={event => {
-                    event.preventDefault();
-                    this.close();
-                }}
+                onClick={this.close}
             >
                 Close
             </ConfirmButton>);
@@ -67,10 +64,7 @@ class ElectionForm extends React.Component {
             buttons.push(<ConfirmButton
                 key='destroy'
                 type='button'
-                onClick={event => {
-                    event.preventDefault();
-                    this.destroy();
-                }}
+                onClick={this.destroy}
             >
                 Destroy
             </ConfirmButton>);
