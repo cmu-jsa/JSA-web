@@ -53,7 +53,7 @@ class ElectionForm extends React.Component {
         ];
 
         if (Auth.authLevel >= AuthLevels.ADMIN) {
-            !closed && buttons.push(<ConfirmButton
+            !closed && buttons.unshift(<ConfirmButton
                 key='close'
                 type='button'
                 onClick={this.close}
@@ -61,7 +61,7 @@ class ElectionForm extends React.Component {
                 Close
             </ConfirmButton>);
 
-            buttons.push(<ConfirmButton
+            buttons.unshift(<ConfirmButton
                 key='destroy'
                 type='button'
                 onClick={this.destroy}

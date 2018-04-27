@@ -26,6 +26,7 @@ class UserForm extends React.Component {
         super();
 
         this.state = {
+            passwordShown: false,
             message: null
         };
 
@@ -41,30 +42,40 @@ class UserForm extends React.Component {
      */
     render() {
         const { user } = this.props;
-        const { message } = this.state;
+        const { passwordShown, message } = this.state;
         const { onSubmit } = this;
 
         const { username } = user;
-        let authLevel = null;
-        if ('authLevel' in user) {
-            authLevel = ` [${user.authLevel}]`;
-        }
+        const authLevel = ('authLevel' in user)
+            ? ` [${user.authLevel}]`
+            : null;
 
-        const destroyButton = username === Auth.username
-            ? null
-            : <ConfirmButton type='button' onClick={this.destroy}>
+        const destroyButton = username !== Auth.username
+            ? <ConfirmButton type='button' onClick={this.destroy}>
                 Destroy
-            </ConfirmButton>;
+            </ConfirmButton>
+            : null;
+
+        const passwordButton = ('password' in user)
+            ? <button type='button' onClick={() => {
+                this.setState(state => {
+                    return { passwordShown: !state.passwordShown };
+                });
+            }}>
+                {passwordShown ? user.password : 'Show password'}
+            </button>
+            : null;
 
         return <form className={styles.user} onSubmit={onSubmit}>
             <p className={styles.header}>
                 <span className={styles.username}>
                     {username}{authLevel}
                 </span>
+                {destroyButton}
+                {passwordButton}
                 <button type='button' onClick={this.refresh}>
                     Refresh
                 </button>
-                {destroyButton}
             </p>
             {message}
         </form>;
