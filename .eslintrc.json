@@ -47,7 +47,6 @@
         "no-dupe-class-members": 2,
         "no-class-assign": 2,
         "no-cond-assign": [2, "always"],
-        "no-continue": 1,
         "no-const-assign": 2,
         "no-debugger": 2,
         "no-dupe-args": 2,

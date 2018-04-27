@@ -89,16 +89,14 @@ class ElectionsAdmin extends React.PureComponent {
 
         return <section className={styles.admin}>
             <h4>Administration</h4>
-            <form onSubmit={event => {
+            <form onSubmit={async event => {
                 event.preventDefault();
 
                 const { title, candidates } = this.inputs.openElection;
-                const titleValue = title.value;
-                const candidatesValues = candidates.values;
+                await this.openElection(title.value, candidates.values);
+
                 title.value = '';
                 candidates.reset();
-
-                this.openElection(titleValue, candidatesValues);
             }}>
                 <ListInput
                     placeholder='Candidate' dedup

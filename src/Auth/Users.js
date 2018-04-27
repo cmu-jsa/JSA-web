@@ -54,20 +54,23 @@ class Users {
      *
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
-     * @param {number} authLevel - The user's authentication level.
-     * @param {boolean} replace - `true` to replace an existing user with the
-     * same username; `false` to reject if the user exists.
+     * @param {string} auth - The user's authentication level name.
+     * @param {boolean} [replace=false] - `true` to replace an existing user
+     * with the same username; `false` to reject if the user exists.
      * @returns {Promise} Resolves on completion, or rejects with an error.
      */
-    static async create(username, password, authLevel, replace) {
-        const body = JSON.stringify({ password, authLevel, replace });
+    static async create(username, password, auth, replace = false) {
+        const body = JSON.stringify({ password, auth, replace });
         const uri = API.user(username);
+        const success = replace ? 204 : 201;
 
-        await XHRpromise('PUT', uri, {
-            successStatus: replace ? 204 : 201,
+        const { status, responseText } = await XHRpromise('PUT', uri, {
             body,
             contentType: 'application/json'
         });
+        if (status !== success) {
+            throw new Error(responseText);
+        }
 
         return void 0;
     }
@@ -81,9 +84,10 @@ class Users {
     static async destroy(username) {
         const uri = API.user(username);
 
-        await XHRpromise('DELETE', uri, {
-            successStatus: 204
-        });
+        const { status, responseText } = await XHRpromise('DELETE', uri);
+        if (status !== 204) {
+            throw new Error(responseText);
+        }
 
         return void 0;
 
@@ -99,9 +103,10 @@ class Users {
     static async get(username) {
         const uri = API.user(username);
 
-        const { responseText } = await XHRpromise('GET', uri, {
-            successStatus: 200
-        });
+        const { status, responseText } = await XHRpromise('GET', uri);
+        if (status !== 200) {
+            throw new Error(responseText);
+        }
 
         const user = JSON.parse(responseText);
         user.username = username;

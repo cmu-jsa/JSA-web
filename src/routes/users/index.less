@@ -1,0 +1,24 @@
+@import '~src/less/definitions';
+
+.users {
+    .create {
+        .password {
+            display: flex;
+            flex-flow: row wrap;
+
+            input[type=text], input[type=password] {
+                flex: 1;
+            }
+
+            .media-screen-sm({
+                flex-flow: column nowrap;
+
+                > * {
+                    display: flex;
+                    justify-content: center;
+                }
+            });
+        }
+    }
+}
+

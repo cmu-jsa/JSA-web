@@ -44,7 +44,7 @@ class ElectionForm extends React.Component {
         const { closed } = this.props.election;
 
         const buttons = [
-            <button key='refresh' onClick={event => {
+            <button key='refresh' type='button' onClick={event => {
                 event.preventDefault();
                 this.refresh();
             }}>
@@ -55,6 +55,7 @@ class ElectionForm extends React.Component {
         if (Auth.authLevel >= AuthLevels.ADMIN) {
             !closed && buttons.push(<ConfirmButton
                 key='close'
+                type='button'
                 onClick={event => {
                     event.preventDefault();
                     this.close();
@@ -63,10 +64,14 @@ class ElectionForm extends React.Component {
                 Close
             </ConfirmButton>);
 
-            buttons.push(<ConfirmButton key='destroy' onClick={event => {
-                event.preventDefault();
-                this.destroy();
-            }}>
+            buttons.push(<ConfirmButton
+                key='destroy'
+                type='button'
+                onClick={event => {
+                    event.preventDefault();
+                    this.destroy();
+                }}
+            >
                 Destroy
             </ConfirmButton>);
         }
@@ -183,14 +188,13 @@ class ElectionForm extends React.Component {
      * @private
      * @param {Event} event - The event.
      */
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
 
         const { select } = this;
-        const candidate = select.value;
-        select.value = '';
+        await this.vote(select.value);
 
-        this.vote(candidate);
+        select.value = '';
     }
 
     /**
