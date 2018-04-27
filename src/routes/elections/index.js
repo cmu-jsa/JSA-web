@@ -93,7 +93,11 @@ class ElectionsAdmin extends React.PureComponent {
                 event.preventDefault();
 
                 const { title, candidates } = this.inputs.openElection;
-                await this.openElection(title.value, candidates.values);
+                if (await this.openElection(
+                    title.value, candidates.values
+                ) !== null) {
+                    return;
+                }
 
                 title.value = '';
                 candidates.reset();
@@ -121,7 +125,8 @@ class ElectionsAdmin extends React.PureComponent {
      *
      * @param {string} title - The election's title.
      * @param {string[]} candidates - The election's candidates.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async openElection(title, candidates) {
         try {
@@ -131,12 +136,14 @@ class ElectionsAdmin extends React.PureComponent {
 
             const { onElectionOpened } = this.props;
             onElectionOpened && onElectionOpened(id, title, candidates);
+
+            return null;
         } catch (err) {
             const openElectionMessage = <p>{err.message}</p>;
             this.setState({ openElectionMessage });
-        }
 
-        return void 0;
+            return err;
+        }
     }
 }
 

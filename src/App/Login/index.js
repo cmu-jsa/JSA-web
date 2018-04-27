@@ -106,23 +106,25 @@ export default class Login extends React.Component {
      *
      * @param {string} username - The username.
      * @param {string} password - The password.
-     * @returns {Promise} Resolves when login has succeeded, or rejects with an
-     * error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async login(username, password) {
         try {
             await Auth.login(username, password);
 
             this.setState({ redirect: true, message: null });
+
+            return null;
         } catch (err) {
             const message = <p className={styles.error}>
                 Login failed: {err.message}
             </p>;
 
             this.setState({ message });
-        }
 
-        return void 0;
+            return err;
+        }
     }
 }
 

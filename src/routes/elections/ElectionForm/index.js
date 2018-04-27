@@ -192,7 +192,9 @@ class ElectionForm extends React.Component {
         event.preventDefault();
 
         const { select } = this;
-        await this.vote(select.value);
+        if (await this.vote(select.value) !== null) {
+            return;
+        }
 
         select.value = '';
     }
@@ -203,7 +205,8 @@ class ElectionForm extends React.Component {
      * @param {Function} updater - The updating function. Called with the
      * election's ID; should return a promise that resolves with the updated
      * election state.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async update(updater) {
         try {
@@ -214,18 +217,21 @@ class ElectionForm extends React.Component {
 
             const { onElectionChanged } = this.props;
             onElectionChanged && onElectionChanged(id, update);
+
+            return null;
         } catch (err) {
             const message = <p>{err.message}</p>;
             this.setState({ message });
-        }
 
-        return void 0;
+            return err;
+        }
     }
 
     /**
      * Refreshes election state.
      *
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async refresh() {
         return await this.update(async(id) => {
@@ -239,7 +245,8 @@ class ElectionForm extends React.Component {
      * Votes for the given candidate.
      *
      * @param {string} candidate - The candidate to vote for.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async vote(candidate) {
         return await this.update(async(id) => {
@@ -251,7 +258,8 @@ class ElectionForm extends React.Component {
     /**
      * Closes the election.
      *
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async close() {
         return await this.update(async(id) => {
@@ -263,7 +271,8 @@ class ElectionForm extends React.Component {
     /**
      * Destroys the election.
      *
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async destroy() {
         return await this.update(async(id) => {

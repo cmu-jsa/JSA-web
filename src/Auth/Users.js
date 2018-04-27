@@ -6,6 +6,8 @@
 
 import XHRpromise from 'src/XHRpromise';
 
+import { number, string, shape } from 'prop-types';
+
 /**
  * API endpoints.
  *
@@ -30,23 +32,48 @@ const API = {
 Object.freeze(API);
 
 /**
+ * Represents a user.
+ *
+ * @private
+ * @typedef {Object} User.
+ * @property {string} username - The user's username.
+ * @property {string} [password] - The user's password.
+ * @property {number} [authLevel] - The user's authentication level.
+ */
+
+/**
+ * User shape.
+ *
+ * @readonly
+ * @type {Object}
+ */
+const userShape = shape({
+    username: string.isRequired,
+    password: string,
+    authLevel: number
+});
+export { userShape };
+
+/**
  * Represents the user management interface.
  *
  * @alias module:src/Auth/Users
  */
 class Users {
     /**
-     * Attempts to list all usernames.
+     * Attempts to get all users.
      *
-     * @returns {Promise} Resolves with the list of all usernames, or rejects
-     * with an error.
+     * @returns {Promise} Resolves with `module:src/Auth/Users~User[]`, or
+     * rejects with an error.
      */
-    static async list() {
+    static async getAll() {
         const { responseText } = await XHRpromise('GET', API.users, {
             successStatus: 200
         });
 
-        return JSON.parse(responseText);
+        return JSON.parse(responseText).map(username => {
+            return { username };
+        });
     }
 
     /**

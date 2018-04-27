@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { func } from 'prop-types';
 
 import Auth from 'src/Auth';
 import AuthLevels from 'src/Auth/AuthLevels';
@@ -117,7 +118,11 @@ class UserCreate extends React.PureComponent {
         event.preventDefault();
 
         const { username, password, auth } = this.inputs;
-        await this.create(username.value, password.value, auth.value);
+        if (await this.create(
+            username.value, password.value, auth.value
+        ) !== null) {
+            return;
+        }
 
         username.value = '';
         password.value = '';
@@ -130,7 +135,8 @@ class UserCreate extends React.PureComponent {
      * @param {string} username - The user's username.
      * @param {string} password - The user's password.
      * @param {string} auth - The user's authentication level name.
-     * @returns {Promise} Resolves on completion, or rejects with an error.
+     * @returns {Promise} Resolves with `null` on success, or with an `Error` if
+     * an error was handled.
      */
     async create(username, password, auth) {
         try {
@@ -140,14 +146,25 @@ class UserCreate extends React.PureComponent {
                 Successfully created user &quot;{username}&quot; [{auth}].
             </p>;
             this.setState({ message });
+
+            const authLevel = AuthLevels[auth];
+
+            const { onUserCreated } = this.props;
+            onUserCreated && onUserCreated(username, password, authLevel);
+
+            return null;
         } catch (err) {
             const message = <p>{err.message}</p>;
             this.setState({ message });
-        }
 
-        return void 0;
+            return err;
+        }
     }
 }
+
+UserCreate.propTypes = {
+    onUserCreated: func
+};
 
 /**
  * Users React component.
@@ -155,6 +172,25 @@ class UserCreate extends React.PureComponent {
  * @alias module:src/routes/users
  */
 class Users extends React.Component {
+    /**
+     * Initializes the component.
+     */
+    constructor() {
+        super();
+
+        this.state = {
+            users: {}
+        };
+
+        (async() => {
+            const users = await AuthUsers.getAll();
+            this.setState({ users });
+        });
+
+        this.onUserCreated = this.onUserCreated.bind(this);
+        this.onUserChanged = this.onUserChanged.bind(this);
+    }
+
     /**
      * Renders the component.
      *
@@ -165,9 +201,49 @@ class Users extends React.Component {
             throw new Error('User must be logged in to render.');
         }
 
+        const { onUserCreated } = this;
+
         return <article className={styles.users}>
-            <UserCreate />
+            <UserCreate onUserCreated={onUserCreated} />
         </article>;
+    }
+
+    /**
+     * Event handler for user creation.
+     *
+     * @param {string} username - The user's username.
+     * @param {string} password - The user's password.
+     * @param {number} authLevel - The user's authentication level.
+     */
+    onUserCreated(username, password, authLevel) {
+        this.setState(({ users }) => {
+            users[username] = { username, password, authLevel };
+            return { users };
+        });
+    }
+
+
+    /**
+     * Event handler for user changes.
+     *
+     * @param {string} username - The user's username.
+     * @param {Object?} changes - The changed user state, or `null` to
+     * delete the user with the given username.
+     */
+    onUserChanged(username, changes) {
+        this.setState(({ users }) => {
+            if (!(username in users)) {
+                return;
+            }
+
+            if (changes === null) {
+                delete users[username];
+            } else {
+                Object.assign(users[username], changes);
+            }
+
+            return { users };
+        });
     }
 }
 
