@@ -1,6 +1,13 @@
 @import '~src/less/definitions';
 
 .users {
+    display: flex;
+    flex-flow: column nowrap;
+
+    section {
+        margin-block-end: @spacing-y;
+    }
+
     .create {
         .password {
             display: flex;
@@ -18,6 +25,15 @@
                     justify-content: center;
                 }
             });
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > * {
+            margin-block-end: @spacing-y;
         }
     }
 }

@@ -5,15 +5,17 @@
  */
 
 import React from 'react';
-import { func } from 'prop-types';
+import { func, arrayOf } from 'prop-types';
 
 import Auth from 'src/Auth';
 import AuthLevels from 'src/Auth/AuthLevels';
-import AuthUsers from 'src/Auth/Users';
+import AuthUsers, { userShape } from 'src/Auth/Users';
+import Logout from 'src/App/Logout';
 import ConfirmButton from 'src/ConfirmButton';
 
-import styles from './index.less';
+import UserForm from './UserForm';
 import genPassword from './genPassword';
+import styles from './index.less';
 
 /**
  * Option elements for authentication levels.
@@ -167,6 +169,53 @@ UserCreate.propTypes = {
 };
 
 /**
+ * Users list React component.
+ *
+ * @private
+ */
+class UsersList extends React.Component {
+    /**
+     * Initializes the component.
+     */
+    constructor() {
+        super();
+
+        this.state = {
+            searchString: ''
+        };
+    }
+
+    /**
+     * Renders the component.
+     *
+     * @returns {ReactElement} The component's elements.
+     */
+    render() {
+        const { users, onUserChanged } = this.props;
+        let elems = users.map(user => {
+            return <UserForm
+                key={user.username}
+                user={user}
+                onUserChanged={onUserChanged}
+            />;
+        });
+
+        if (users.length === 0) {
+            elems = <p>No users available.</p>;
+        }
+
+        return <section className={styles.list}>
+            {elems}
+        </section>;
+    }
+}
+
+UsersList.propTypes = {
+    users: arrayOf(userShape).isRequired,
+    onUserChanged: func
+};
+
+/**
  * Users React component.
  *
  * @alias module:src/routes/users
@@ -179,16 +228,16 @@ class Users extends React.Component {
         super();
 
         this.state = {
-            users: {}
+            users: []
         };
+
+        this.onUserCreated = this.onUserCreated.bind(this);
+        this.onUserChanged = this.onUserChanged.bind(this);
 
         (async() => {
             const users = await AuthUsers.getAll();
             this.setState({ users });
-        });
-
-        this.onUserCreated = this.onUserCreated.bind(this);
-        this.onUserChanged = this.onUserChanged.bind(this);
+        })();
     }
 
     /**
@@ -201,10 +250,16 @@ class Users extends React.Component {
             throw new Error('User must be logged in to render.');
         }
 
-        const { onUserCreated } = this;
+        const { users } = this.state;
+        const { onUserCreated, onUserChanged } = this;
 
         return <article className={styles.users}>
-            <UserCreate onUserCreated={onUserCreated} />
+            <h1>Users</h1>
+            <h3>Hello, {Auth.username}! <Logout /></h3>
+            <section>
+                <UserCreate onUserCreated={onUserCreated} />
+            </section>
+            <UsersList users={users} onUserChanged={onUserChanged} />
         </article>;
     }
 
@@ -217,7 +272,7 @@ class Users extends React.Component {
      */
     onUserCreated(username, password, authLevel) {
         this.setState(({ users }) => {
-            users[username] = { username, password, authLevel };
+            users.push({ username, password, authLevel });
             return { users };
         });
     }
