@@ -1,6 +1,6 @@
 {
     "title": "elections",
     "hidden": true,
-    "auth": true
+    "auth": "USER"
 }
 

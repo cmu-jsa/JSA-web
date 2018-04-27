@@ -7,20 +7,6 @@
 import XHRpromise from 'src/XHRpromise';
 
 /**
- * Authorization levels.
- *
- * @alias module:src/Auth.AuthLevels
- * @readonly
- * @enum {number}
- */
-const AuthLevels = {
-    USER: 0,
-    ADMIN: 1000
-};
-Object.freeze(AuthLevels);
-export { AuthLevels };
-
-/**
  * API endpoints.
  *
  * @private

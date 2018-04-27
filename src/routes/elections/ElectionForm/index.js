@@ -7,7 +7,8 @@
 import React from 'react';
 import { func } from 'prop-types';
 
-import Auth, { AuthLevels } from 'src/Auth';
+import Auth from 'src/Auth';
+import AuthLevels from 'src/Auth/AuthLevels';
 import Election, { electionShape } from 'src/Election';
 import ConfirmButton from 'src/ConfirmButton';
 

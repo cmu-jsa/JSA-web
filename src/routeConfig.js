@@ -6,6 +6,7 @@
 
 import { boolean, string, shape, object, objectOf } from 'prop-types';
 
+import AuthLevels from 'src/Auth/AuthLevels';
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 
@@ -14,6 +15,8 @@ import Spinner from 'src/Spinner';
  *
  * @typedef {Object} Route
  * @property {string} title - The route's title. Used for labels/link text.
+ * @property {boolean} [hidden] - `true` if the route is hidden.
+ * @property {string} [auth] - The route's required authentication level.
  * @property {string} path - The full path for the route.
  * @property {string[]} parts - The individual parts of the path.
  * @property {module:src/routeConfig~Children} children - The child routes.
@@ -63,7 +66,7 @@ function componentFromCtx(path) {
  * @param {string} configPath - Path to the configuration file.
  * @returns {module:src/routeConfig~Route} The configured route.
  */
-function configure(configPath) {
+function configure(configPath) {    // eslint-disable-line max-statements
     const config = routeConfigCtx(configPath);
     const path = configPath.match(/.(\/|\/.*\/)route.json$/)[1];
     const component = componentFromCtx(path);
@@ -86,7 +89,14 @@ function configure(configPath) {
     route.component = component;
     route.parts = parts;
     'hidden' in config && (route.hidden = config.hidden);
-    'auth' in config && (route.auth = config.auth);
+    if ('auth' in config) {
+        const { auth } = config;
+        if (!(auth in AuthLevels)) {
+            throw new Error(`Unknown authentication level "${auth}"`);
+        }
+
+        route.authLevel = AuthLevels[auth];
+    }
 
     return route;
 }
@@ -100,7 +110,7 @@ const routeShape = shape({
     path: string.isRequired,
     children: object.isRequired,
     hidden: boolean,
-    auth: boolean
+    auth: string
 });
 
 const routeChildrenShape = objectOf(routeShape);

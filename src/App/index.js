@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { func } from 'prop-types';
+import { number, func } from 'prop-types';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import asyncComponent from 'src/async-component';
@@ -13,11 +13,14 @@ import Spinner from 'src/Spinner';
 import { routeConfigFlat } from 'src/routeConfig';
 import Auth from 'src/Auth';
 
-import NotFound from 'bundle-loader?lazy!src/NotFound';
-import Login from 'bundle-loader?lazy!./Login';
+import AsyncNotFound from 'bundle-loader?lazy!src/NotFound';
+import AsyncLogin from 'bundle-loader?lazy!./Login';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './index.less';
+
+const Login = asyncComponent(AsyncLogin, Spinner);
+const NotFound = asyncComponent(AsyncNotFound, Spinner);
 
 /**
  * Represents a route that needs authentication.
@@ -27,24 +30,32 @@ import styles from './index.less';
  * @returns {ReactElement} The component's elements.
  */
 function AuthRoute(props) {
-    const { component: Component, ...rest } = props;
+    const { authLevel, component: Component, ...rest } = props;
 
     return <Route {...rest} render={componentProps => {
-        return Auth.loggedIn
-            ? <Component {...componentProps} />
-            : <Redirect to={{
+        if (!Auth.loggedIn) {
+            const redirect = {
                 pathname: Auth.paths.login,
                 state: { referer: componentProps.location }
-            }} />;
+            };
+            return <Redirect to={redirect} />;
+        }
+
+        if (Auth.authLevel < authLevel) {
+            return <NotFound {...componentProps} />;
+        }
+
+        return <Component {...componentProps} />;
     }} />;
 }
 
 AuthRoute.propTypes = {
+    authLevel: number.isRequired,
     component: func.isRequired
 };
 
 const routes = routeConfigFlat.map(config => {
-    const { path, component, auth } = config;
+    const { path, component } = config;
 
     const props = {
         key: path,
@@ -54,8 +65,8 @@ const routes = routeConfigFlat.map(config => {
         strict: true
     };
 
-    return auth
-        ? <AuthRoute {...props} />
+    return ('authLevel' in config)
+        ? <AuthRoute authLevel={config.authLevel} {...props} />
         : <Route {...props} />;
 });
 
@@ -95,9 +106,6 @@ const userRedirects = Object.keys(Auth.paths).map(key => {
     return redirectNoSlash(path);
 });
 
-const asyncLogin = asyncComponent(Login, Spinner);
-const asyncNotFound = asyncComponent(NotFound, Spinner);
-
 /**
  * React component for the entire app.
  *
@@ -112,8 +120,8 @@ export default function App() {
                     { routeRedirects }
                     { routes }
                     { userRedirects }
-                    <Route path={Auth.paths.login} component={asyncLogin} />
-                    <Route component={asyncNotFound} />
+                    <Route path={Auth.paths.login} component={Login} />
+                    <Route component={NotFound} />
                 </Switch>
             </main>
             <Footer />
