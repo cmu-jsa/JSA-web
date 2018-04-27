@@ -36,64 +36,64 @@ form {
     > *:not(:last-child) {
         margin-block-end: @spacing-y;
     }
+}
 
-    input[type=text], input[type=username], input[type=password] {
-        padding: @spacing-y @spacing-x;
-        background: none;
-        border: none;
-        border-bottom: @border;
-        transition: border @duration-transition;
+input[type=text], input[type=username], input[type=password] {
+    padding: @spacing-y @spacing-x;
+    background: none;
+    border: none;
+    border-bottom: @border;
+    transition: border @duration-transition;
 
-        &:focus {
-            border-bottom: @border-primary;
-            border-bottom-width: 1px;
-        }
+    &:focus {
+        border-bottom: @border-primary;
+        border-bottom-width: 1px;
+    }
+}
+
+select {
+    background: none;
+    border: none;
+    border-bottom: @border;
+    transition: border @duration-transition;
+
+    &:focus {
+        border-bottom: @border-primary;
+        border-bottom-width: 1px;
+    }
+}
+
+button, input[type=submit] {
+    background: @color-bg-card;
+    color: @color-text;
+    border: @border;
+    transition: all @duration-transition;
+    line-height: @line-height;
+
+    &:hover {
+        background: @color-bg-hover;
+        color: @color-text-bg-hover;
     }
 
-    select {
-        background: none;
-        border: none;
-        border-bottom: @border;
-        transition: border @duration-transition;
+    &:focus, &:active {
+        background: @color-bg-active;
+        color: @color-text-bg-active;
+    }
+}
 
-        &:focus {
-            border-bottom: @border-primary;
-            border-bottom-width: 1px;
+input, button {
+    &:disabled {
+        &, &:hover, &:focus, &:active {
+            background: @color-bg-disabled;
+            color: @color-text-bg-disabled;
         }
     }
+}
 
-    button, input[type=submit] {
-        background: @color-bg-card;
-        color: @color-text;
-        border: @border;
-        transition: all @duration-transition;
-        line-height: @line-height;
-
-        &:hover {
-            background: @color-bg-hover;
-            color: @color-text-bg-hover;
-        }
-
-        &:focus, &:active {
-            background: @color-bg-active;
-            color: @color-text-bg-active;
-        }
-    }
-
-    input, button {
-        &:disabled {
-            &, &:hover, &:focus, &:active {
-                background: @color-bg-disabled;
-                color: @color-text-bg-disabled;
-            }
-        }
-    }
-
-    fieldset {
-        border: none;
-        margin: 0;
-        padding: 0;
-    }
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 :global(#app) {

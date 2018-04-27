@@ -183,6 +183,8 @@ class UsersList extends React.Component {
         this.state = {
             searchString: ''
         };
+
+        this.search = null;
     }
 
     /**
@@ -192,7 +194,11 @@ class UsersList extends React.Component {
      */
     render() {
         const { users, onUserChanged } = this.props;
-        let elems = users.map(user => {
+        const { searchString } = this.state;
+
+        let elems = users.filter(user => {
+            return user.username.indexOf(searchString) >= 0;
+        }).map(user => {
             return <UserForm
                 key={user.username}
                 user={user}
@@ -201,10 +207,21 @@ class UsersList extends React.Component {
         });
 
         if (users.length === 0) {
-            elems = <p>No users available.</p>;
+            elems = <p>No users found.</p>;
         }
 
         return <section className={styles.list}>
+            <input
+                type='username'
+                autoComplete='off'
+                placeholder='Search usernames'
+                ref={search => (this.search = search)}
+                onChange={() => {
+                    this.setState({
+                        searchString: this.search.value
+                    });
+                }}
+            />
             {elems}
         </section>;
     }
