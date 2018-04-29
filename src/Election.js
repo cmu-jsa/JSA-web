@@ -41,7 +41,7 @@ const API = {
  * @property {boolean} closed - `true` if closed; `false` otherwise.
  * @property {boolean} voted - `true` if voted; `false` otherwise.
  * @property {number} [voteCount] - Number of votes so far.
- * @property {Object<string,number>?} [finalVotes] - Final votes, or `null` if
+ * @property {Object.<string,number>?} [finalVotes] - Final votes, or `null` if
  * not closed yet.
  */
 

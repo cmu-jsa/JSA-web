@@ -26,7 +26,7 @@ import Spinner from 'src/Spinner';
 /**
  * Child route configuration object. Each key is the next path component.
  *
- * @typedef {Object<string, module:src/routeConfig~Route>} Children
+ * @typedef {Object.<string, module:src/routeConfig~Route>} Children
  */
 
 const routeConfigCtx = require.context(
