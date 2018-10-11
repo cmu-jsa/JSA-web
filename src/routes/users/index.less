@@ -1,0 +1,75 @@
+@import '~src/less/definitions';
+
+.users {
+    display: flex;
+    flex-flow: column nowrap;
+
+    section {
+        margin-block-end: @spacing-y;
+    }
+
+    .create {
+        fieldset {
+            display: flex;
+            flex-flow: row wrap;
+
+            .media-screen-sm({
+                flex-flow: column nowrap;
+
+                > * {
+                    display: flex;
+                    justify-content: center;
+                }
+            });
+
+            > select, > input[type=text], > input[type=password] {
+                flex: 1;
+            }
+
+            > input[type=submit], > button[type=submit] {
+                flex: 0.5;
+            }
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > * {
+            margin-block-end: @spacing-y;
+        }
+
+        .header {
+            display: flex;
+            flex-flow: row wrap;
+
+            .title {
+                flex: 1;
+            }
+
+            > button {
+                align-self: flex-end;
+            }
+
+            .media-screen-sm({
+                flex-flow: column nowrap;
+
+                > *:not(:last-child) {
+                    margin-inline-end: 0;
+                    margin-block-end: @spacing-x;
+                }
+
+                > * {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                > button {
+                    align-self: unset;
+                }
+            });
+        }
+    }
+}
+

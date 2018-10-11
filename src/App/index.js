@@ -5,33 +5,80 @@
  */
 
 import React from 'react';
+import { number, func } from 'prop-types';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 import { routeConfigFlat } from 'src/routeConfig';
+import Auth from 'src/Auth';
 
-import NotFound from 'bundle-loader?lazy!src/NotFound';
+import AsyncNotFound from 'bundle-loader?lazy!src/NotFound';
+import AsyncLogin from 'bundle-loader?lazy!./Login';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './index.less';
 
+const Login = asyncComponent(AsyncLogin, Spinner);
+const NotFound = asyncComponent(AsyncNotFound, Spinner);
+
+/**
+ * Represents a route that needs authentication.
+ *
+ * @private
+ * @param {Object} props - The properties for the route.
+ * @returns {ReactElement} The component's elements.
+ */
+function AuthRoute(props) {
+    const { authLevel, component: Component, ...rest } = props;
+
+    return <Route {...rest} render={componentProps => {
+        if (!Auth.loggedIn) {
+            const redirect = {
+                pathname: Auth.paths.login,
+                state: { referer: componentProps.location }
+            };
+            return <Redirect to={redirect} />;
+        }
+
+        if (Auth.authLevel < authLevel) {
+            return <NotFound {...componentProps} />;
+        }
+
+        return <Component {...componentProps} />;
+    }} />;
+}
+
+AuthRoute.propTypes = {
+    authLevel: number.isRequired,
+    component: func.isRequired
+};
+
 const routes = routeConfigFlat.map(config => {
     const { path, component } = config;
-    return <Route
-        key={path}
-        path={path}
-        exact={path === '/'}
-        strict
-        component={component}
-    />;
+
+    const props = {
+        key: path,
+        component,
+        path,
+        exact: path === '/',
+        strict: true
+    };
+
+    return ('authLevel' in config)
+        ? <AuthRoute authLevel={config.authLevel} {...props} />
+        : <Route {...props} />;
 });
 
-// Create redirects for missing trailing slashes.
-const routeRedirects = routeConfigFlat.map(config => {
-    const { path } = config;
+/**
+ * Redirects paths without a trailing slash to paths with a slash.
+ *
+ * @param {string} path - The path, including the trailing slash.
+ * @returns {ReactElement} The redirect.
+ */
+function redirectNoSlash(path) {
     if (!path.endsWith('/')) {
-        return null;
+        throw new Error('Path does not end with a slash.');
     }
 
     const noSlash = path.substr(0, path.length - 1);
@@ -39,13 +86,24 @@ const routeRedirects = routeConfigFlat.map(config => {
         return;
     }
 
-    return <Route
+    return <Redirect
         key={noSlash}
-        path={noSlash}
+        from={noSlash}
         exact
         strict
-        render={() => <Redirect to={path} />}
+        to={path}
     />;
+}
+
+// Create redirects for missing trailing slashes.
+const routeRedirects = routeConfigFlat.map(config => {
+    return redirectNoSlash(config.path);
+});
+
+// Create redirects for user UI paths.
+const userRedirects = Object.keys(Auth.paths).map(key => {
+    const path = Auth.paths[key];
+    return redirectNoSlash(path);
 });
 
 /**
@@ -61,7 +119,9 @@ export default function App() {
                 <Switch>
                     { routeRedirects }
                     { routes }
-                    <Route component={asyncComponent(NotFound, Spinner)} />
+                    { userRedirects }
+                    <Route path={Auth.paths.login} component={Login} />
+                    <Route component={NotFound} />
                 </Switch>
             </main>
             <Footer />

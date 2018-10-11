@@ -1,0 +1,38 @@
+@import '~src/less/definitions';
+
+.elections {
+    display: flex;
+    flex-flow: column nowrap;
+
+    section {
+        margin-block-end: @spacing-y;
+    }
+
+    .admin {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .submit {
+            display: flex;
+            flex-flow: row wrap;
+
+            > input[type=text] {
+                flex: 2;
+            }
+
+            > button, input[type=submit] {
+                flex: 1;
+            }
+        }
+    }
+
+    .list {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > * {
+            margin-block-end: @spacing-y;
+        }
+    }
+}
+

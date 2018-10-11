@@ -91,7 +91,13 @@ function DropdownButton(props) {
             [styles.open]: isOpen
         });
 
-        return <span className={classes}>{title}</span>;
+        return <a
+            href={to}
+            className={classes}
+            onClick={event => event.preventDefault()}
+        >
+            {title}
+        </a>;
     }
 
     Button.propTypes = {
@@ -140,7 +146,12 @@ DropdownMenu.propTypes = {
  */
 function routeChildrenMenu(routeChildren) {
     return Object.keys(routeChildren).map(name => {
-        const { children: grandchildren, title, path } = routeChildren[name];
+        const child = routeChildren[name];
+        if (child.hidden) {
+            return null;
+        }
+
+        const { children: grandchildren, title, path } = child;
 
         if (objectIsEmpty(grandchildren)) {
             return <HeaderLink

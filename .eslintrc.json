@@ -1,11 +1,11 @@
 {
     "extends": ["eslint:recommended"],
     "parserOptions": {
-        "ecmaVersion": 2015
+        "ecmaVersion": 2017
     },
     "env": {
-        "node": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "rules": {
         "no-console": 0,
@@ -47,7 +47,6 @@
         "no-dupe-class-members": 2,
         "no-class-assign": 2,
         "no-cond-assign": [2, "always"],
-        "no-continue": 1,
         "no-const-assign": 2,
         "no-debugger": 2,
         "no-dupe-args": 2,

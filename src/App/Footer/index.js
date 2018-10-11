@@ -18,7 +18,12 @@ import styles from './index.less';
 export default function Footer() {
     const links = Object.keys(routeConfig.children)
         .map(name => {
-            const { title, path } = routeConfig.children[name];
+            const child = routeConfig.children[name];
+            if (child.hidden) {
+                return null;
+            }
+
+            const { title, path } = child;
             return <Link key={path} to={path}>{title}</Link>;
         });
 

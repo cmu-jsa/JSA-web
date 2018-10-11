@@ -1,9 +1,0 @@
-{
-    "exec": "jsdoc -c .jsdoc.json README.md src",
-    "watch": [
-        ".jsdoc.json",
-        "README.md",
-        "src"
-    ]
-}
-

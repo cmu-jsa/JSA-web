@@ -6,11 +6,6 @@
     flex-flow: column nowrap;
 
     > input[type=text] {
-      padding: @spacing-y @spacing-x;
-      background: none;
-      border: none;
-      border-bottom: @border;
-
       font-size: larger;
     }
 
@@ -41,24 +36,6 @@
 }
 
 .sponsor {
-  .card() {
-    background-color: @color-bg-card;
-    box-shadow: @box-shadow;
-
-    padding: @spacing-y @spacing-x;
-    box-sizing: border-box;
-
-    > * {
-      &:first-child {
-        margin-top: 0;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   .button {
     .card();
 

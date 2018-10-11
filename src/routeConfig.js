@@ -4,8 +4,9 @@
  * @module src/routeConfig
  */
 
-import { string, shape, object, objectOf } from 'prop-types';
+import { boolean, string, shape, object, objectOf } from 'prop-types';
 
+import AuthLevels from 'src/Auth/AuthLevels';
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 
@@ -14,6 +15,8 @@ import Spinner from 'src/Spinner';
  *
  * @typedef {Object} Route
  * @property {string} title - The route's title. Used for labels/link text.
+ * @property {boolean} [hidden] - `true` if the route is hidden.
+ * @property {string} [auth] - The route's required authentication level.
  * @property {string} path - The full path for the route.
  * @property {string[]} parts - The individual parts of the path.
  * @property {module:src/routeConfig~Children} children - The child routes.
@@ -23,7 +26,7 @@ import Spinner from 'src/Spinner';
 /**
  * Child route configuration object. Each key is the next path component.
  *
- * @typedef {Object<string, module:src/routeConfig~Route>} Children
+ * @typedef {Object.<string, module:src/routeConfig~Route>} Children
  */
 
 const routeConfigCtx = require.context(
@@ -41,22 +44,32 @@ const routeComponentCtx = require.context(
 const routeConfig = { children: {} };
 
 /**
- * Configures the route specified by the given configuration file.
+ * Gets the component at the given path from the context.
  *
- * @param {string} configPath - Path to the configuration file.
- * @returns {module:src/routeConfig~Route} The configured route.
+ * @param {string} path The path for the component.
+ * @returns {React.Component} The (async) component.
  */
-function configure(configPath) {
-    const { title } = routeConfigCtx(configPath);
-    const path = configPath.match(/.(\/|\/.*\/)route.json$/)[1];
-
+function componentFromCtx(path) {
     let getComponent;
     try {
         getComponent = routeComponentCtx(`.${path}index.js`);
     } catch (err) {
         getComponent = routeComponentCtx(`.${path}index.md`);
     }
-    const component = asyncComponent(getComponent, Spinner);
+
+    return asyncComponent(getComponent, Spinner);
+}
+
+/**
+ * Configures the route specified by the given configuration file.
+ *
+ * @param {string} configPath - Path to the configuration file.
+ * @returns {module:src/routeConfig~Route} The configured route.
+ */
+function configure(configPath) {    // eslint-disable-line max-statements
+    const config = routeConfigCtx(configPath);
+    const path = configPath.match(/.(\/|\/.*\/)route.json$/)[1];
+    const component = componentFromCtx(path);
 
     // Find the route's proper location in the configuration
     const parts = path.split('/').slice(1, -1);
@@ -69,10 +82,22 @@ function configure(configPath) {
         return node.children[key];
     }, routeConfig);
 
+    const { title } = config;
+
     route.title = title;
     route.path = path;
     route.component = component;
     route.parts = parts;
+    'hidden' in config && (route.hidden = config.hidden);
+    if ('auth' in config) {
+        const { auth } = config;
+        if (!(auth in AuthLevels)) {
+            throw new Error(`Unknown authentication level "${auth}"`);
+        }
+
+        route.authLevel = AuthLevels[auth];
+    }
+
     return route;
 }
 
@@ -83,7 +108,9 @@ const routeConfigFlat = routeConfigCtx.keys()
 const routeShape = shape({
     title: string.isRequired,
     path: string.isRequired,
-    children: object.isRequired
+    children: object.isRequired,
+    hidden: boolean,
+    auth: string
 });
 
 const routeChildrenShape = objectOf(routeShape);

@@ -1,0 +1,33 @@
+@import '~src/less/definitions';
+
+.listInput {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: @spacing-y @spacing-x;
+
+    border: @border;
+
+    > *:not(:last-child) {
+        margin-block-end: @spacing-y;
+    }
+
+    ul, ol {
+        margin: 0;
+
+        li {
+            cursor: pointer;
+
+            &:hover, &:focus, &:active {
+                &:after {
+                    float: right;
+                    content: '⌫';
+                }
+            }
+
+            &.placeholder {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
