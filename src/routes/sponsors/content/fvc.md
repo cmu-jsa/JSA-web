@@ -14,8 +14,8 @@ recruiting agent service, Connect Job (Formerly TOP CAREER International).
 Many CMUJSA students who are interested in working in Japan are connected to Japanese recruiters
 through events and seminars hosted by Connect Job.
 
-This is Fourth Valley Concierge's first year as a sponsor for CMUJSA,
-supporting us as an annual <font color="Gold">Gold Tier Sponsor</font> for 2018.
+This is Fourth Valley Concierge's second year as a sponsor for CMUJSA,
+supporting us as an annual <font color="Gold">Gold Tier Sponsor</font> for 2019.
 
 ## External Link
 
