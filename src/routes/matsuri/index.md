@@ -1,4 +1,4 @@
-# Matsuri 2018
+# Matsuri 2019
 
 ## About
 
@@ -16,8 +16,8 @@ We hand craft our booths to make it look like what you see on the streets in Jap
 Enjoy the event to its fullest by paying attention to the details we've put in!
 
 We are also proud to announce that the profits we make at this event will be 
-donated to Minato Junior High school in Ishinomaki, Japan. 
-The school lost their whole campus due to the East Japan Earthquake and Tsunami of March 11, 2011. 
+donated to the Red feather Community Chest in Japan. 
+The organization helps people affected by natural disasters, all over Japan. 
 
 ## When, Where
 

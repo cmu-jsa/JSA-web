@@ -11,34 +11,23 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 
 ### General
 
-- Karaage (Fried Chicken) &nbsp;🎫🎫
 - Onigiri (Rice Balls) &nbsp;🎫
 - Spam Musubi (Spam Rice Balls) &nbsp;🎫🎫 
 - Takoyaki (Octopus Balls) &nbsp;🎫🎫🎫
-- Yakisoba (Fried Noodles) &nbsp;🎫🎫🎫🎫
+- Yakisoba (Fried Noodles) &nbsp;🎫🎫🎫
 
-### Snacks / Desserts
+### Others
 
 - Japanese-style Crepe &nbsp;🎫🎫🎫
 - Dorayaki (Pancakes with Red Bean Paste) &nbsp;🎫🎫
-- Assorted Japanese Snacks
- - Small &nbsp;🎫
- - Large &nbsp;🎫🎫
-
-### Drinks
-
-- Water &nbsp;🎫
-- Soda &nbsp;🎫
-- Capri Sun &nbsp;🎫
-- La Croix Sparkling Water &nbsp;🎫🎫
-- Ramune (Japanese Soda) &nbsp;🎫🎫🎫
+- Drinks 
 
 ## Games
 
-- Poké Ball Omikuji (Fortune Drawing) &nbsp;🎫
-- Senbontsuri (Prize Fishing) &nbsp;🎫
 - Super Ball Sukui (Super Ball Scooping) &nbsp;🎫
-- Wanage (Ring Tossing) &nbsp;🎫🎫
+- Water Balloon Fishing &nbsp;🎫
+- Nerf Gun Arcade 1 shot &nbsp;🎫 5 shots &nbsp;🎫🎫 
+
 
 ## Apparel
 
@@ -47,6 +36,4 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 
 ## Activities
 
-- Raffle Ticket &nbsp;🎫
-- Advanced Origami Workshop &nbsp;🎫
-- Kimono Try-ons + 1 Polaroid Photo &nbsp;🎫🎫
+- Raffle &nbsp;🎫🎫🎫 
