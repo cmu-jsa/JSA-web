@@ -1,32 +1,9 @@
 # Cause
 
-## 2011.3.11
+The Red feather Central Community Chest of Japan is a non profit organization that raises donation for natural disasters that happened in Japan. 
 
-#### _When the only thing left in your life is yourself - no shelter, no money, no family - what would you do?_<br>
+The organization was established as the nation's first private social welfare campaign after WWII, starting with helping those affected by the war. Through the years, the community chest has helped many people in Japan, collaborating closely with local people to effectively support as many people as efficiently as possible. To this date, the organization has received a total of 943.3 billion Japanese Yen, which helped increase the scope of impact it has had on the people living in Japan. 
 
-<iframe width="100%" height="280" src="https://www.youtube.com/embed/Cie88YSP9SI?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br>
+We decided to donate our money raised from Matsuri to this organization as many many people, including members of CMU JSA, were greatly impacted by the 2011 Tohoku earthquake.
 
-The 2011 East Japan Earthquake and Tsunami disaster happened seven years ago.
-As the earthquake shook the ground beneath East Japan, it teared down all the precious memories built with families and friends.
-The M9.0 devil destroyed buildings, bridges and schools, creating massive crevasses on roads, and left people in isolation.
-Soon after, tsunamis of heights over 30 feet crushed and swept away whatever was remaining, along with the lives of many more.
-Big painful scars were left for those survived.
-
-## What we can do
-
-It is difficult to put ourselves in the shoes of the affected, but we are dedicated to help those in need - 
-even if it does not fix everything. Profits made at Matsuri will be donated directly to Minato Juni High School,
-located in Ishinomaki, Miyagi, Japan. We believe that intimate connections are much more meaningful than donating to large organizations 
-such as UNICEF or the Red Cross. Continuing with our contribution from previous years, we are grateful to be part of the recovery.
-
-Minato Middle school used to be located on the coast, one of the most vulnerable locations to Tsunamis.
-It is currently using make-shift shelters on the playground of a near by elementary school.
-While a lot of recovery has already been in place and the school receives aid from the government,
-it is no where near the state where it was before the earthquake.
-
-In previous years, we were able to help students get equipment for sports and support music classes through the profits made at Matsuri.
-We hope to continue being part of the help given to Minato Junior High School.
-
-## Photos
-
-_Coming soon..._
+Learn more at: https://www.akaihane.or.jp.e.gt.hp.transer.com/

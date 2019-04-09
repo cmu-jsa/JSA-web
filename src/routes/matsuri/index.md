@@ -8,7 +8,7 @@ Matsuris are of great importance to the Japanese people, its culture, and its tr
 
 We want to share a snippet of this eventful festival here in Pittsburgh, 
 right on the Carnegie Mellon campus! Come by to try a taste of Japanese street food, 
-play with some traditional games and enjoy a range of performances from Japanese Taiko Drumming to fire dances!
+play with some traditional games and enjoy a range of performances fromdance groups to Japanese Taiko Drumming!
 
 We have put in a lot of effort into authenticity; 
 We purchase things online and ship them from Japan. 
@@ -16,8 +16,8 @@ We hand craft our booths to make it look like what you see on the streets in Jap
 Enjoy the event to its fullest by paying attention to the details we've put in!
 
 We are also proud to announce that the profits we make at this event will be 
-donated to the Red feather Community Chest in Japan. 
-The organization helps people affected by natural disasters, all over Japan. 
+donated to the Red Feather Community Chest in Japan. 
+The organization helps people affected by natural disasters all over Japan. 
 
 ## When, Where
 

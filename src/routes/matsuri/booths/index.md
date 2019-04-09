@@ -20,20 +20,13 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 
 - Japanese-style Crepe &nbsp;🎫🎫🎫
 - Dorayaki (Pancakes with Red Bean Paste) &nbsp;🎫🎫
-- Drinks 
+- Drinks &nbsp;🎫
 
 ## Games
 
 - Super Ball Sukui (Super Ball Scooping) &nbsp;🎫
 - Water Balloon Fishing &nbsp;🎫
-- Nerf Gun Arcade 1 shot &nbsp;🎫 5 shots &nbsp;🎫🎫 
-
-
-## Apparel
-
-- CMUJSA Sticker + Button Set &nbsp;🎫
-- Matsuri 2018 T-shirt &nbsp;🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫🎫
-
-## Activities
-
-- Raffle &nbsp;🎫🎫🎫 
+- Nerf Gun Arcade 2 shots &nbsp;🎫 5 shots &nbsp;🎫🎫 
+- Raffle 
+    - First 3 raffle tickets &nbsp;🎫🎫🎫 
+    - Additional raffle tickets can be obtained through games

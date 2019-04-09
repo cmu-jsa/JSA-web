@@ -32,12 +32,11 @@ export default class Performances extends React.Component {
 
             <p>
                 Also keep an eye (ear?) out for occasional events that
-                will be happening on stage, including raffle ticket draws and
-                Haiku contest winner announcements!
+                will be happening on stage, including raffle ticket draws!
             </p>
 
             <p>
-                MC: Simon Lenoe (Freshman Representative at CMUJSA)
+                MC: Simon Lenoe 
             </p>
 
             <h2> Performance Schedule </h2>
