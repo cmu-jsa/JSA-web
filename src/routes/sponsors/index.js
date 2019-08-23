@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 import Modal from 'src/Modal';
 
-import sponsors from './sponsorstemp.csv';
+import sponsors from './sponsors.csv';
 import styles from './index.less';
 
 import asyncComponent from 'src/async-component';
