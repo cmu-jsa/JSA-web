@@ -37,7 +37,7 @@ export default function Footer() {
             </div>
             <div className={styles.right}>
                 <span>
-                    Inquiries: <a href='mailto:aavondet@andrew.cmu.edu'>aavondet@andrew.cmu.edu</a>
+                    Inquiries: <a href='mailto:hmdougla@andrew.cmu.edu'>hmdougla@andrew.cmu.edu</a>
                 </span>
                 <span>
                     Site design: <a href='https://szz.io'>Stan Zhang</a>
