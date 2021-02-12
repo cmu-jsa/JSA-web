@@ -7,26 +7,30 @@ now a day full of street food, games, and joyful performances,
 Matsuris are of great importance to the Japanese people, its culture, and its tradition.
 
 We want to share a snippet of this eventful festival here in Pittsburgh, 
-right on the Carnegie Mellon campus! Come by to try a taste of Japanese street food, 
-play with some traditional games and enjoy a range of performances fromdance groups to Japanese Taiko Drumming!
+right on the Carnegie Mellon campus, and this year across the world as well! Try a taste of authentic Japanese food,
+play traditional games and enjoy a range of performances all from the comfort of your home!
 
-We have put in a lot of effort into authenticity; 
-We purchase things online and ship them from Japan. 
-We hand craft our booths to make it look like what you see on the streets in Japan. 
-Enjoy the event to its fullest by paying attention to the details we've put in!
+Although 2021 has presented its fair share of challenges to running our Matsuri, we are excited to give you the Matsuri experience
+no matter where you are, from Pittsburgh to Tokyo. This year, in addition to our games and performances, we are hoping to give back
+to Japanese restaurants throughout Pittsburgh by sponsoring a discount program for any food you purchase from select establishments.
+We hope that you will enjoy this one of a kind Matsuri experience!
 
 We are also proud to announce that the profits we make at this event will be 
 donated to the Red Feather Community Chest in Japan. 
 The organization helps people affected by natural disasters all over Japan. 
 
-## When, Where
+## Events
 
-- Find out about the [event logistics](/matsuri/logistics)
+Matsuri 2021's events will be held virtually from Friday, April 9 to Sunday, April 11. We will be hosting multiple games and performances across
+all three days. 
 
-## What
+-Please check out our [performances](/matsuri/performances) and [games](/matsuri/games)
 
-- Check out what we have at our [booths](/matsuri/booths)
-- Check out our free [stage performances](/matsuri/stage)
+## Food
+
+There will be multiple options to enjoy Japanese food for those in the Pittsburgh area, including discounts! 
+
+-Learn more about our [Food Program](/matsuri/food)
 
 ## Why
 
