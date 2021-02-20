@@ -5,7 +5,7 @@ CMUJSA website.
 ## Installation
 
 1. Install `node.js` (`v6.4.0` or higher).
-2. Clone this repository: `git clone git@github.com:Rikilele/JSA-web`
+2. Clone this repository: `git clone git@github.com:cmu-jsa/JSA-web`
 3. Go to the repository's root: `cd JSA-web`
 4. Install `node.js` dependencies: `npm install`
 
