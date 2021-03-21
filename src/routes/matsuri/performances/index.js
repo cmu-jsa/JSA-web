@@ -1,6 +1,6 @@
 /**
  * Performances list page.
- *
+ *<!--- add route.json to reshow--->
  * @module src/routes/stage
  */
 
