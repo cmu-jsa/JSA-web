@@ -1,4 +1,7 @@
-# Matsuri 2019
+# Matsuri 2021 - April 9-11
+
+<img src="/images/matsuri-banner.PNG" alt="Matsuri Banner" style="width: 100%;">
+<!--- (PLACEHOLDER IMAGE) -->
 
 ## About
 
@@ -7,33 +10,35 @@ now a day full of street food, games, and joyful performances,
 Matsuris are of great importance to the Japanese people, its culture, and its tradition.
 
 We want to share a snippet of this eventful festival here in Pittsburgh, 
-right on the Carnegie Mellon campus! Come by to try a taste of Japanese street food, 
-play with some traditional games and enjoy a range of performances fromdance groups to Japanese Taiko Drumming!
+right on the Carnegie Mellon campus, and this year across the world as well! Try a taste of authentic Japanese food,
+play traditional games and enjoy a range of performances all from the comfort of your home!
 
-We have put in a lot of effort into authenticity; 
-We purchase things online and ship them from Japan. 
-We hand craft our booths to make it look like what you see on the streets in Japan. 
-Enjoy the event to its fullest by paying attention to the details we've put in!
-
-We are also proud to announce that the profits we make at this event will be 
-donated to the Red Feather Community Chest in Japan. 
-The organization helps people affected by natural disasters all over Japan. 
-
-## When, Where
-
-- Find out about the [event logistics](/matsuri/logistics)
-
-## What
-
-- Check out what we have at our [booths](/matsuri/booths)
-- Check out our free [stage performances](/matsuri/stage)
+Although 2021 has presented its fair share of challenges to running Matsuri, we are excited to give you the Matsuri experience
+no matter where you are, from Pittsburgh to Tokyo, via a virtual setting.  Our goal is to offer the same cultural experience we’ve offered in the past, centered around food, performances, and games, while tackling and raising awareness about relevant issues that have surfaced on the local and national level due to COVID in the past year.
+We hope that you will enjoy this one of a kind Matsuri experience!
 
 ## Why
 
-- Read about our [cause](/matsuri/cause)
+Our Matsuri this year has been profoundly affected by recent events, and as a result, this year's Matsuri has been developed around the idea of an exchange of culture, to educate and enrich those at CMU, Pittsburgh, and communities all over. 
+- Read more about our [cause](/matsuri/cause)
 
-## How
 
-- Read more about our [sponsors](/sponsors)
-- Discover our [collaborators](/matsuri/j@cmu)
-- Find out about how our [ticketing system](/matsuri/tickets) works
+
+## Events
+
+Matsuri 2021's events will be held virtually from Friday, April 9 to Sunday, April 11. We will be hosting multiple games and performances across
+all three days. 
+
+- Take a look out at our [schedule](/matsuri/schedule)
+- Check out our [cultural threads](/matsuriculture)
+
+## Food
+
+There will be multiple options to enjoy Japanese food for those in the Pittsburgh area, including discounts! 
+
+- Learn more about our [Food Program](/matsuri/food)
+
+We will be updating this page with more information soon, so stay tuned for all the fun Matsuri 2021 will have to offer!
+
+
+

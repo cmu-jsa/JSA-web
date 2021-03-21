@@ -1,3 +1,4 @@
+<!--- add route.json to reshow--->
 # Booths
 
 Check here for what booths and activities we have prepared for you to enjoy at Matsuri,
@@ -31,3 +32,4 @@ To see more ticketing information, look **[here](/matsuri/tickets)**
 - Raffle 
     - First 3 raffle tickets &nbsp;🎫🎫🎫 
     - Additional raffle tickets can be obtained through games
+

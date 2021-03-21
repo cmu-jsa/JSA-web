@@ -1,6 +1,6 @@
 /**
  * Org list page.
- *
+ * ADD route.json for this page to show up again
  * @module src/routes/j@cmu
  */
 
