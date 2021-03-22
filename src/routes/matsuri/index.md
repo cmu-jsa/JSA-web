@@ -1,6 +1,6 @@
 # Matsuri 2021 - April 9-11
 
-<img src="/images/matsuri-banner.PNG" alt="Matsuri Banner" style="width: 100%;">
+<img src="/images/matsuri-banner.png" alt="Matsuri Banner" style="width: 100%;">
 <!--- (PLACEHOLDER IMAGE) -->
 
 ## About
