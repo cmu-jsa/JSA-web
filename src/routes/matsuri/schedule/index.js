@@ -13,10 +13,18 @@ class ScheduleTable extends React.PureComponent {
         super();
 
         let csvData = require('./matsuriSchedule.csv');
-        console.log(csvData);
         let headerDates = new Set();
-        csvData.forEach(event => headerDates.add(event['Start Date']));
-        headerDates = Array.from(headerDates);
+        csvData.forEach(event => { headerDates.add(event['Start Date'])});
+        const currYear = 2021;
+        headerDates = Array.from(headerDates)
+        headerDates.sort((s1, s2) => {
+            const date1 = new Date(s1);
+            const date2 = new Date(s2);
+            date1.setFullYear(currYear);
+            date2.setFullYear(currYear);
+            return (date1 < date2 ? -1 : 1);
+        });
+
         this.state = {
             scheduleData: csvData,
             headerDates: headerDates,
@@ -37,7 +45,7 @@ class ScheduleTable extends React.PureComponent {
                 break;
         }
         return (
-            <span style={{backgroundColor: color, borderRadius: '12px', color: 'white', padding: '5px', marginLeft: '12px'}}>
+            <span style={{backgroundColor: color, borderRadius: '12px', color: 'white', padding: '5px', marginLeft: '24px'}}>
                 {type}
             </span>
         );
@@ -48,7 +56,7 @@ class ScheduleTable extends React.PureComponent {
     render() {
         return (
             <div className='schedule'>
-                {Array.from(this.state.headerDates).map(headerDate => (
+                {this.state.headerDates.map(headerDate => (
                     <div className='matsuri-day' style={{position: 'relative'}}>
                         <div style={{position: 'sticky', top: '43px', borderRadius: '6px', color: 'white', backgroundColor: '#2e3192', padding: '10px'}}>
                             {headerDate}
