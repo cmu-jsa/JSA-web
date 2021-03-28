@@ -51,6 +51,35 @@ class ScheduleTable extends React.PureComponent {
         );
     }
 
+    getEventLink(event) {
+        const cultureTag = event['Culture Tag'];
+        let link;
+        console.log(cultureTag)
+        switch (cultureTag) {
+            case 'Food':
+                link = '/matsuriculture/food/';
+                break;
+            case 'Art':
+                link = '/matsuriculture/art/';
+                break;
+            case 'Music':
+                link = '/matsuriculture/music/';
+                break;
+            case 'Games':
+                link = '/matsuriculture/games/';
+                break;
+            case 'Literature':
+                link = '/matsuriculture/literature/';
+                break;
+            case 'Culture':
+                link = '/matsuriculture/';
+                break;
+            default:
+                link = false;
+        }
+        return link;
+    }
+
     // red: #ed1c24
 
     render() {
@@ -68,8 +97,11 @@ class ScheduleTable extends React.PureComponent {
                                         <div className='event-time' style={{width: '20%'}}>
                                             {event['Time']}
                                         </div>
-                                        <div className='event-detials' style={{width: '80%'}}>
-                                            {event.Event}
+                                        <div className='event-detials' style={{width: '80%', display: 'flex', justifyContent: 'space-between'}}>
+                                            {this.getEventLink(event)
+                                                ? <a href={this.getEventLink(event)}>{event.Event}</a>
+                                                : event.Event
+                                            }
                                             {this.getLabel(event['Category'])}
                                         </div>
                                     </div>
