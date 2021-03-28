@@ -16,6 +16,14 @@ if (!config.plugins) {
 config.plugins.push(
     new CleanWebpackPlugin(['dist'], { verbose: true })
 );
+config.module = {
+      rules: [
+        {
+          test: /\.md$/,
+          use: 'raw-loader'
+        }
+      ]
+    }
 
 module.exports = config;
 

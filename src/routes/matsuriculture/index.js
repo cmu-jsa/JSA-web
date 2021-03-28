@@ -12,6 +12,38 @@ import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 import NotFound from 'bundle-loader?lazy!src/NotFound';
 import events, { EventConfig } from './events.js';
+//import ReactMarkdown from 'react-markdown';
+//import Iframe from 'react-iframe';
+import ImgMediaCard from './pain.js';
+
+//import Pain from './pain';
+
+
+/**
+ * React component for a single event.
+ *
+ * @param {Object} props - The component's props.
+ * @param {module:src/routes/events/events.EventConfig} props.event - The event
+ * configuration.
+ * @returns {ReactElement} The component's elements.
+ */
+/*
+const body = `
+# Schedule
+
+## Date, Time, and Location
+
+Matsuri 2021's events will be held virtually from Friday, April 9 to Sunday, April 11. We will be hosting multiple games and performances across
+all three days. 
+
+Spread the word and stay informed by joining and sharing the **[Facebook event](https://www.facebook.com/events/268303537457369/)**! 
+
+Our performances will be live-streamed on our **[Youtube Channel](https://www.youtube.com/channel/UCJRtPt616S7M3qonS8Jg83Q)**. Please check back later for a link to the live-stream.
+
+## Matsuri 2021 Table of Events
+
+<iframe  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRNfFKUKdX-SXMS1EY4_kELX5Erp8LJS2zhTr9PnElw7gjImhQC624mhgqcfWe9aRAkwNSvSXO-PgDw/pubhtml?gid=855555506&amp;single=true&amp;widget=true&amp;headers=false" width="114%" height="920" frameborder="0" style="border:0" allowfullscreen></iframe>
+';`;*/
 
 const contentCtx = require.context(
     'bundle-loader?lazy!./content',
@@ -31,13 +63,14 @@ const AsyncNotFound = asyncComponent(NotFound, Spinner);
  */
 function EventComponent(props) {
     const { event: {
-        title, location, date, contentPath
+        title,location, date, contentPath
     } } = props;
 
     const Content = contentPath
         && asyncComponent(contentCtx(contentPath), Spinner);
 
     return <div>
+    
         <Link to=".."><h1>Events</h1></Link>
         <h2>{title}</h2>
         <h4>{date}</h4>
@@ -81,20 +114,23 @@ EventMatcher.propTypes = {
  */
 function EventList() {
     return <div>
-        <h1>Events</h1>
-        {events.map((event, i) => {
-            const {
-                title, location, date, path
-            } = event;
 
+        
+        {events.map((event, i) => {
+            
+            const {
+                title, description, url,test
+            } = event;
+            console.log(event,'fuck youfasdoij');
             return <div key={i}>
-                <Link to={path}><h2>{title}</h2></Link>
-                <h4>{date}</h4>
-                <h5>{location}</h5>
+                <ImgMediaCard title = {title} description = {description} url = {url} test = {test}></ImgMediaCard>
+                {test}
+                <br></br>
             </div>;
         })}
     </div>;
 }
+
 
 /**
  * Event page React component.
@@ -103,6 +139,9 @@ function EventList() {
  */
 export default function Events() {
     return <div>
+        <div>
+            <h1>Japanese Culture</h1>
+        </div>
         <Switch>
             <Route path="/events/:path/" strict component={EventMatcher} />
             <Route path="/events/:path" render={({ match }) => {
@@ -111,6 +150,16 @@ export default function Events() {
             }} />
             <Route component={EventList} />
         </Switch>
+        
     </div>;
 }
+/*
+<ReactMarkdown source={body}></ReactMarkdown>
+            <Iframe  url="https://docs.google.com/spreadsheets/d/e/2PACX-1vRNfFKUKdX-SXMS1EY4_kELX5Erp8LJS2zhTr9PnElw7gjImhQC624mhgqcfWe9aRAkwNSvSXO-PgDw/pubhtml?gid=855555506&amp;single=true&amp;widget=true&amp;headers=false"
+                width="114%" 
+                height="920" 
+                frameBorder="0" 
+                style="border:0" 
+                allowFullScreen></Iframe>
+*/
 

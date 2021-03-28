@@ -59,8 +59,9 @@
     "postcss-loader": "^2.0.6",
     "progress": "^2.0.0",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "raw-loader": "^4.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-key-handler": "^0.3.0",
     "react-router": "^4.1.2",
@@ -72,6 +73,7 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "body-parser": "^1.18.2",
     "d3-dsv": "^1.0.8",
     "express": "^4.16.3",
@@ -80,6 +82,8 @@
     "npm": "^6.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "react-iframe": "^1.8.0",
+    "react-markdown": "^5.0.3",
     "session-file-store": "^1.2.0",
     "uuid": "^3.2.1"
   },
