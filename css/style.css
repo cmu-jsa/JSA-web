@@ -1,0 +1,4 @@
+.matsuri-schedule-table .event-row {
+  background-color: cyan; }
+  .matsuri-schedule-table .event-row .flex-row {
+    display: flex; }
