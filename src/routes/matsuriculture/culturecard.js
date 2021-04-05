@@ -51,7 +51,7 @@ const ImgMediaCard = (props) => {
                         objectFit= 'cover'*/
     return (
         <Card className={classes.root}>
-            <CardActionArea>
+            
                 {a ? 
                     <CardMedia
                         component="img"
@@ -76,10 +76,10 @@ const ImgMediaCard = (props) => {
                         {props.description}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
+            
             <CardActions>
                 <Button size="small" color="primary">
-                    <a href='../matsuri/schedule'>Schedule</a>
+                    <a href='/matsuri/schedule'>Schedule</a>
                 </Button>
                 <Button size="small" color="primary">
                 {props.link ? <a href={props.link}>More Information</a> : null}
