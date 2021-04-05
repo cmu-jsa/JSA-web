@@ -30,7 +30,7 @@ export default function Events() {
                 <li><a href = "/matsuriculture/literature">Literature</a></li>
                 <li><a href = "/matsuriculture/music">Music</a></li>
             </ul>
-            <h2>Featured Aspect:</h2>
+            <h2>Featured Aspect</h2>
             <EventList events = {events} thread = {"random"}/> 
         </div>
     </div>;

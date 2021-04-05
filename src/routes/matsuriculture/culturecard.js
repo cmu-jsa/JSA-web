@@ -82,7 +82,7 @@ const ImgMediaCard = (props) => {
                     <a href='/matsuri/schedule'>Schedule</a>
                 </Button>
                 <Button size="small" color="primary">
-                {props.link ? <a href={props.link}>More Information</a> : null}
+                {props.link ? <a target="_blank" href={props.link}>More Information</a> : null}
                 </Button>
             </CardActions>
         </Card>
