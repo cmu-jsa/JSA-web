@@ -7,8 +7,8 @@ For this year's Matsuri, we will be running a whole slew of games for you and yo
 - There will be posts announcing point totals after each day of the challenge
 
 ## Synchronous Games
+Please sign up for the Escape Room using the link below: https://forms.gle/FUKsv9QP38qysySR8
 
 ### Main Times (EDT) 
 - Escape Room: 4/9 Friday 19:00 - 20:00
-- TBD: 4/10 Saturday 15:00 - 16:00
 - Escape Room: 4/11 Sunday 16:00 - 17:00

@@ -11,7 +11,7 @@ import { Link, Route, Redirect, Switch } from 'react-router-dom';
 import asyncComponent from 'src/async-component';
 import Spinner from 'src/Spinner';
 import NotFound from 'bundle-loader?lazy!src/NotFound';
-import events, { EventConfig } from './hide/events.js';
+import events, { EventConfig } from './events.js';
 
 const contentCtx = require.context(
     'bundle-loader?lazy!./content',
