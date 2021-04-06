@@ -10,4 +10,4 @@ JSA's Matsuri care package includes: a redeemable FREE RAMEN from Fujiya Ramen, 
 ## When can I get my care package?
 We will be handing out care packages in front of the Conan room at the UC on Friday, April 9th, from 2-6pm: https://forms.gle/rGyMifeKqadzC8b46
 This offer is limited for the first 45 people who sign up, so hurry up and secure your spot!
-You can also win FREE SUSHI from sushi fuku here (https://forms.gle/pdZiPJAH4NeQmtFCA), or commenting on our instagram post.
+You can also win FREE SUSHI from sushi fuku [here](https://forms.gle/pdZiPJAH4NeQmtFCA), or commenting on our instagram post.
