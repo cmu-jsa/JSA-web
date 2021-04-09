@@ -1,6 +1,9 @@
 <img src="/images/food.jpg" alt="Japanese Food" style="width: 100%;">
 # Restaurants
 
+
+# UPDATE: Thank you all for signing up for care packages, we are now all sold out! 
+
 This year, recognizing the hardships that local Japanese restaurants have faced and are still facing, we are selling care packages with discounts for select Japanese restaurants for Matsuri 2021! Are you interested in trying new Japanese snacks and get FREE RAMEN from Fujiya Ramen? Then this care package is for you 🙂
 
 ## What's in the care package?
