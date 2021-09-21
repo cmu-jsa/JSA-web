@@ -22,7 +22,7 @@ export default function Events() {
         <div>
             <h1>Japanese Art</h1>
         </div>
-        <EventList events = {events} thread = {"art"}/> 
+        <EventList events = {events} thread = {'art'}/> 
     </div>;
 }
 

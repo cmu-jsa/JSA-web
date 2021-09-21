@@ -19,8 +19,8 @@ import EventList from '../culturelist.js';
 export default function Events() {
     const events = eventConfigs;
     return <div>
-            <h1>Japanese Literature</h1>
-        <EventList events = {events} thread = {"literature"}/> 
+        <h1>Japanese Literature</h1>
+        <EventList events = {events} thread = {'literature'}/> 
     </div>;
 }
 

@@ -16,13 +16,13 @@ import EventList from './culturelist.js';
  *
  * @returns {ReactElement} The component's elements.
  */
-
 export default function Events() {
     const events = eventConfigs;
     return <div>
         <div>
             <h1>Japanese Culture</h1>
-            <p>Please check out our threads, each showcasing an aspect of Japanese culture below:</p>
+            <p>Please check out our threads, each showcasing an aspect of 
+                Japanese culture below:</p>
             <ul>
                 <li><a href = "/matsuriculture/art">Art</a></li>
                 <li><a href = "/matsuriculture/food">Food</a></li>
@@ -31,7 +31,7 @@ export default function Events() {
                 <li><a href = "/matsuriculture/music">Music</a></li>
             </ul>
             <h2>Featured Aspect</h2>
-            <EventList events = {events} thread = {"random"}/> 
+            <EventList events = {events} thread = {'random'}/> 
         </div>
     </div>;
 }

@@ -8,15 +8,23 @@
 import React from 'react';
 import './index.less';
 
+/**
+ * Schedule Table Component
+ *  
+ * @returns {ReactElement} The component's elements.
+ */
 class ScheduleTable extends React.PureComponent {
+    /**
+     * Initializes the component.
+     */
     constructor() {
         super();
 
         let csvData = require('./matsuriSchedule.csv');
         let headerDates = new Set();
-        csvData.forEach(event => { headerDates.add(event['Start Date'])});
+        csvData.forEach(event => { headerDates.add(event['Start Date']);});
         const currYear = 2021;
-        headerDates = Array.from(headerDates)
+        headerDates = Array.from(headerDates);
         headerDates.sort((s1, s2) => {
             const date1 = new Date(s1);
             const date2 = new Date(s2);
@@ -27,10 +35,15 @@ class ScheduleTable extends React.PureComponent {
 
         this.state = {
             scheduleData: csvData,
-            headerDates: headerDates,
+            headerDates: headerDates
         };
     }
-
+    /**
+     * Get label for type of event
+     * 
+     * @param {string} type Type of event
+     * @returns {JSX.Element} Event label
+     */
     getLabel(type) {
         let color;
         switch (type) {
@@ -43,18 +56,30 @@ class ScheduleTable extends React.PureComponent {
             case 'Game':
                 color = 'green';
                 break;
+            default:
+                break;
         }
         return (
-            <span style={{backgroundColor: color, borderRadius: '12px', color: 'white', padding: '5px', marginLeft: '24px'}}>
+            <span style={{
+                backgroundColor: color,
+                borderRadius: '12px',
+                color: 'white',
+                padding: '5px',
+                marginLeft: '24px' }}>
                 {type}
             </span>
         );
     }
 
+    /**
+     * Get event link
+     * 
+     * @param {Object} event Event object
+     * @returns {JSX.Element} Event label
+     */
     getEventLink(event) {
         const cultureTag = event['Culture Tag'];
         let link;
-        console.log(cultureTag)
         switch (cultureTag) {
             case 'Food':
                 link = '/matsuriculture/food/';
@@ -80,24 +105,27 @@ class ScheduleTable extends React.PureComponent {
         return link;
     }
 
-    // red: #ed1c24
-
+    /**
+     * Renders the component.
+     *
+     * @returns {ReactElement} The component's elements.
+     */
     render() {
         return (
             <div className='schedule'>
                 {this.state.headerDates.map(headerDate => (
-                    <div className='matsuri-day' style={{position: 'relative'}}>
-                        <div style={{position: 'sticky', top: '43px', borderRadius: '6px', color: 'white', backgroundColor: '#2e3192', padding: '10px'}}>
+                    <div className='matsuri-day' style={{ position: 'relative' }} key={headerDate.key}>
+                        <div style={{ position: 'sticky', top: '43px', borderRadius: '6px', color: 'white', backgroundColor: '#2e3192', padding: '10px' }}>
                             {headerDate}
                         </div>
-                        <table style={{width: '100%'}}>
+                        <table style={{ width: '100%' }}>
                             {this.state.scheduleData.filter(event => event['Start Date'] === headerDate).map(event => (
-                                <tr className='row' style={{width: '100%', margin: '10px'}}>
-                                    <div className='flex-row' style={{display: 'flex', justifyContent: 'space-between', padding: '10px'}}>
-                                        <div className='event-time' style={{width: '20%'}}>
+                                <tr className='row' style={{ width: '100%', margin: '10px' }} key={event.key}>
+                                    <div className='flex-row' style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
+                                        <div className='event-time' style={{ width: '20%' }}>
                                             {event['Time']}
                                         </div>
-                                        <div className='event-detials' style={{width: '80%', display: 'flex', justifyContent: 'space-between'}}>
+                                        <div className='event-detials' style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
                                             {this.getEventLink(event)
                                                 ? <a href={this.getEventLink(event)}>{event.Event}</a>
                                                 : event.Event
@@ -121,8 +149,12 @@ class ScheduleTable extends React.PureComponent {
  *
  * @returns {ReactElement} The rendered schedule.
  */
-
 export default class MatsuriScheduleTab extends React.Component {
+    /**
+     * Renders the component.
+     *
+     * @returns {ReactElement} The component's elements.
+     */
     render() {
         return (
             <div>
@@ -131,28 +163,31 @@ export default class MatsuriScheduleTab extends React.Component {
                 <h2>Date, Time, and Location</h2>
 
                 <p>
-                    Matsuri 2021's events will be held virtually from Friday,
+                    Matsuri 2021&apos;s events will be held virtually from Friday,
                     April 9 to Sunday, April 11. We will be hosting multiple
                     games and performances across all three days. 
                 </p>
                 
                 <p>
                     Spread the word and stay informed by joining and sharing the <b>
-                        <a href='https://www.facebook.com/events/268303537457369/' target='_blank'>
+                        <a href='https://www.facebook.com/events/268303537457369/' target='_blank' rel="noopener noreferrer">
                         Facebook event
-                    </a></b>! 
+                        </a>
+                    </b>! 
                 </p>
 
                 <p>
                     Our performances will be live-streamed on our <b>
-                      <a href='https://www.youtube.com/channel/UCJRtPt616S7M3qonS8Jg83Q' target='_blank'>
+                        <a 
+                            href='https://www.youtube.com/channel/UCJRtPt616S7M3qonS8Jg83Q'
+                            target='_blank'
+                            rel='noopener noreferrer'>
                         YouTube Channel
-                      </a></b>. Please check back later for a link to the live-stream.
+                        </a>
+                    </b>.
+                        Please check back later for a link to the live-stream.
                 </p>
-
                 <ScheduleTable />
-
-                {/* <iframe src='https://docs.google.com/spreadsheets/d/e/2PACX-1vRNfFKUKdX-SXMS1EY4_kELX5Erp8LJS2zhTr9PnElw7gjImhQC624mhgqcfWe9aRAkwNSvSXO-PgDw/pubhtml?gid=855555506&amp;single=true&amp;widget=true&amp;headers=false' width='114%' height='920' frameBorder='0' style={{border:0}} allowFullScreen /> */}
                 <br />
             </div>
         );
