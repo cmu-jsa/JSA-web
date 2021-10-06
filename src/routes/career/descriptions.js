@@ -1,9 +1,35 @@
 /* eslint-disable max-len */
 
-export const PlaidDescription = `Coming soon...
+export const PlaidDescription = `Original Japanese version:
+
+プレイドは「超大規模データを“直感的に”扱うテクノロジーによ
+って、世界に大きな価値をもたらす」を開発ミッションに掲げる
+テックカンパニーです。
+あらゆるユーザーの行動データを時系列にそって蓄積・分析でき
+るデータベース・解析エンジンを軸にしたプロダクト「KARTE」
+や誰でも大規模データを直感的に扱うことを可能にする新プロダ
+クト「QualtData」、サイトをノーコードで書き換え編集できる
+「Blocks」など、そのほか多くの新規プロダクトの開発を行って
+います。
+
+English Translation:
+
+We are Plaid, a tech company with a development mission to
+"Maximize the value of people with the power of data, using
+technology that deals with super-scale data intuitively."
+Some of the recent products we are currently developing are:
+"KARTE", a product built upon an analysis engine and database to
+collect and analyze various user activities in a chronological manner,
+"QualtData", a recently developed product that helps anyone deal
+with large-scale data intuitively, "Blocks", which let's users edit
+websites without any code, and much more.
 `;
 
-export const JmcDescription = `Coming soon...
+export const JmcDescription = `Japan Medical Company is a medical device startup founded in
+2018. Our business consists of two lines: cranial remolding helmet
+for infants and medical training model for neurosurgeons. We
+look forward to meeting young energetic talents who are eager to
+change the world to be a better place.
 `;
 
 export const MujinDescription = `Mujin is a company which develops and sells "intelligent robot controllers," designated as a common platform for industrial robots. Conventional robots, even though they are suitable for the automation of repetitive work, were difficult to install in environments where handled products and the surroundings are liable to change, due to the robots’ operations differing by manufacturer and the complex settings. Mujin has solved this problem using technology called motion planning, and is providing solutions in which heavy/simple work done by humans at the logistics/manufacturing scene are automated by robots.
@@ -51,4 +77,10 @@ Areas we are Hiring
     - Hiring
     - Team Growth and Building
     - Performance Reviewing
+`;
+export const PlaystationDescription = `Recognized as a global leader in interactive and digital
+entertainment, Sony Interactive Entertainment (SIE) is responsible
+for the PlayStation® brand and family of products and services.
+PlayStation has delivered innovation to the market since the launch
+of the original PlayStation in Japan in 1994.
 `;

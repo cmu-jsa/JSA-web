@@ -7,7 +7,7 @@
 import React from 'react';
 import CompanyListItem from './CompanyListItem';
 import List from '@mui/material/List';
-
+import ScheduleTable from './careerSchedule.js'
 import companies from './companies.csv';
 
 const CareerFair = () => {
@@ -28,6 +28,8 @@ const CareerFair = () => {
                 <p>
                     Location: Zoom
                 </p>
+                <h2> Schedule </h2>
+                <ScheduleTable />
                 <h2>Participating Companies</h2>
                 <List>
                     {companies.map((company, i) => 
@@ -35,9 +37,9 @@ const CareerFair = () => {
                     )}
                 </List>
                 <h2>Sponsors</h2>
-                <p>
-                    Coming soon...
-                </p>
+                <a href="https://mujin-corp.com/">
+                    <img src="/images/career/mujin.png" width="800"/>
+                </a>
             </div>
         </div>
     );

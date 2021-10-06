@@ -27,14 +27,16 @@ import {
     PlaidDescription,
     JmcDescription,
     MujinDescription,
-    MenuDescription
+    MenuDescription,
+    PlaystationDescription
 } from './descriptions';
 
 const descriptions = {
     0: PlaidDescription,
     1: JmcDescription,
     2: MujinDescription,
-    3: MenuDescription
+    3: MenuDescription,
+    4: PlaystationDescription
 };
 
 /* eslint-disable no-unused-vars */
@@ -58,10 +60,10 @@ const CompanyListItem = (props) => {
 
     return (
         <ListItem>
-            <Card sx={{ maxWidth: 500 }}>
+            <Card sx={{ maxWidth: 800 }}>
                 <CardMedia
                     component='img'
-                    height='150'
+                    height='200'
                     image={company.imagePath}
                     alt={company.name}
                 />
