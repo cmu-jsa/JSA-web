@@ -80,14 +80,14 @@ const CompanyListItem = (props) => {
                 <CardContent>
                     <Stack spacing={1}>
                         <Stack direction="row" spacing={1}>
-                            {company.intern === 1 && 
+                            {company.intern === "1" && 
                                 <Chip
                                     label="Internship"
                                     color="primary"
                                     size ='small'
                                 />
                             }
-                            {company.fulltime === 1 &&
+                            {company.fulltime === "1" &&
                                 <Chip
                                     label="Fulltime"
                                     color="primary"
@@ -96,21 +96,21 @@ const CompanyListItem = (props) => {
                             }
                         </Stack>
                         <Stack direction="row" spacing={1}>
-                            {company.japan === 1 &&
+                            {company.japan === "1" &&
                                 <Chip
                                     label="Japan"
                                     color="secondary"
                                     size ='small'
                                 />
                             }
-                            {company.us === 1 &&
+                            {company.us === "1" &&
                                 <Chip
                                     label="US"
                                     color="secondary"
                                     size ='small'
                                 />
                             }
-                            {company.china === 1 &&
+                            {company.china === "1" &&
                                 <Chip
                                     label="China"
                                     color="secondary"
@@ -119,14 +119,14 @@ const CompanyListItem = (props) => {
                             }
                         </Stack>
                         <Stack direction="row" spacing={1}>
-                            {company.japanese === 1 &&
+                            {company.japanese === "1" &&
                                 <Chip
                                     label="Japanese required"
                                     color="success"
                                     size ='small'
                                 />
                             }
-                            {company.english === 1 &&
+                            {company.english === "1" &&
                                 <Chip
                                     label="English required"
                                     color="success"
