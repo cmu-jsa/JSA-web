@@ -62,9 +62,9 @@ const CareerFair = () => {
                     About Ripple
                 </h2>
                 <p>
-                <p>
+                    <p>
                     Just like how a single droplet can start a ripple, we hope this fair becomes that first drop which allows you to build deep connections with innovative companies in Japan.
-                </p>
+                    </p>
                 </p>
             </div>
         </div>
