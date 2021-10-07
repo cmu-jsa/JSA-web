@@ -73,7 +73,11 @@
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.11.3",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/material": "^5.0.0",
     "body-parser": "^1.18.2",
     "d3-dsv": "^1.0.8",
     "express": "^4.16.3",

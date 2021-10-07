@@ -1,0 +1,9 @@
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+.help {
+    max-width: 768px;
+    max-height: auto;
+    object-fit: contain;
+}
