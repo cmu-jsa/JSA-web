@@ -54,8 +54,8 @@ const CareerFair = () => {
                     <a href="https://mujin-corp.com/">
                         <img src="/images/career/mujin.png" width="800"/>
                     </a>
-                    <a href="https://app.menu.jp/">
-                        <img src="/images/career/menu.png" width="600"/>
+                    <a href="https://reazon.jp/">
+                        <img src="/images/career/reazonholdings.jpeg" width="600"/>
                     </a>
                 </div>
                 <h2>
