@@ -54,17 +54,17 @@ const CareerFair = () => {
                     <a href="https://mujin-corp.com/">
                         <img src="/images/career/mujin.png" width="800"/>
                     </a>
-                    <a href="https://app.menu.jp/">
-                        <img src="/images/career/menu.png" width="600"/>
+                    <a href="https://reazon.jp/">
+                        <img src="/images/career/reazonholdings.jpeg" width="600"/>
                     </a>
                 </div>
                 <h2>
                     About Ripple
                 </h2>
                 <p>
-                <p>
+                    <p>
                     Just like how a single droplet can start a ripple, we hope this fair becomes that first drop which allows you to build deep connections with innovative companies in Japan.
-                </p>
+                    </p>
                 </p>
             </div>
         </div>

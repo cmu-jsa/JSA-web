@@ -44,7 +44,10 @@ Want to know more?
 MUJ INspire - delivering the "reality" of Mujin
 `;
 
-export const MenuDescription = `Menu is a fast growing food delivery and takeout company based in Tokyo, Japan. Officially launched in 2020, the service is now available across all 47 prefectures of Japan, and is quickly expanding to more areas across the country, going viral among the 120m+ hungry people we are trying to capture. This is an intricate industry where we need to satisfy the needs and demands of the merchants, the crew, and the end customers that requires creative solutions to differentiate us from the competitors. If you like solving complex problems in a vibrant work environment, you’ll be a perfect fit for our product and engineering teams.
+export const MenuDescription = `
+Reazon Holdings' aim is to maintain rapid growth and become "No. 1 in the World." The company's business in Japan is steadily expanding mainly through its AdTech, Gaming, Media, and FoodTech divisions. In the near future, it will be launching new services overseas to pursue success in the global market. With its flat environment, anyone at Reazon with a challenger's spirit has the opportunity for rapid advancement and promotion.
+
+Among Reazon Holdings' services is Menu, a fast growing food delivery and takeout company based in Tokyo, Japan. Officially launched in 2020, the service is now available across all 47 prefectures of Japan, and is quickly expanding to more areas across the country, going viral among the 120m+ hungry people we are trying to capture. This is an intricate industry where we need to satisfy the needs and demands of the merchants, the crew, and the end customers that requires creative solutions to differentiate us from the competitors. If you like solving complex problems in a vibrant work environment, you’ll be a perfect fit for our product and engineering teams.
 
 Areas we are Hiring
 - Frontend Engineers
