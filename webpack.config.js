@@ -17,13 +17,13 @@ config.plugins.push(
     new CleanWebpackPlugin(['dist'], { verbose: true })
 );
 config.module = {
-      rules: [
+    rules: [
         {
-          test: /\.md$/,
-          use: 'raw-loader'
+            test: /\.md$/,
+            use: 'raw-loader'
         }
-      ]
-    }
+    ]
+};
 
 module.exports = config;
 
