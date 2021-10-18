@@ -33,7 +33,7 @@ const CareerFair = () => {
                     Date/Time: October 20-21
                 </h3>
                 <h3>
-                    CORRECTION: The Career Fair is from Wednesday, October 20 to Thursday, October 21.
+                    CORRECTION: The Career Fair is from Wednesday, October 20 to Thursday, October 21. All times are in Eastern Daylight Time.
                 </h3>
                 <h2> Important Links </h2>
                 <div className={styles.buttons}>

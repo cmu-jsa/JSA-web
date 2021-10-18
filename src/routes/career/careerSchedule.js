@@ -123,7 +123,7 @@ class ScheduleTable extends React.PureComponent {
                                 <tr className='row' style={{ width: '100%', margin: '10px' }} key={event.key}>
                                     <div className='flex-row' style={{ display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
                                         <div className='event-time' style={{ width: '20%' }}>
-                                            {event['Time']}
+                                            {event['Time'] + " (EDT)"}
                                         </div>
                                         <div className='event-detials' style={{ width: '80%', display: 'flex', justifyContent: 'space-between' }}>
                                             {this.getEventLink(event)
