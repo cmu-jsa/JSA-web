@@ -32,6 +32,9 @@ const CareerFair = () => {
                 <h3>
                     Date/Time: October 20-21
                 </h3>
+                <h3>
+                    CORRECTION: The Career Fair is from Wednesday, October 20 to Thursday, October 21.
+                </h3>
                 <h2> Important Links </h2>
                 <div className={styles.buttons}>
                     <Button target="_blank" variant="contained" fullWidth={true} href="https://forms.gle/jLEkNPQdYy7xQukU9">
@@ -52,10 +55,7 @@ const CareerFair = () => {
                 <h2>Sponsors</h2>
                 <div className="sponsors">
                     <a href="https://mujin-corp.com/">
-                        <img src="/images/career/mujin.png" width="800"/>
-                    </a>
-                    <a href="https://reazon.jp/">
-                        <img src="/images/career/reazonholdings.jpeg" width="600"/>
+                        <img src="/images/career/mujin.png" width="100%"/>
                     </a>
                 </div>
                 <h2>

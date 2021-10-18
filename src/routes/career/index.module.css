@@ -3,7 +3,7 @@
     gap: 10px;
 }
 .help {
-    max-width: 768px;
+    width: 100%;
     max-height: auto;
     object-fit: contain;
 }

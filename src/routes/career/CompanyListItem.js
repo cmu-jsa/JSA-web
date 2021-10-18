@@ -60,7 +60,7 @@ const CompanyListItem = (props) => {
 
     return (
         <ListItem>
-            <Card sx={{ minWidth: 768 }}> 
+            <Card sx={{ width: '100%' }}> 
                 <CardMedia
                     component='img'
                     height='250'
