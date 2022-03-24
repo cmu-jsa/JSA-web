@@ -1,5 +1,4 @@
 'use strict';
-
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -36,12 +35,17 @@ if (config.module.rules) {
 if (!config.plugins) {
     config.plugins = [];
 }
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserPlugin()],
+    },
+};
 
 config.plugins.push(
     new CleanWebpackPlugin(['dist'], { verbose: true }),
-    new webpack.optimize.UglifyJsPlugin({
-        parallel: true
-    }),
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('production')

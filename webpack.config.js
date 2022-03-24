@@ -1,5 +1,4 @@
 'use strict';
-
 const config = require('./webpack.config.base.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
