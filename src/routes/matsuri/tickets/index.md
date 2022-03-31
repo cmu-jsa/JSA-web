@@ -10,16 +10,13 @@ Payment Methods:
 - Cash
 - Venmo
 - Credit Card/Debit Card
-- Paypal
 
 Please note that there is no entrance fee to the event, and you can enjoy all of the performances for free.
 
 ## Pre-ordering
 
-For preordering, we are giving out a DISCOUNT of $10 for 12 tickets.
+For pre-ordering, we are giving out a DISCOUNT of $10 for 12 tickets. You will also get a HUGE goodie bag full of Japanese snacks and treats!!
 
-Method1: Venmo cmu-jsa with your Andrew ID
+To pre-order, please fill out [this form](https://forms.gle/HYp6X4yqPFpZvKAk8), and then Venmo CMUJSA with your Andrew ID / Name (if you are not a CMU student).
 
-Method2: Pay with this paypal link https://www.paypal.me/cmujsa?locale.x=en_US with a note of your Andrew ID
-
-And you will be able to pick up your tickets during Matsuri at the ticketing booth!
+You will then be able to pick up your tickets during Matsuri at the ticketing booth!

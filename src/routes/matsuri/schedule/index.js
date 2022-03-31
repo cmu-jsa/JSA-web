@@ -154,6 +154,42 @@ export default class MatsuriScheduleTab extends React.Component {
      * Renders the component.
      *
      * @returns {ReactElement} The component's elements.
+     *  <p>
+                    Spread the word and stay informed by joining and sharing the <b>
+                        <a href='https://www.facebook.com/events/268303537457369/' target='_blank' rel="noopener noreferrer">
+                        Facebook event
+                        </a>
+                    </b>! 
+                </p>
+
+        Food,"Friday, April 9",,On-Campus Food Resale,14:00-18:00,Food,1,,,,,,
+Food,"Monday, April 5 - Monday, April 12","Monday, April 12",Restaurant Incentive Program,All Day,Food,0,,,,,,
+Game,"Friday, April 9",,Virtual Escape Room,19:00-20:00,Games,1,,,,,,
+Game,"Sunday, April 11",,Virtual Escape Room,16:00-17:00,Games,2,,,,,,
+Performance,"Saturday, April 10",,Opening Remarks,14:00-14:05,,1,,,,,,
+Performance,"Saturday, April 10",,Shakuhachi - Itou Keizan,14:05-14:20,Music,1,,,,,,
+Performance,"Saturday, April 10",,Haiku Readings,14:20-14:25,Literature,1,,,,,,
+Performance,"Saturday, April 10",,Yokai Shokai,14:25-14:30,Culture,1,,,,,,
+Performance,"Saturday, April 10",,Taiko - Pittsburgh Taiko,14:30-15:00,Music,1,,,,,,
+Performance,"Saturday, April 10",,Karuta,15:00-15:05,Games,1,,,,,,
+Performance,"Saturday, April 10",,Cooking Demo - Sukiyaki,15:05-15:10,Food,1,,,,,,
+Performance,"Saturday, April 10",,Video Game Trivia,15:10-15:30,Games,1,,,,,,
+Performance,"Saturday, April 10",,A Visual History of Shinkansen,15:30-15:40,Culture,1,,,,,,
+Performance,"Saturday, April 10",,Dry Flower Cover,15:40-15:45,Music,1,,,,,,
+Performance,"Saturday, April 10",,Day 1 Ending Remarks,15:45-15:50,,1,,,,,,
+Performance,"Sunday, April 11",,Day 2 Opening Remarks,14:00-14:05,,2,,,,,,
+Performance,"Sunday, April 11",,Tsugaru Shamisen - Keio,14:05-14:15,Music,2,,,,,,
+Performance,"Sunday, April 11",,Amusement Parks,14:15-14:25,Culture,2,,,,,,
+Performance,"Sunday, April 11",,Cooking Demo - Agedashi Tofu,14:25-14:30,Food,2,,,,,,
+Performance,"Sunday, April 11",,Shakuhachi - Devon Osamu Tipp,14:30-14:36,Music,2,,,,,,
+Performance,"Sunday, April 11",,Origami,14:36-14:48,Art,2,,,,,,
+Performance,"Sunday, April 11",,Street Culture,14:48-14:53,Culture,2,,,,,,
+Performance,"Sunday, April 11",,Acchimuitehoi,14:53-14:55,Games,2,,,,,,
+Performance,"Sunday, April 11",,Nihon Buyo - Hanaka,14:55-15:15,Art,2,,,,,,
+Performance,"Sunday, April 11",,Tokyo Drift,15:15-15:20,Music,2,,,,,,
+Performance,"Sunday, April 11",,Chado - Yuko Eguchi Wright,15:20-15:30,Culture,2,,,,,,
+Performance,"Sunday, April 11",,Shuntou,15:30-15:35,Music,2,,,,,,
+Performance,"Sunday, April 11",,Matsuri (& 3.11) Ending Remarks,15:35-15:45,,2,,,,,,
      */
     render() {
         return (
@@ -163,29 +199,13 @@ export default class MatsuriScheduleTab extends React.Component {
                 <h2>Date, Time, and Location</h2>
 
                 <p>
-                    Matsuri 2021&apos;s events will be held virtually from Friday,
-                    April 9 to Sunday, April 11. We will be hosting multiple
-                    games and performances across all three days. 
+                    Matsuri 2022&apos;s events will all be held on Saturday, April 16th.
                 </p>
                 
-                <p>
-                    Spread the word and stay informed by joining and sharing the <b>
-                        <a href='https://www.facebook.com/events/268303537457369/' target='_blank' rel="noopener noreferrer">
-                        Facebook event
-                        </a>
-                    </b>! 
-                </p>
 
                 <p>
-                    Our performances will be live-streamed on our <b>
-                        <a 
-                            href='https://www.youtube.com/channel/UCJRtPt616S7M3qonS8Jg83Q'
-                            target='_blank'
-                            rel='noopener noreferrer'>
-                        YouTube Channel
-                        </a>
-                    </b>.
-                        Please check back later for a link to the live-stream.
+                    
+                    Please check back later for a more detailed schedule
                 </p>
                 <ScheduleTable />
                 <br />
