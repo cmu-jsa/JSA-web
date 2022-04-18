@@ -18,13 +18,13 @@ This year’s Matsuri is inspired by Eastern and Western Japan - more specifical
 
 ## DETAILS:
 - Find ticketing details here: [tickets](/matsuri/tickets)
+- Learn more about our [cause](/matsuri/cause)
+- [Food and prices](/matsuri/food)
+- [Games and prices](/matsuri/games)
 - Location: UC Merson Courtyard
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.4557661473427!2d-79.94352776145514!3d40.44304843191136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8834f221dd43ae17%3A0xa894bdf2f5efc7!2sMerson%20Courtyard%2C%20Pittsburgh%2C%20PA%2015213!5e0!3m2!1sen!2sus!4v1648746562803!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 - Time: Saturday, April 16th, 10AM-5PM
 - Features: Food, Games, Performances!!
 
-## Updates
-
-Stay tuned for updates on the food, games, and performances schedule!
 
 
